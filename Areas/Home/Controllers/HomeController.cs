@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Jikandesu.Controllers
+namespace Jikandesu.Areas.Home
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            return View();
+            return View("~/Areas/Home/Views/Index.cshtml");
         }
 
         public ActionResult About()
