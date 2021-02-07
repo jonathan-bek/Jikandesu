@@ -10,6 +10,9 @@ var Home;
             this.testCtrl = "TEST CTRL";
             this.$scope.testCtrlScope = "TEST CTRL SCOPE";
         }
+        HomeCtrl.prototype.getInt = function () {
+            return 1;
+        };
         HomeCtrl.$inject = ["$scope", "$http"];
         return HomeCtrl;
     }());

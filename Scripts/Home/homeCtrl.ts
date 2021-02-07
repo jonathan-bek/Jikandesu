@@ -17,5 +17,10 @@
             this.testCtrl = "TEST CTRL";
             this.$scope.testCtrlScope = "TEST CTRL SCOPE";
         }
+
+
+        getInt(){
+            return 1;
+        }
     }
 }
