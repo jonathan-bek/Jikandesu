@@ -18,9 +18,16 @@
             this.$scope.testCtrlScope = "TEST CTRL SCOPE";
         }
 
+        getInt(): Promise<any> {
+            return this.$http.get("/Home/HomeApi/GetInt")
+                .then(res => res
+                    , msg => console.log(msg)) as Promise<any>;
+        }
 
-        getInt(){
-            return 1;
+        getIntFromDb(): void {
+            this.getInt().then((data: any) => {
+                this.testCtrl = data.data;
+            })
         }
     }
 }

@@ -11,7 +11,14 @@ var Home;
             this.$scope.testCtrlScope = "TEST CTRL SCOPE";
         }
         HomeCtrl.prototype.getInt = function () {
-            return 1;
+            return this.$http.get("/Home/HomeApi/GetInt")
+                .then(function (res) { return res; }, function (msg) { return console.log(msg); });
+        };
+        HomeCtrl.prototype.getIntFromDb = function () {
+            var _this = this;
+            this.getInt().then(function (data) {
+                _this.testCtrl = data.data;
+            });
         };
         HomeCtrl.$inject = ["$scope", "$http"];
         return HomeCtrl;
