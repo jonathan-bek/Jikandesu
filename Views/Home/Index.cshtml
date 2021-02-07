@@ -3,12 +3,13 @@
 }
 
 <body ng-app="homeApp">
-    <p>Home App Html</p>
+    <p>Home App Html?</p>
     <div ng-controller="homeCtrl as ctrl">
-        <p>{{test}}</p>
-        <p>{{ctrl.test}}</p>
+        <p>{{ctrl}}</p>
+        <p>{{ctrl.testCtrl}}</p>
+        <p>{{testCtrlScope}}</p>
     </div>
 </body>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/angular.min.js"></script>
-<script src="~/Scripts/Home/homeApp.js"></script>
+<script src="~/Scripts/Home/HomeBundle.js"></script>
