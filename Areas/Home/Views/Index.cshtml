@@ -1,17 +1,13 @@
-﻿@{
-    Layout = "~/Shared/_Layout.cshtml";
-}
-@{
-    ViewBag.Title = "Home Page";
-}
+﻿@{ Layout = "~/Shared/_Layout.cshtml"; }
+@{ ViewBag.Title = "Home"; }
 
 <body ng-app="homeApp">
     <p>Home App Html?</p>
     <div ng-controller="homeCtrl as ctrl">
         <p>{{ctrl}}</p>
-        <p>{{ctrl.testCtrl}}</p>
+        <p>{{ctrl.displayText}}</p>
         <p>{{testCtrlScope}}</p>
-        <button ng-click="ctrl.getIntFromDb()">test</button>
+        <button ng-click="ctrl.getAnimeStats()">test</button>
     </div>
 </body>
 

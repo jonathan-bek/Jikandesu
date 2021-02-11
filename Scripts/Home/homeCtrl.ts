@@ -12,21 +12,21 @@
         constructor(
             private readonly $scope: IHomeCtrlScope,
             private readonly $http: ng.IHttpService,
-            private testCtrl: string
+            private displayText: string
         ) {
-            this.testCtrl = "TEST CTRL";
+            this.displayText = "TEST CTRL";
             this.$scope.testCtrlScope = "TEST CTRL SCOPE";
         }
 
-        getInt(): Promise<any> {
-            return this.$http.get("/Home/HomeApi/GetInt")
+        getAnimeStatsFromApi(): Promise<any> {
+            return this.$http.get("/Home/HomeApi/GetAnimeStats/1")
                 .then(res => res
                     , msg => console.log(msg)) as Promise<any>;
         }
 
-        getIntFromDb(): void {
-            this.getInt().then((data: any) => {
-                this.testCtrl = data.data;
+        getAnimeStats(): void {
+            this.getAnimeStatsFromApi().then((data: any) => {
+                this.displayText = data.data;
             })
         }
     }

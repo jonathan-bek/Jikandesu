@@ -3,21 +3,21 @@ var Home;
 (function (Home) {
     "use strict";
     var HomeCtrl = (function () {
-        function HomeCtrl($scope, $http, testCtrl) {
+        function HomeCtrl($scope, $http, displayText) {
             this.$scope = $scope;
             this.$http = $http;
-            this.testCtrl = testCtrl;
-            this.testCtrl = "TEST CTRL";
+            this.displayText = displayText;
+            this.displayText = "TEST CTRL";
             this.$scope.testCtrlScope = "TEST CTRL SCOPE";
         }
-        HomeCtrl.prototype.getInt = function () {
-            return this.$http.get("/Home/HomeApi/GetInt")
+        HomeCtrl.prototype.getAnimeStatsFromApi = function () {
+            return this.$http.get("/Home/HomeApi/GetAnimeStats/1")
                 .then(function (res) { return res; }, function (msg) { return console.log(msg); });
         };
-        HomeCtrl.prototype.getIntFromDb = function () {
+        HomeCtrl.prototype.getAnimeStats = function () {
             var _this = this;
-            this.getInt().then(function (data) {
-                _this.testCtrl = data.data;
+            this.getAnimeStatsFromApi().then(function (data) {
+                _this.displayText = data.data;
             });
         };
         HomeCtrl.$inject = ["$scope", "$http"];
