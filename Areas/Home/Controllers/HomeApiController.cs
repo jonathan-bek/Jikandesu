@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
+using Jikandesu.Models;
 using Jikandesu.Services;
 using Newtonsoft.Json;
 
 namespace Jikandesu.Areas.Home.Controllers
 {
-    public class HomeApiController : Controller
+    public class HomeApiController : BaseApiController
     {
         private readonly IJdHttpService _http;
 
@@ -22,8 +23,7 @@ namespace Jikandesu.Areas.Home.Controllers
             var url = $"{baseUrl}/anime/{id}/stats";
             var getResult = await _http.AsyncGet(url);
             var result = JsonConvert.DeserializeObject<AnimeStats>(getResult);
-            var toReturn = JsonConvert.SerializeObject(result);
-            return new ContentResult() { Content = toReturn };
+            return SuccessJsonContent(result);
         }
 
         public class AnimeStats

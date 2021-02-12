@@ -150,6 +150,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BaseApiController.cs" />
+    <Compile Include="Models\BaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IJdHttpService.cs" />
     <Compile Include="Services\JdHttpService.cs" />
@@ -201,7 +203,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Home\Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

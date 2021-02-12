@@ -18,16 +18,13 @@
             this.$scope.testCtrlScope = "TEST CTRL SCOPE";
         }
 
-        getAnimeStatsFromApi(): Promise<any> {
-            return this.$http.get("/Home/HomeApi/GetAnimeStats/1")
-                .then(res => res
-                    , msg => console.log(msg)) as Promise<any>;
-        }
-
         getAnimeStats(): void {
-            this.getAnimeStatsFromApi().then((data: any) => {
-                this.displayText = data.data;
-            })
+            var url = "/Home/HomeApi/GetAnimeStats/1";
+            this.$http.get(url)
+                .then((data: any) => {
+                    this.displayText = data.data;
+                },
+                    msg => console.log("ERROR:", msg));
         }
     }
 }
