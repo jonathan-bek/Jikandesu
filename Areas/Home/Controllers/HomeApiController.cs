@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
+using Jikandesu.Areas.Home.Models;
 using Jikandesu.Models;
 using Jikandesu.Services;
-using Newtonsoft.Json;
 
 namespace Jikandesu.Areas.Home.Controllers
 {
@@ -20,18 +20,18 @@ namespace Jikandesu.Areas.Home.Controllers
         // GET: Home/HomeApi
         public async Task<ContentResult> GetAnimeStats(int id)
         {
-            var url = $"{baseUrl}/anime/{id}/stats";
-            var getResult = await _http.AsyncGet(url);
-            var result = JsonConvert.DeserializeObject<AnimeStats>(getResult);
+            var lst = new DbTester().Run();
+            var result = lst[0];
+            //var url = $"{baseUrl}/anime/{id}/stats";
+            //var getResult = await _http.AsyncGet(url);
+            //var result = JsonConvert.DeserializeObject<AnimeStats>(getResult);
             return SuccessJsonContent(result);
         }
 
         public class AnimeStats
         {
-            [JsonProperty("watching")]
-            public int ID { get; set; }
-            [JsonProperty("completed")]
-            public int Title { get; set; }
+            public int watching { get; set; }
+            public int completed { get; set; }
         }
     }
 }
