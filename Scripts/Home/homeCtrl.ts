@@ -26,5 +26,13 @@
                 },
                     msg => console.log("ERROR:", msg));
         }
+        getInfoFromDb(): void {
+            var url = "/Home/HomeApi/GetInfoFromDb";
+            this.$http.get(url)
+                .then((data: any) => {
+                    this.displayText = data.data;
+                },
+                    msg => console.log("ERROR:", msg));
+        }
     }
 }

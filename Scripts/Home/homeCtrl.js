@@ -18,6 +18,14 @@ var Home;
                 _this.displayText = data.data;
             }, function (msg) { return console.log("ERROR:", msg); });
         };
+        HomeCtrl.prototype.getInfoFromDb = function () {
+            var _this = this;
+            var url = "/Home/HomeApi/GetInfoFromDb";
+            this.$http.get(url)
+                .then(function (data) {
+                _this.displayText = data.data;
+            }, function (msg) { return console.log("ERROR:", msg); });
+        };
         HomeCtrl.$inject = ["$scope", "$http"];
         return HomeCtrl;
     }());
