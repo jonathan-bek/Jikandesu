@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using Dapper;
 
 namespace Jikandesu.Areas.Home.Models
 {
@@ -16,24 +19,13 @@ namespace Jikandesu.Areas.Home.Models
                 builder.Password = UserInfo.Password;
                 builder.InitialCatalog = UserInfo.Database;
 
-                var lst = new List<int>();
-                using (var con = new SqlConnection(builder.ConnectionString))
+                using (IDbConnection con = new SqlConnection(builder.ConnectionString))
                 {
                     con.Open();
                     var query = @"SELECT * FROM testTable";
-
-                    using (var cmd = new SqlCommand(query, con))
-                    {
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                lst.Add(reader.GetInt32(0));
-                            }
-                        }
-                    }
+                    var result = con.Query<int>(query);
+                    return result.ToList();
                 }
-                return lst;
             }
             catch (Exception e)
             {
