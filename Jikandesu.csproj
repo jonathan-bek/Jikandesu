@@ -180,6 +180,7 @@
     <Content Include="package-lock.json" />
     <Content Include="Scripts\Home\tsconfig.json" />
     <Content Include="Areas\Home\Views\web.config" />
+    <None Include="Properties\PublishProfiles\Jikandesu - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

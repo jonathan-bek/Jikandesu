@@ -1,4 +1,7 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Web.Mvc;
 using Unity;
 using Unity.Mvc5;
@@ -12,14 +15,31 @@ namespace Jikandesu
         {
             var container = new UnityContainer();
             var repositoryAssembly = Assembly.GetExecutingAssembly();
-            container.RegisterTypes(repositoryAssembly.GetTypes(),
+            var controllerTypes = GetControllerTypes(repositoryAssembly);
+            var nonControllerTypes = repositoryAssembly.GetTypes().Except(controllerTypes);
+
+            //Register controllers to resolve per request
+            container.RegisterTypes(controllerTypes,
+                WithMappings.FromMatchingInterface,
+                WithName.Default,
+                WithLifetime.PerResolve);
+
+            //Register other types to resolve only once (singleton, default setting)
+            container.RegisterTypes(nonControllerTypes,
                 WithMappings.FromMatchingInterface,
                 WithName.Default,
                 WithLifetime.ContainerControlled);
-            // register all your components with the container here
-            // it is NOT necessary to register your controllers
-            //  e.g. container.RegisterType<ITestService, TestService>();
+
+            //Register others here in the future
+            
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+        }
+
+        private static IEnumerable<Type> GetControllerTypes(Assembly assembly)
+        {
+            var controllerTypes = assembly.GetTypes()
+                .Where(x => typeof(Controller).IsAssignableFrom(x));
+            return controllerTypes;
         }
     }
 }
