@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Dapper;
+using Jikandesu.Areas.Home.Models;
 using Jikandesu.Models;
 using Jikandesu.Services;
 using Newtonsoft.Json;
