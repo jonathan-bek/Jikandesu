@@ -19,7 +19,7 @@ namespace Jikandesu.Services
             try
             {
                 var request = new RestRequest(url, DataFormat.Json);
-                var response = await _client.GetAsync<IRestResponse>(request);
+                var response = await _client.ExecuteAsync(request);
                 return response.Content;
             }
             catch (HttpRequestException e)
