@@ -150,12 +150,16 @@
     <Compile Include="Areas\Home\Controllers\HomeApiController.cs" />
     <Compile Include="Areas\Home\Controllers\HomeController.cs" />
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
+    <Compile Include="Areas\Home\Models\Anime.cs" />
+    <Compile Include="Areas\Home\Models\Genre.cs" />
+    <Compile Include="Areas\Home\Models\Season.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseApiController.cs" />
     <Compile Include="Models\BaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <TypeScriptCompile Include="Scripts\Home\homeDataService.ts" />
     <Compile Include="Services\IJdCrud.cs" />
     <Compile Include="Services\IJdHttpService.cs" />
     <Compile Include="Services\JdCrud.cs" />
@@ -178,6 +182,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="package-lock.json" />
+    <Content Include="Scripts\Home\.gitignore" />
     <Content Include="Scripts\Home\tsconfig.json" />
     <Content Include="Areas\Home\Views\web.config" />
     <None Include="Properties\PublishProfiles\Jikandesu - Web Deploy.pubxml" />
@@ -209,7 +214,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Home\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

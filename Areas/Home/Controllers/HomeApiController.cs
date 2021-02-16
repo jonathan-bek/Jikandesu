@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Dapper;
@@ -22,12 +25,20 @@ namespace Jikandesu.Areas.Home.Controllers
             _http = http;
         }
 
-        // GET: Home/HomeApi
+        public async Task<ContentResult> LoadSeasonalAnime()
+        {
+            //params: string season, int year
+            var url = $"{baseUrl}/season/2018/winter";
+            var apiResult = await _http.AsyncGet(url);
+            var result = JsonConvert.DeserializeObject<Season>(apiResult);
+            return SuccessJsonContent(result);
+        }
+
         public async Task<ContentResult> GetAnimeStats(int id)
         {
             var url = $"{baseUrl}/anime/{id}/stats";
-            var getResult = await _http.AsyncGet(url);
-            var result = JsonConvert.DeserializeObject<AnimeStats>(getResult);
+            var apiResult = await _http.AsyncGet(url);
+            var result = JsonConvert.DeserializeObject<AnimeStats>(apiResult);
             return SuccessJsonContent(result);
         }
 

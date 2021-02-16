@@ -2,12 +2,16 @@
 @{ ViewBag.Title = "Home"; }
 
 <body ng-app="homeApp">
+    <div class="images-scroller">
+
+    </div>
     <p>Home App Html?</p>
     <div ng-controller="homeCtrl as ctrl">
         <p>{{ctrl}}</p>
         <p>{{ctrl.displayText}}</p>
         <p>{{testCtrlScope}}</p>
-        <button ng-click="ctrl.getInfoFromDb()">test</button>
+        <button ng-click="ctrl.getAnimeStats()">getanimestats</button>
+        <button ng-click="ctrl.getSeasonalAnime()">getSeasonalAnime</button>
     </div>
 </body>
 

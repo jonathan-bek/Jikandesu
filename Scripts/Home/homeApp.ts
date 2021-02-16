@@ -1,4 +1,5 @@
 ﻿/// <reference path="homeCtrl.ts" />
+/// <reference path="homeDataService.ts" />
 
 module Home {
     "use strict";
@@ -11,4 +12,5 @@ module Home {
 
     //Include controllers
     app.controller("homeCtrl", HomeCtrl);
+    app.service("homeDataService", HomeDataService)
 }
