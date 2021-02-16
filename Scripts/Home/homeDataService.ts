@@ -7,8 +7,8 @@
         anime: IAnime[]
     }
     export interface IAnime {
-        mal_id: number, 
-        url: string, 
+        mal_id: number,
+        url: string,
         title: string,
         image_url: string,
         synopsis: string,
@@ -24,7 +24,7 @@
     export interface IGenre {
         mal_id: number,
         name: string,
-        url: string, 
+        url: string,
         type: string,
     }
     export interface IHomeDataService {
@@ -38,7 +38,7 @@
             private readonly $http: ng.IHttpService
         ) { }
 
-        loadSeasonalAnime(): Promise<ISeason|void> {
+        loadSeasonalAnime(): Promise<ISeason | void> {
             var url = "/Home/HomeApi/LoadSeasonalAnime";
             return this.$http.get(url)
                 .then((data) => {

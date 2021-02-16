@@ -9,10 +9,7 @@ namespace Jikandesu.Services
     {
         private RestClient _client = new RestClient();
 
-        public JdHttpService()
-        {
-            //_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }
+        public JdHttpService() { }
 
         public async Task<string> AsyncGet(string url)
         {

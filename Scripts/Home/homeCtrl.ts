@@ -28,7 +28,7 @@ module Home {
                 .then((data: any) => {
                     this.displayText = data;
                 },
-                    msg =>  console.log("ERROR:", msg))
+                    msg => console.log("ERROR:", msg))
         }
 
         getAnimeStats(): void {
