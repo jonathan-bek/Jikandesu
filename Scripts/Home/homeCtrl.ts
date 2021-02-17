@@ -3,8 +3,6 @@
 module Home {
     "use strict";
 
-    import IHomeDataService = Home.HomeDataService;
-
     export interface IHomeCtrlScope extends ng.IScope {
         homeCtrl: HomeCtrl;
         testCtrlScope: string;
@@ -23,8 +21,16 @@ module Home {
             this.$scope.testCtrlScope = "TEST CTRL SCOPE";
         }
 
-        getSeasonalAnime(): void {
-            this.homeDataService.loadSeasonalAnime()
+        getCurrentSeasonAnime(): void {
+            this.homeDataService.loadCurrentSeasonAnime()
+                .then((data: any) => {
+                    this.displayText = data;
+                },
+                    msg => console.log("ERROR:", msg))
+        }
+
+        getSeasonalAnime(year: number, season: string): void {
+            this.homeDataService.loadSeasonalAnime(year, season)
                 .then((data: any) => {
                     this.displayText = data;
                 },

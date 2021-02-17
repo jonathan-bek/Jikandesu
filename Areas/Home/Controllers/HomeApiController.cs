@@ -23,10 +23,19 @@ namespace Jikandesu.Areas.Home.Controllers
             _http = http;
         }
 
-        public async Task<ContentResult> LoadSeasonalAnime()
+        [HttpGet]
+        public async Task<ContentResult> LoadCurrentSeasonAnime()
         {
-            //params: string season, int year
-            var url = $"{baseUrl}/season/2018/winter";
+            var url = $"{baseUrl}/season";
+            var apiResult = await _http.AsyncGet(url);
+            var result = JsonConvert.DeserializeObject<Season>(apiResult);
+            return SuccessJsonContent(result);
+        }
+
+        [HttpPost]
+        public async Task<ContentResult> LoadSeasonalAnime(int year, string season)
+        {
+            var url = $"{baseUrl}/season/{year}/{season}";
             var apiResult = await _http.AsyncGet(url);
             var result = JsonConvert.DeserializeObject<Season>(apiResult);
             return SuccessJsonContent(result);

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace Jikandesu
@@ -15,8 +11,14 @@ namespace Jikandesu
 
             routes.MapRoute(
                 name: "Default",
-                url: "{area}/{controller}/{action}/{id}",
-                defaults: new { area = "Home", controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{area}/{controller}/{action}/{a}/{b}/{c}",
+                defaults: new
+                {
+                    area = "Home", controller = "Home", action = "Index",
+                    a = UrlParameter.Optional,
+                    b = UrlParameter.Optional,
+                    c = UrlParameter.Optional
+                }
             );
         }
     }

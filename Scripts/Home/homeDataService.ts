@@ -28,7 +28,8 @@
         type: string,
     }
     export interface IHomeDataService {
-        loadSeasonalAnime(): any;
+        loadCurrentSeasonAnime(): Promise<ISeason | void>;
+        loadSeasonalAnime(year: number, season: string): Promise<ISeason | void>;
     }
 
     export class HomeDataService implements IHomeDataService {
@@ -38,9 +39,19 @@
             private readonly $http: ng.IHttpService
         ) { }
 
-        loadSeasonalAnime(): Promise<ISeason | void> {
-            var url = "/Home/HomeApi/LoadSeasonalAnime";
+        loadCurrentSeasonAnime(): Promise<ISeason | void> {
+            var url = `/Home/HomeApi/LoadCurrentSeasonAnime`;
             return this.$http.get(url)
+                .then((data) => {
+                    return data.data as Promise<ISeason>;
+                },
+                    msg => console.log("ERROR:", msg));
+        }
+
+        loadSeasonalAnime(year: number, season: string): Promise<ISeason | void> {
+            var url = `/Home/HomeApi/LoadSeasonalAnime`;
+            var postObj = { year, season };
+            return this.$http.post(url, postObj)
                 .then((data) => {
                     return data.data as Promise<ISeason>;
                 },
