@@ -5,7 +5,6 @@ module Home {
 
     export interface ISeasonalAnimeCtrl extends ng.IScope {
         seasonalAnimeCtrl: SeasonalAnimeCtrl;
-        testCtrlScope: string;
     }
 
     export class SeasonalAnimeCtrl implements ng.IController {
@@ -15,16 +14,16 @@ module Home {
             private readonly $scope: ISeasonalAnimeCtrl,
             private readonly $http: ng.IHttpService,
             private readonly homeDataService: IAnimeDataService,
-            private displayText: string
+            private displayText: string, //for testing
+            public animeSeason: ISeason
         ) {
             this.displayText = "TEST CTRL";
-            this.$scope.testCtrlScope = "TEST CTRL SCOPE";
         }
 
         getCurrentSeasonAnime(): void {
             this.homeDataService.loadCurrentSeasonAnime()
-                .then((data: any) => {
-                    this.displayText = data;
+                .then((data: ISeason | void) => {
+                    this.animeSeason = data as ISeason;
                 },
                     msg => console.log("ERROR:", msg))
         }

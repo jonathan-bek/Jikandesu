@@ -2,14 +2,15 @@
 @{ ViewBag.Title = "Home"; }
 
 <body ng-app="homeApp">
-    <div class="images-scroller">
-
-    </div>
-    <p>Home App Html?</p>
+    <p>Home App Html</p>
     <div ng-controller="seasonalAnimeCtrl as ctrl">
-        <p>{{ctrl}}</p>
-        <p>{{ctrl.displayText}}</p>
-        <p>{{testCtrlScope}}</p>
+        <p>Season: {{ctrl.animeSeason.season_name}}</p>
+        <div class="seasonal-anime-scroller">
+            <div ng-repeat="anime in ctrl.animeSeason.anime">
+                <p>{{anime.title}}</p>
+            </div>
+        </div>
+        <p>Display text: {{ctrl.displayText}}</p>
         <button ng-click="ctrl.getAnimeStats()">getanimestats</button>
         <button ng-click="ctrl.getCurrentSeasonAnime()">getSeasonalAnime</button>
     </div>
