@@ -159,7 +159,7 @@
     <Compile Include="Models\BaseApiController.cs" />
     <Compile Include="Models\BaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <TypeScriptCompile Include="Scripts\Home\homeDataService.ts" />
+    <TypeScriptCompile Include="Scripts\Home\animeDataService.ts" />
     <Compile Include="Services\IJdCrud.cs" />
     <Compile Include="Services\IJdHttpService.cs" />
     <Compile Include="Services\JdCrud.cs" />
@@ -230,7 +230,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Home\homeApp.ts" />
-    <TypeScriptCompile Include="Scripts\Home\homeCtrl.ts" />
+    <TypeScriptCompile Include="Scripts\Home\seasonalAnimeCtrl.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

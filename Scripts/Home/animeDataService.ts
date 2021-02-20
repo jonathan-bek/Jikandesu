@@ -27,12 +27,12 @@
         url: string,
         type: string,
     }
-    export interface IHomeDataService {
+    export interface IAnimeDataService {
         loadCurrentSeasonAnime(): Promise<ISeason | void>;
         loadSeasonalAnime(year: number, season: string): Promise<ISeason | void>;
     }
 
-    export class HomeDataService implements IHomeDataService {
+    export class AnimeDataService implements IAnimeDataService {
         static $inject = ["$http"];
 
         constructor(

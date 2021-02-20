@@ -1,5 +1,5 @@
-﻿/// <reference path="homeCtrl.ts" />
-/// <reference path="homeDataService.ts" />
+﻿/// <reference path="seasonalAnimeCtrl.ts" />
+/// <reference path="animeDataService.ts" />
 
 module Home {
     "use strict";
@@ -11,6 +11,6 @@ module Home {
     }]);
 
     //Include controllers
-    app.controller("homeCtrl", HomeCtrl);
-    app.service("homeDataService", HomeDataService)
+    app.controller("seasonalAnimeCtrl", SeasonalAnimeCtrl);
+    app.service("animeDataService", AnimeDataService)
 }

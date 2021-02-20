@@ -1,20 +1,20 @@
-﻿/// <reference path="homeDataService.ts" />
+﻿/// <reference path="animeDataService.ts" />
 
 module Home {
     "use strict";
 
-    export interface IHomeCtrlScope extends ng.IScope {
-        homeCtrl: HomeCtrl;
+    export interface ISeasonalAnimeCtrl extends ng.IScope {
+        seasonalAnimeCtrl: SeasonalAnimeCtrl;
         testCtrlScope: string;
     }
 
-    export class HomeCtrl implements ng.IController {
-        static $inject = ["$scope", "$http", "homeDataService"];
+    export class SeasonalAnimeCtrl implements ng.IController {
+        static $inject = ["$scope", "$http", "animeDataService"];
 
         constructor(
-            private readonly $scope: IHomeCtrlScope,
+            private readonly $scope: ISeasonalAnimeCtrl,
             private readonly $http: ng.IHttpService,
-            private readonly homeDataService: IHomeDataService,
+            private readonly homeDataService: IAnimeDataService,
             private displayText: string
         ) {
             this.displayText = "TEST CTRL";
