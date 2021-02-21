@@ -1,0 +1,22 @@
+{
+  "name": "jikandesu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathan-bek/Jikandesu.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonathan-bek/Jikandesu/issues"
+  },
+  "homepage": "https://github.com/jonathan-bek/Jikandesu#readme",
+  "dependencies": {
+    "@types/angular": "^1.8.1"
+  }
+}

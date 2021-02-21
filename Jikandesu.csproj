@@ -185,6 +185,7 @@
     <Content Include="Scripts\Home\.gitignore" />
     <Content Include="Scripts\Home\tsconfig.json" />
     <Content Include="Areas\Home\Views\web.config" />
+    <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\Jikandesu - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
