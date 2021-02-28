@@ -29,6 +29,7 @@ namespace Jikandesu.Areas.Home.Controllers
             var url = $"{baseUrl}/season";
             var apiResult = await _http.AsyncGet(url);
             var result = JsonConvert.DeserializeObject<Season>(apiResult);
+            result.Anime = result.Anime.Take(10).ToList();
             return SuccessJsonContent(result);
         }
 

@@ -1,17 +1,20 @@
 ﻿/// <reference path="animeDataService.ts" />
 
-module Home {
+namespace JdAnime {
     "use strict";
 
-    export interface ISeasonalAnimeCtrl extends ng.IScope {
-        seasonalAnimeCtrl: SeasonalAnimeCtrl;
+    export interface ISeasonalAnimeCtrl {
+        animeSeason: ISeason;
+        getCurrentSeasonAnime: () => void;
+        getSeasonalAnime: (year: number, season: string) => void;
+        getAnimeStats: () => void;
     }
 
-    export class SeasonalAnimeCtrl implements ng.IController {
+    export class SeasonalAnimeCtrl implements ng.IController, ISeasonalAnimeCtrl {
         static $inject = ["$scope", "$http", "animeDataService"];
 
         constructor(
-            private readonly $scope: ISeasonalAnimeCtrl,
+            private readonly $scope: ng.IScope,
             private readonly $http: ng.IHttpService,
             private readonly homeDataService: IAnimeDataService,
             private displayText: string, //for testing
@@ -44,13 +47,13 @@ module Home {
                 },
                     msg => console.log("ERROR:", msg));
         }
-        getInfoFromDb(): void {
-            var url = "/Home/HomeApi/GetInfoFromDb";
-            this.$http.get(url)
-                .then((data: any) => {
-                    this.displayText = data.data;
-                },
-                    msg => console.log("ERROR:", msg));
-        }
+        //getInfoFromDb(): void {
+        //    var url = "/Home/HomeApi/GetInfoFromDb";
+        //    this.$http.get(url)
+        //        .then((data: any) => {
+        //            this.displayText = data.data;
+        //        },
+        //            msg => console.log("ERROR:", msg));
+        //}
     }
 }

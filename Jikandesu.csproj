@@ -231,6 +231,10 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Home\homeApp.ts" />
+    <TypeScriptCompile Include="Scripts\Home\IAnime.ts" />
+    <TypeScriptCompile Include="Scripts\Home\IAnimeDataService.ts" />
+    <TypeScriptCompile Include="Scripts\Home\IGenre.ts" />
+    <TypeScriptCompile Include="Scripts\Home\ISeason.ts" />
     <TypeScriptCompile Include="Scripts\Home\seasonalAnimeCtrl.ts" />
   </ItemGroup>
   <ItemGroup>
