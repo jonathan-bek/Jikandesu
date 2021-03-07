@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Dapper;
 using Jikandesu.Areas.Home.Models;
 using Jikandesu.Models;
 using Jikandesu.Services;
@@ -21,6 +20,14 @@ namespace Jikandesu.Areas.Home.Controllers
         {
             _crud = crud;
             _http = http;
+        }
+
+        [HttpGet]
+        public async Task<ContentResult> LoadScrapedMangaImageUrls()
+        {
+            var str = "Placeholder";
+
+            return SuccessJsonContent(str);
         }
 
         [HttpGet]
@@ -53,9 +60,9 @@ namespace Jikandesu.Areas.Home.Controllers
         public async Task<ContentResult> GetInfoFromDb()
         {
             var query = @"SELECT * FROM testTable";
-            using (var con = _crud.GetOpenConnection())
+            using (_crud.GetOpenConnection())
             {
-                var result = await con.QueryAsync<TestClass>(query);
+                var result = await _crud.QueryAsync<TestClass>(query);
                 var info = result.Select(x => x.ID).ToList();
                 return SuccessJsonContent(info);
             }
