@@ -11,7 +11,9 @@
             </div>
         </div>
         <p>Display text: {{ctrl.displayText}}</p>
-        <button ng-click="ctrl.getAnimeStats()">getanimestats</button>
+        <input ng-model="ctrl.searchText" />
+
+        <button ng-click="ctrl.searchAllMediaByName()">search all media by name</button>
         <button ng-click="ctrl.getCurrentSeasonAnime()">get current season </button>
         <button ng-click="ctrl.getSeasonalAnime(2010, 'winter')">get seasonal, 2010 winter</button>
         <button ng-click="ctrl.getScrapedMangaImageUrls()">Get scraped manga</button>

@@ -5,10 +5,22 @@ namespace JdAnime {
 
     export interface ISeasonalAnimeCtrl {
         animeSeason: ISeason;
+        searchText: string;
+        searchAllMediaByName: () => void;
         getCurrentSeasonAnime: () => void;
         getSeasonalAnime: (year: number, season: string) => void;
         getAnimeStats: () => void;
         testDb: () => void;
+    }
+
+    export interface ISearchFilter {
+        SearchCategory: SearchCategoryEnum;
+        Name: string;
+    }
+
+    export enum SearchCategoryEnum {
+        Anime = "anime",
+        Manga = "manga"
     }
 
     export class SeasonalAnimeCtrl implements ng.IController, ISeasonalAnimeCtrl {
@@ -19,9 +31,24 @@ namespace JdAnime {
             private readonly $http: ng.IHttpService,
             private readonly animeDataService: IAnimeDataService,
             private displayText: string, //for testing
-            public animeSeason: ISeason
+            public animeSeason: ISeason,
+            public searchText: string
         ) {
             this.displayText = "TEST CTRL";
+            this.searchText = "";
+        }
+
+        searchAllMediaByName(): void {
+            var filterCollection: ISearchFilter[] = [];
+            filterCollection.push(
+                { SearchCategory: SearchCategoryEnum.Anime, Name: this.searchText },
+                { SearchCategory: SearchCategoryEnum.Manga, Name: this.searchText }
+            );
+            this.animeDataService.loadSearchResults(filterCollection)
+                .then((data: any | void) => {
+                    this.displayText = data as string;
+                },
+                    msg => console.log("ERROR:", msg));
         }
 
         getScrapedMangaImageUrls(): void {

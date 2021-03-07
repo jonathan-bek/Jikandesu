@@ -8,6 +8,14 @@
             private readonly $http: ng.IHttpService
         ) { }
 
+        loadSearchResults(filterCollection: ISearchFilter[]): Promise<any | void> {
+            var url = `/Home/HomeApi/LoadSearchResults`;
+            return this.$http.post(url, filterCollection)
+                .then((data) => {
+                    return data.data as Promise<any>;
+                }, msg => console.log("ERROR:", msg));
+        }
+
         loadScrapedMangaImageUrls(): Promise<any | void> {
             var url = `/Home/HomeApi/LoadScrapedMangaImageUrls`;
             return this.$http.get(url)

@@ -152,6 +152,9 @@
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
     <Compile Include="Areas\Home\Models\Anime.cs" />
     <Compile Include="Areas\Home\Models\Genre.cs" />
+    <Compile Include="Areas\Home\Models\Manga.cs" />
+    <Compile Include="Areas\Home\Models\SearchCategoryEnum.cs" />
+    <Compile Include="Areas\Home\Models\SearchFilter.cs" />
     <Compile Include="Areas\Home\Models\Season.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

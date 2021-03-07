@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Jikandesu.Areas.Home.Models;
@@ -8,6 +10,33 @@ using Newtonsoft.Json;
 
 namespace Jikandesu.Areas.Home.Controllers
 {
+    public class SearchResults
+    {
+        [JsonProperty("results")] public List<SearchResult> results { get; set; }
+    }
+    public class SearchResult
+    {
+        [JsonProperty("mal_id")] public int ID { get; set; }
+        [JsonProperty("url")] public string Url { get; set; }
+        [JsonProperty("title")] public string Title { get; set; }
+        [JsonProperty("image_url")] public string ImageUrl { get; set; }
+        [JsonProperty("type")] public string Type { get; set; }
+        [JsonProperty("synopsis")] public string Synopsis { get; set; }
+        [JsonProperty("members")] public int Members { get; set; }
+        [JsonProperty("score")] public decimal? Score { get; set; }
+        [JsonProperty("start_date")] public DateTime? StartDate { get; set; }
+        [JsonProperty("end_date")] public DateTime? EndDate { get; set; }
+        [JsonProperty("episodes")] public int? Episodes { get; set; } //anime only
+        [JsonProperty("rated")] public string Rated { get; set; } //anime only
+        [JsonProperty("chapters")] public int? Chapters { get; set; } //manga only
+        [JsonProperty("volumes")] public int? Volumes { get; set; } //manga only
+
+        [JsonProperty("airing")]
+        public bool Airing { get; set; } //anime only
+        [JsonProperty("publishing")]
+        public bool Publishing { get; set; } //manga only
+    }
+
     public class HomeApiController : BaseApiController
     {
         private readonly IJdCrud _crud;
@@ -20,6 +49,34 @@ namespace Jikandesu.Areas.Home.Controllers
         {
             _crud = crud;
             _http = http;
+        }
+
+        [HttpPost]
+        public async Task<ContentResult> LoadSearchResults(
+            IEnumerable<SearchFilter> filterCollection)
+        {
+            var animeFilter = filterCollection.First(x => x.SearchCategory.Equals(SearchCategoryEnum.Anime));
+            var animeResult = await _http.AsyncGet($"{baseUrl}/search/{CreateSearchQueryString(animeFilter)}&page=1");
+            var mangaFilter = filterCollection.First(x => x.SearchCategory.Equals(SearchCategoryEnum.Manga));
+            var mangaResult = await _http.AsyncGet($"{baseUrl}/search/{CreateSearchQueryString(mangaFilter)}&page=1");
+
+            var result1 = JsonConvert.DeserializeObject<SearchResults>(animeResult);
+            var result2 = JsonConvert.DeserializeObject<SearchResults>(mangaResult);
+
+            //Parallel.ForEach(filterCollection, f =>
+            //{
+            //    var url = $"{baseUrl}/search/{CreateSearchQueryString(f)}";
+
+            //});
+
+            var str = "Placeholder";
+
+            return SuccessJsonContent(str);
+        }
+
+        private string CreateSearchQueryString(SearchFilter filter)
+        {
+            return $"{filter.SearchCategory}?q={filter.Name}";
         }
 
         [HttpGet]
