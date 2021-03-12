@@ -8,5 +8,6 @@ namespace Jikandesu.Services
     {
         IDbConnection GetOpenConnection();
         Task<IEnumerable<T>> QueryAsync<T>(string sql);
+        Task<T> GetAsync<T>(int id);
     }
 }

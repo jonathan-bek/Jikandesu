@@ -51,6 +51,9 @@
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Dapper.2.0.78\lib\net461\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper.SimpleCRUD, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Dapper.SimpleCRUD.2.2.0.1\lib\netstandard2.0\Dapper.SimpleCRUD.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="RestSharp, Version=106.11.7.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>packages\RestSharp.106.11.7\lib\net452\RestSharp.dll</HintPath>
@@ -62,6 +65,7 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -150,12 +154,13 @@
     <Compile Include="Areas\Home\Controllers\HomeApiController.cs" />
     <Compile Include="Areas\Home\Controllers\HomeController.cs" />
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
-    <Compile Include="Areas\Home\Models\Anime.cs" />
-    <Compile Include="Areas\Home\Models\Genre.cs" />
-    <Compile Include="Areas\Home\Models\Manga.cs" />
+    <Compile Include="Areas\Home\Models\JsonModels\Anime.cs" />
+    <Compile Include="Areas\Home\Models\JsonModels\Genre.cs" />
+    <Compile Include="Areas\Home\Models\JsonModels\SearchResults.cs" />
+    <Compile Include="Areas\Home\Models\JsonModels\Manga.cs" />
     <Compile Include="Areas\Home\Models\SearchCategoryEnum.cs" />
     <Compile Include="Areas\Home\Models\SearchFilter.cs" />
-    <Compile Include="Areas\Home\Models\Season.cs" />
+    <Compile Include="Areas\Home\Models\JsonModels\Season.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
