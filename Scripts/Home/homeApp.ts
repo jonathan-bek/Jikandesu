@@ -1,4 +1,4 @@
-﻿/// <reference path="seasonalAnimeCtrl.ts" />
+﻿/// <reference path="animeHomeCtrl.ts" />
 /// <reference path="animeDataService.ts" />
 
 module Home {
@@ -11,6 +11,6 @@ module Home {
     }]);
 
     //Include controllers
-    app.controller("seasonalAnimeCtrl", JdAnime.SeasonalAnimeCtrl);
+    app.controller("seasonalAnimeCtrl", JdAnime.AnimeHomeCtrl);
     app.service("animeDataService", JdAnime.AnimeDataService)
 }

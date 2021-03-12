@@ -2,28 +2,7 @@
 
 namespace JdAnime {
     "use strict";
-
-    export interface ISeasonalAnimeCtrl {
-        animeSeason: ISeason;
-        searchText: string;
-        searchAllMediaByName: () => void;
-        getCurrentSeasonAnime: () => void;
-        getSeasonalAnime: (year: number, season: string) => void;
-        getAnimeStats: () => void;
-        testDb: () => void;
-    }
-
-    export interface ISearchFilter {
-        SearchCategory: SearchCategoryEnum;
-        Name: string;
-    }
-
-    export enum SearchCategoryEnum {
-        Anime = "anime",
-        Manga = "manga"
-    }
-
-    export class SeasonalAnimeCtrl implements ng.IController, ISeasonalAnimeCtrl {
+    export class AnimeHomeCtrl implements ng.IController, IAnimeHomeCtrl {
         static $inject = ["$scope", "$http", "animeDataService"];
 
         constructor(

@@ -9,7 +9,7 @@
         ) { }
 
         loadSearchResults(filterCollection: ISearchFilter[]): Promise<any | void> {
-            var url = `/Home/HomeApi/LoadSearchResults`;
+            var url = `/Home/AnimeHomeApi/LoadSearchResults`;
             return this.$http.post(url, filterCollection)
                 .then((data) => {
                     return data.data as Promise<any>;
@@ -17,7 +17,7 @@
         }
 
         loadScrapedMangaImageUrls(): Promise<any | void> {
-            var url = `/Home/HomeApi/LoadScrapedMangaImageUrls`;
+            var url = `/Home/AnimeHomeApi/LoadScrapedMangaImageUrls`;
             return this.$http.get(url)
                 .then((data) => {
                     return data.data as Promise<any>;
@@ -25,7 +25,7 @@
         }
 
         loadCurrentSeasonAnime(): Promise<ISeason | void> {
-            var url = `/Home/HomeApi/LoadCurrentSeasonAnime`;
+            var url = `/Home/AnimeHomeApi/LoadCurrentSeasonAnime`;
             return this.$http.get(url)
                 .then((data) => {
                     return data.data as Promise<ISeason>;
@@ -33,7 +33,7 @@
         }
 
         loadSeasonalAnime(year: number, season: string): Promise<ISeason | void> {
-            var url = `/Home/HomeApi/LoadSeasonalAnime`;
+            var url = `/Home/AnimeHomeApi/LoadSeasonalAnime`;
             var postObj = { year, season };
             return this.$http.post(url, postObj)
                 .then((data) => {
@@ -42,7 +42,7 @@
         }
 
         testDb(): Promise<any> {
-            var url = `/Home/HomeApi/GetInfoFromDb`;
+            var url = `/Home/AnimeHomeApi/GetInfoFromDb`;
             return this.$http.get(url)
                 .then((data) => {
                     return data.data as Promise<any>;

@@ -11,14 +11,14 @@ using Newtonsoft.Json;
 
 namespace Jikandesu.Areas.Home.Controllers
 {
-    public class HomeApiController : BaseApiController
+    public class AnimeHomeApiController : BaseApiController
     {
         private readonly IJdCrud _crud;
         private readonly IJdHttpService _http;
 
         private const string baseUrl = "https://api.jikan.moe/v3";
 
-        public HomeApiController(IJdCrud crud,
+        public AnimeHomeApiController(IJdCrud crud,
             IJdHttpService http)
         {
             _crud = crud;
@@ -36,8 +36,6 @@ namespace Jikandesu.Areas.Home.Controllers
 
             var result1 = JsonConvert.DeserializeObject<SearchResults>(animeResult);
             var result2 = JsonConvert.DeserializeObject<SearchResults>(mangaResult);
-
-            var str = "Placeholder";
 
             return SuccessJsonContent(new { result1, result2 });
         }
