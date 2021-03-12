@@ -151,7 +151,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="Areas\Home\Controllers\AnimeHomeApiController.cs" />
+    <Compile Include="Areas\Home\Controllers\HomeApiController.cs" />
     <Compile Include="Areas\Home\Controllers\HomeController.cs" />
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
     <Compile Include="Areas\Home\Models\JsonModels\Anime.cs" />
@@ -169,7 +169,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <TypeScriptCompile Include="Scripts\Home\animeDataService.ts" />
     <TypeScriptCompile Include="Scripts\Home\ISearchFilter.ts" />
-    <TypeScriptCompile Include="Scripts\Home\ISeasonalAnimeCtrlcs.ts" />
+    <TypeScriptCompile Include="Scripts\Home\ISearchResult.ts" />
+    <TypeScriptCompile Include="Scripts\Home\IAnimeHomeCtrl.ts" />
     <Compile Include="Services\IJdCrud.cs" />
     <Compile Include="Services\IJdHttpService.cs" />
     <Compile Include="Services\JdCrud.cs" />

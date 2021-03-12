@@ -1,5 +1,7 @@
 ﻿namespace JdAnime {
     export interface IAnimeHomeCtrl {
+        animeHeader: ISearchResult[],
+        mangaHeader: ISearchResult[],
         animeSeason: ISeason;
         searchText: string;
         searchAllMediaByName: () => void;

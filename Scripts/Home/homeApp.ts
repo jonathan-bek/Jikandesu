@@ -11,6 +11,6 @@ module Home {
     }]);
 
     //Include controllers
-    app.controller("seasonalAnimeCtrl", JdAnime.AnimeHomeCtrl);
+    app.controller("animeHomeCtrl", JdAnime.AnimeHomeCtrl);
     app.service("animeDataService", JdAnime.AnimeDataService)
 }

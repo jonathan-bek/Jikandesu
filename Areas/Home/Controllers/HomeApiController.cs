@@ -11,14 +11,14 @@ using Newtonsoft.Json;
 
 namespace Jikandesu.Areas.Home.Controllers
 {
-    public class AnimeHomeApiController : BaseApiController
+    public class HomeApiController : BaseApiController
     {
         private readonly IJdCrud _crud;
         private readonly IJdHttpService _http;
 
         private const string baseUrl = "https://api.jikan.moe/v3";
 
-        public AnimeHomeApiController(IJdCrud crud,
+        public HomeApiController(IJdCrud crud,
             IJdHttpService http)
         {
             _crud = crud;
@@ -34,10 +34,10 @@ namespace Jikandesu.Areas.Home.Controllers
             var mangaFilter = filterCollection.First(x => x.SearchCategory.Equals(SearchCategoryEnum.Manga));
             var mangaResult = await _http.AsyncGet($"{baseUrl}/search/{CreateSearchQueryString(mangaFilter)}&page=1");
 
-            var result1 = JsonConvert.DeserializeObject<SearchResults>(animeResult);
-            var result2 = JsonConvert.DeserializeObject<SearchResults>(mangaResult);
+            var result1 = JsonConvert.DeserializeObject<SearchResults>(animeResult).Results;
+            var result2 = JsonConvert.DeserializeObject<SearchResults>(mangaResult).Results;
 
-            return SuccessJsonContent(new { result1, result2 });
+            return SuccessJsonContent(new { AnimeResult = result1, MangaResult = result2 });
         }
 
         private string CreateSearchQueryString(SearchFilter filter)

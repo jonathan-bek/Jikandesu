@@ -3,11 +3,13 @@
 
 <body ng-app="homeApp">
     <p>Home App Html</p>
-    <div ng-controller="seasonalAnimeCtrl as ctrl">
-        <p>Season: {{ctrl.animeSeason.season_name}}</p>
-        <div class="seasonal-anime-scroller">
-            <div ng-repeat="anime in ctrl.animeSeason.anime">
-                <p>{{anime.title}}</p>
+    <div ng-controller="animeHomeCtrl as ctrl">
+        <div class="header-display-scroller">
+            <div ng-repeat="item in ctrl.animeHeader">
+                <p>{{item.title}}</p>
+            </div>
+            <div ng-repeat="item in ctrl.mangaHeader">
+                <p>{{item.title}}</p>
             </div>
         </div>
         <p>Display text: {{ctrl.displayText}}</p>

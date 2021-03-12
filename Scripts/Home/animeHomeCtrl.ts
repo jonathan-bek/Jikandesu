@@ -11,10 +11,14 @@ namespace JdAnime {
             private readonly animeDataService: IAnimeDataService,
             private displayText: string, //for testing
             public animeSeason: ISeason,
+            public animeHeader: ISearchResult[],
+            public mangaHeader: ISearchResult[],
             public searchText: string
         ) {
             this.displayText = "TEST CTRL";
             this.searchText = "";
+            this.animeHeader = [];
+            this.mangaHeader = [];
         }
 
         searchAllMediaByName(): void {
@@ -25,7 +29,8 @@ namespace JdAnime {
             );
             this.animeDataService.loadSearchResults(filterCollection)
                 .then((data: any | void) => {
-                    this.displayText = data as string;
+                    this.animeHeader = data.AnimeResult;
+                    this.mangaHeader = data.MangaResult;
                 },
                     msg => console.log("ERROR:", msg));
         }
