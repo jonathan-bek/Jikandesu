@@ -6,7 +6,9 @@
     <div ng-controller="animeHomeCtrl as ctrl">
         <div class="header-display-scroller">
             <div ng-repeat="item in ctrl.animeHeader">
+                <img ng-src="{{item.image_url}}" />
                 <p>{{item.title}}</p>
+                <p>{{item.score}}</p>
             </div>
             <div ng-repeat="item in ctrl.mangaHeader">
                 <p>{{item.title}}</p>

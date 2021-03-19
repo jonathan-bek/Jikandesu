@@ -4,6 +4,7 @@
         mangaHeader: ISearchResult[],
         animeSeason: ISeason;
         searchText: string;
+        displayText: string;
         searchAllMediaByName: () => void;
         getCurrentSeasonAnime: () => void;
         getSeasonalAnime: (year: number, season: string) => void;

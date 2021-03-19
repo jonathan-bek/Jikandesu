@@ -9,16 +9,16 @@ namespace JdAnime {
             private readonly $scope: ng.IScope,
             private readonly $http: ng.IHttpService,
             private readonly animeDataService: IAnimeDataService,
-            private displayText: string, //for testing
-            public animeSeason: ISeason,
             public animeHeader: ISearchResult[],
             public mangaHeader: ISearchResult[],
-            public searchText: string
+            public animeSeason: ISeason,
+            public searchText: string,
+            public displayText: string //for testing
         ) {
-            this.displayText = "TEST CTRL";
-            this.searchText = "";
             this.animeHeader = [];
             this.mangaHeader = [];
+            this.searchText = "";
+            this.displayText = "Display Text";
         }
 
         searchAllMediaByName(): void {
