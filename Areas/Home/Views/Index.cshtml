@@ -5,13 +5,16 @@
     <p>Home App Html</p>
     <div ng-controller="animeHomeCtrl as ctrl">
         <div class="header-display-scroller">
-            <div ng-repeat="item in ctrl.animeHeader">
+            <!-- this can probably be a directive -->
+            <div ng-repeat="item in ctrl.pagedAnimeHeader">
                 <img ng-src="{{item.image_url}}" />
                 <p>{{item.title}}</p>
                 <p>{{item.score}}</p>
             </div>
-            <div ng-repeat="item in ctrl.mangaHeader">
+            <div ng-repeat="item in ctrl.pagedMangaHeader">
+                <img ng-src="{{item.image_url}}" />
                 <p>{{item.title}}</p>
+                <p>{{item.score}}</p>
             </div>
         </div>
         <p>Display text: {{ctrl.displayText}}</p>

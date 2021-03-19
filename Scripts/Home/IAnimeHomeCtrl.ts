@@ -1,5 +1,7 @@
 ﻿namespace JdAnime {
     export interface IAnimeHomeCtrl {
+        animePageNumber: number,
+        pagedAnimeHeader: ISearchResult[],
         animeHeader: ISearchResult[],
         mangaHeader: ISearchResult[],
         animeSeason: ISeason;

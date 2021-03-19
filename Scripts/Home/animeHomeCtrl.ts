@@ -9,17 +9,33 @@ namespace JdAnime {
             private readonly $scope: ng.IScope,
             private readonly $http: ng.IHttpService,
             private readonly animeDataService: IAnimeDataService,
+
+            public animePageNumber: number,
+            public pagedAnimeHeader: ISearchResult[],
             public animeHeader: ISearchResult[],
+
+
+            public mangaPageNumber: number,
+            public pagedMangaHeader: ISearchResult[],
             public mangaHeader: ISearchResult[],
+
             public animeSeason: ISeason,
             public searchText: string,
             public displayText: string //for testing
         ) {
+            this.animePageNumber = 1;
+            this.pagedAnimeHeader = [];
             this.animeHeader = [];
+
+            this.mangaPageNumber = 1;
+            this.pagedMangaHeader = [];
             this.mangaHeader = [];
+
             this.searchText = "";
             this.displayText = "Display Text";
         }
+
+        private pageSize: number = 5;
 
         searchAllMediaByName(): void {
             var filterCollection: ISearchFilter[] = [];
@@ -30,9 +46,19 @@ namespace JdAnime {
             this.animeDataService.loadSearchResults(filterCollection)
                 .then((data: any | void) => {
                     this.animeHeader = data.AnimeResult;
+                    this.pagedAnimeHeader = this.setPaginatedData(this.animeHeader,
+                        this.animePageNumber) as ISearchResult[];
                     this.mangaHeader = data.MangaResult;
+                    this.pagedMangaHeader = this.setPaginatedData(this.mangaHeader,
+                        this.mangaPageNumber);
                 },
                     msg => console.log("ERROR:", msg));
+        }
+
+        private setPaginatedData(all: any[], pageNumber: number): any[] {
+            var end = pageNumber * this.pageSize;
+            var start = end - this.pageSize;
+            return all.slice(start, end);
         }
 
         getScrapedMangaImageUrls(): void {
