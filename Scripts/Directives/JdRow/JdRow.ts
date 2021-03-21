@@ -1,7 +1,12 @@
 ﻿module JdRowDirective {
     export class JdRowDirective implements ng.IDirective {
         restrict = "AE";
-        template = "<p>{{value}}</p>"
+        template = `
+            <div ng-repeat="item in value">
+                <img ng-src="{{item.image_url}}" />
+                <p>{{item.title}}</p>
+                <p>{{item.score}}</p>
+            </div>`;
         scope = {
             value: "=value"
         };

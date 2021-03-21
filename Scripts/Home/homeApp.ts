@@ -12,7 +12,7 @@ module Home {
     }]);
 
     app.controller("animeHomeCtrl", JdAnime.AnimeHomeCtrl)
-        .directive("jdRowItem", JdRowDirective.JdRowDirective.factory());
+        .directive("jdRow", JdRowDirective.JdRowDirective.factory());
 
     app.service("animeDataService", JdAnime.AnimeDataService)
 }
