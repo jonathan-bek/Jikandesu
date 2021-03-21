@@ -14,7 +14,6 @@ namespace JdAnime {
             public pagedAnimeHeader: ISearchResult[],
             public animeHeader: ISearchResult[],
 
-
             public mangaPageNumber: number,
             public pagedMangaHeader: ISearchResult[],
             public mangaHeader: ISearchResult[],

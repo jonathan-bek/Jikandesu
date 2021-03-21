@@ -1,0 +1,10 @@
+﻿{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "removeComments": true,
+    "target": "es5",
+    "outFile": "jdRowItemBundle.js",
+    "sourceMap": true,
+    "strict": true
+  }
+}

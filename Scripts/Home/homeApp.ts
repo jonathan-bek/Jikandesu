@@ -1,5 +1,6 @@
 ﻿/// <reference path="animeHomeCtrl.ts" />
 /// <reference path="animeDataService.ts" />
+/// <reference path="../Directives/JdRowItem/JdRowItem.ts" />
 
 module Home {
     "use strict";
@@ -10,7 +11,8 @@ module Home {
         $locationProvider.html5Mode({ enabled: true, requireBase: false });
     }]);
 
-    //Include controllers
-    app.controller("animeHomeCtrl", JdAnime.AnimeHomeCtrl);
+    app.controller("animeHomeCtrl", JdAnime.AnimeHomeCtrl)
+        .directive("jdRowItem", JdRowItemDirective.JdRowItemDirective.factory());
+
     app.service("animeDataService", JdAnime.AnimeDataService)
 }
