@@ -1,8 +1,10 @@
-﻿module JdRowItemDirective {
-    export class JdRowItemDirective implements ng.IDirective {
-        restrict = "E";
-        //require = 'ngModel';
-        template = "<p>TEST JD ROW ITEM DIRECTIVE</p>"
+﻿module JdRowDirective {
+    export class JdRowDirective implements ng.IDirective {
+        restrict = "AE";
+        template = "<p>{{value}}</p>"
+        scope = {
+            value: "=value"
+        };
         replace = true;
 
         //constructor for dependencies/svcs
@@ -12,7 +14,7 @@
         }
 
         static factory(): ng.IDirectiveFactory {
-            const directive = () => new JdRowItemDirective();
+            const directive = () => new JdRowDirective();
             directive.$inject = [] as any[];
             return directive;
         }

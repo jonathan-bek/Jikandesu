@@ -167,8 +167,8 @@
     <Compile Include="Models\BaseApiController.cs" />
     <Compile Include="Models\BaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <TypeScriptCompile Include="Scripts\Directives\JdRowItem\JdRowItem.ts" />
-    <None Include="Scripts\Directives\JdRowItem\tsconfig.json" />
+    <TypeScriptCompile Include="Scripts\Directives\JdRow\JdRow.ts" />
+    <None Include="Scripts\Directives\JdRow\tsconfig.json" />
     <TypeScriptCompile Include="Scripts\Home\animeDataService.ts" />
     <TypeScriptCompile Include="Scripts\Home\ISearchFilter.ts" />
     <TypeScriptCompile Include="Scripts\Home\ISearchResult.ts" />
@@ -195,7 +195,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="package-lock.json" />
-    <Content Include="Scripts\Directives\JdRowItem\.gitignore" />
+    <Content Include="Scripts\Directives\JdRow\.gitignore" />
     <Content Include="Scripts\Home\.gitignore" />
     <Content Include="Scripts\Home\tsconfig.json" />
     <Content Include="Areas\Home\Views\web.config" />

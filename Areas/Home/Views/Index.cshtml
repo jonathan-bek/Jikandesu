@@ -6,7 +6,7 @@
     <div ng-controller="animeHomeCtrl as ctrl">
         <div class="header-display-scroller">
             <!-- this can probably be a directive -->
-            <jd-row-item></jd-row-item>
+            <jd-row-item value="ctrl.displayText"></jd-row-item>
             <div ng-repeat="item in ctrl.pagedAnimeHeader">
                 <img ng-src="{{item.image_url}}" />
                 <p>{{item.title}}</p>
@@ -32,4 +32,4 @@
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/Home/HomeBundle.js"></script>
-<script src="~/Scripts/Directives/JdRowItem/jdRowItemBundle.js"></script>
+<script src="~/Scripts/Directives/JdRowItem/jdRowBundle.js"></script>

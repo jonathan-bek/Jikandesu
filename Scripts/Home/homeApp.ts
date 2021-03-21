@@ -1,6 +1,6 @@
 ﻿/// <reference path="animeHomeCtrl.ts" />
 /// <reference path="animeDataService.ts" />
-/// <reference path="../Directives/JdRowItem/JdRowItem.ts" />
+/// <reference path="../Directives/JdRow/JdRow.ts" />
 
 module Home {
     "use strict";
@@ -12,7 +12,7 @@ module Home {
     }]);
 
     app.controller("animeHomeCtrl", JdAnime.AnimeHomeCtrl)
-        .directive("jdRowItem", JdRowItemDirective.JdRowItemDirective.factory());
+        .directive("jdRowItem", JdRowDirective.JdRowDirective.factory());
 
     app.service("animeDataService", JdAnime.AnimeDataService)
 }
