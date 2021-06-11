@@ -20,7 +20,8 @@ namespace JdAnime {
 
             public animeSeason: ISeason,
             public searchText: string,
-            public displayText: string //for testing
+            public displayText: string, //for testing
+            public mangaUrl: string
         ) {
             this.animePageNumber = 1;
             this.pagedAnimeHeader = [];
@@ -32,9 +33,17 @@ namespace JdAnime {
 
             this.searchText = "";
             this.displayText = "Display Text";
+            this.mangaUrl = "";
         }
 
         private pageSize: number = 5;
+
+        getMangaPage(): void {
+            this.animeDataService.getMangaPage(this.mangaUrl)
+                .then((data) => {
+                    this.displayText = data;
+                })
+        }
 
         searchAllMediaByName(): void {
             var filterCollection: ISearchFilter[] = [];
@@ -58,14 +67,6 @@ namespace JdAnime {
             var end = pageNumber * this.pageSize;
             var start = end - this.pageSize;
             return all.slice(start, end);
-        }
-
-        getScrapedMangaImageUrls(): void {
-            this.animeDataService.loadScrapedMangaImageUrls()
-                .then((data: any | void) => {
-                    this.displayText = data as string;
-                },
-                    msg => console.log("ERROR:", msg));
         }
 
         getCurrentSeasonAnime(): void {

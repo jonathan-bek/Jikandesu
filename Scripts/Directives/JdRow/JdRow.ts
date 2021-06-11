@@ -11,7 +11,6 @@
             value: "=value"
         };
         replace = true;
-
         //constructor for dependencies/svcs
 
         link = (scope: ng.IScope, element: ng.IAugmentedJQuery,

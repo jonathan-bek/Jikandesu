@@ -15,14 +15,24 @@ namespace Jikandesu.Areas.Home.Controllers
     {
         private readonly IJdCrud _crud;
         private readonly IJdHttpService _http;
+        private readonly IMangaPageProvider _pageProvider;
 
         private const string baseUrl = "https://api.jikan.moe/v3";
 
         public HomeApiController(IJdCrud crud,
-            IJdHttpService http)
+            IJdHttpService http,
+            IMangaPageProvider pageProvider)
         {
             _crud = crud;
             _http = http;
+            _pageProvider = pageProvider;
+        }
+
+        [HttpPost]
+        public async Task<ContentResult> GetMangaPage(string mangaUrl)
+        {
+            var page = await _pageProvider.GetMangaPage(mangaUrl);
+            return SuccessJsonContent(page);
         }
 
         [HttpPost]
@@ -43,14 +53,6 @@ namespace Jikandesu.Areas.Home.Controllers
         private string CreateSearchQueryString(SearchFilter filter)
         {
             return $"{filter.SearchCategory}?q={filter.Name}";
-        }
-
-        [HttpGet]
-        public async Task<ContentResult> LoadScrapedMangaImageUrls()
-        {
-            var str = "Placeholder";
-
-            return SuccessJsonContent(str);
         }
 
         [HttpGet]
