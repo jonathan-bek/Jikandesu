@@ -8,10 +8,13 @@ namespace Jikandesu.Areas.Home.Models
     public class MangaPageProvider : IMangaPageProvider
     {
         private readonly IJdHttpService _http;
+        private readonly IManganeloPageParser _manganeloPageParser;
 
-        public MangaPageProvider(IJdHttpService http)
+        public MangaPageProvider(IJdHttpService http,
+            IManganeloPageParser manganeloPageParser)
         {
             _http = http;
+            _manganeloPageParser = manganeloPageParser;
         }
 
         public async Task<string> GetMangaPage(string url)
@@ -21,35 +24,11 @@ namespace Jikandesu.Areas.Home.Models
             var provider = GetMangaProvider(html);
             if (provider == MangaProviderEnum.Manganelo)
             {
-                var title = GetManganeloTitle(html);
-                var id = GetManganeloId(html);
-                GetChapterList(html);
-                return id;
+                var page = await _manganeloPageParser.GetMangaDetails(html);
+                return page.Id;
             }
 
             return htmlString;
-        }
-
-        private void GetChapterList(HtmlDocument html)
-        {
-            var chapterDiv = html.DocumentNode.SelectNodes("//ul[@class='row-content-chapter']");
-            var chapters = chapterDiv.Descendants("li");
-        }
-
-        private string GetManganeloTitle(HtmlDocument html)
-        {
-            var titleDiv = html.DocumentNode.SelectNodes("//div[@class='story-info-right']");
-            var title = titleDiv.Descendants("h1").Single().InnerHtml;
-            return title;
-        }
-
-        private string GetManganeloId(HtmlDocument html)
-        {
-            var urlTag = html.DocumentNode.SelectNodes("//meta")
-                .Where(x => x.GetAttributeValue("property", "").Contains("og:url")).First();
-            var content = urlTag.GetAttributeValue("content", "");
-            var id = content.Split('/').Last();
-            return id;
         }
 
         private HtmlDocument ParseHtmlString(string htmlString)

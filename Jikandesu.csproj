@@ -162,6 +162,9 @@
     <Compile Include="Areas\Home\Models\JsonModels\Genre.cs" />
     <Compile Include="Areas\Home\Models\JsonModels\SearchResults.cs" />
     <Compile Include="Areas\Home\Models\JsonModels\Manga.cs" />
+    <Compile Include="Areas\Home\Models\MangaChapter.cs" />
+    <Compile Include="Areas\Home\Models\ManganeloPageParser.cs" />
+    <Compile Include="Areas\Home\Models\MangaPage.cs" />
     <Compile Include="Areas\Home\Models\MangaPageProvider.cs" />
     <Compile Include="Areas\Home\Models\SearchCategoryEnum.cs" />
     <Compile Include="Areas\Home\Models\SearchFilter.cs" />
