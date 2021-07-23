@@ -6,21 +6,35 @@
     <div ng-controller="animeHomeCtrl as ctrl">
         <div>
             <label>Get:</label>
-            <input type="text" ng-model="ctrl.mangaUrl" />
+            <input type="text" ng-model="ctrl.mangaUrl" placeholder="Enter URL" />
             <button ng-click="ctrl.getMangaPage()">Get</button>
+            <button ng-click="ctrl.saveMangaPage()" ng-show="ctrl.mangaPage !== undefined">Save</button>
         </div>
-        <label>Search:</label>
-        <div class="header-display-scroller">
-            <jd-row value="ctrl.pagedAnimeHeader"></jd-row>
-            <jd-row value="ctrl.pagedMangaHeader"></jd-row>
+        <div ng-show="ctrl.mangaPage !== undefined">
+            <label>Manga Page</label>
+            <h4>{{ctrl.mangaPage.Title}}</h4>
+            <img ng-src="{{ctrl.mangaPage.ImageUrl}}" />
+            <div ng-repeat="c in ctrl.mangaPage.MangaChapters">
+                <a ng-href="{{c.ChapterUrl}}">{{c.ChapterName}}</a>
+            </div>
         </div>
-        <p>Display text: {{ctrl.displayText}}</p>
-        <input ng-model="ctrl.searchText" />
 
-        <button ng-click="ctrl.searchAllMediaByName()">search all media by name</button>
-        <button ng-click="ctrl.getCurrentSeasonAnime()">get current season </button>
-        <button ng-click="ctrl.getSeasonalAnime(2010, 'winter')">get seasonal, 2010 winter</button>
-        <button ng-click="ctrl.testDb()">test db</button>
+
+        @*discovery side*@
+        <div ng-show="false">
+            <label>Search:</label>
+            <div class="header-display-scroller">
+                <jd-row value="ctrl.pagedAnimeHeader"></jd-row>
+                <jd-row value="ctrl.pagedMangaHeader"></jd-row>
+            </div>
+            <p>Display text: {{ctrl.displayText}}</p>
+            <input ng-model="ctrl.searchText" />
+
+            <button ng-click="ctrl.searchAllMediaByName()">search all media by name</button>
+            <button ng-click="ctrl.getCurrentSeasonAnime()">get current season </button>
+            <button ng-click="ctrl.getSeasonalAnime(2010, 'winter')">get seasonal, 2010 winter</button>
+            <button ng-click="ctrl.testDb()">test db</button>
+        </div>
     </div>
 </body>
 

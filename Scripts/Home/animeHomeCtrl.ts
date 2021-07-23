@@ -5,6 +5,8 @@ namespace JdAnime {
     export class AnimeHomeCtrl implements ng.IController, IAnimeHomeCtrl {
         static $inject = ["$scope", "$http", "animeDataService"];
 
+        mangaPage: IMangaPage | undefined;
+
         constructor(
             private readonly $scope: ng.IScope,
             private readonly $http: ng.IHttpService,
@@ -40,9 +42,13 @@ namespace JdAnime {
 
         getMangaPage(): void {
             this.animeDataService.getMangaPage(this.mangaUrl)
-                .then((data) => {
-                    this.displayText = data;
+                .then((data: IMangaPage | void) => {
+                    this.mangaPage = data as IMangaPage;
                 })
+        }
+
+        saveMangaPage(): void {
+            this.animeDataService.saveMangaPage(this.mangaPage as IMangaPage);
         }
 
         searchAllMediaByName(): void {

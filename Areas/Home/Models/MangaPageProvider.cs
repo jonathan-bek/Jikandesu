@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 using Jikandesu.Services;
@@ -17,18 +18,17 @@ namespace Jikandesu.Areas.Home.Models
             _manganeloPageParser = manganeloPageParser;
         }
 
-        public async Task<string> GetMangaPage(string url)
+        public async Task<MangaPage> GetMangaPage(string url)
         {
             var htmlString = await _http.AsyncGet(url);
             var html = ParseHtmlString(htmlString);
             var provider = GetMangaProvider(html);
             if (provider == MangaProviderEnum.Manganelo)
             {
-                var page = await _manganeloPageParser.GetMangaDetails(html);
-                return page.Id;
+                return await _manganeloPageParser.GetMangaDetails(html);
             }
 
-            return htmlString;
+            throw new ArgumentException("Invalid url for manga page", nameof(url));
         }
 
         private HtmlDocument ParseHtmlString(string htmlString)

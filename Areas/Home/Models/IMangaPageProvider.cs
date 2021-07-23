@@ -4,6 +4,6 @@ namespace Jikandesu.Areas.Home.Models
 {
     public interface IMangaPageProvider
     {
-        Task<string> GetMangaPage(string url);
+        Task<MangaPage> GetMangaPage(string url);
     }
 }

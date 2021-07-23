@@ -42,5 +42,15 @@ namespace Jikandesu.Services
         {
             return _con.GetAsync<T>(id);
         }
+
+        public Task<int> ExecuteAsync(string sql)
+        {
+            return _con.ExecuteAsync(sql);
+        }
+
+        public Task<int> ExecuteAsync(string sql, object param)
+        {
+            return _con.ExecuteAsync(sql, param);
+        }
     }
 }

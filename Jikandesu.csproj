@@ -178,6 +178,7 @@
     <TypeScriptCompile Include="Scripts\Directives\JdRow\JdRow.ts" />
     <None Include="Scripts\Directives\JdRow\tsconfig.json" />
     <TypeScriptCompile Include="Scripts\Home\animeDataService.ts" />
+    <TypeScriptCompile Include="Scripts\Home\IMangaPage.ts" />
     <TypeScriptCompile Include="Scripts\Home\ISearchFilter.ts" />
     <TypeScriptCompile Include="Scripts\Home\ISearchResult.ts" />
     <TypeScriptCompile Include="Scripts\Home\IAnimeHomeCtrl.ts" />

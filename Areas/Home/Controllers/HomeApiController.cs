@@ -36,6 +36,21 @@ namespace Jikandesu.Areas.Home.Controllers
         }
 
         [HttpPost]
+        public async Task<ContentResult> SaveMangaPage(string mangaPageStr)
+        {
+            var mangaPage = JsonConvert.DeserializeObject<MangaPage>(mangaPageStr);
+
+            using (_crud.GetOpenConnection())
+            {
+                var query = @"INSERT INTO linkUserManga (userId, mangaId) VALUES (NEWID(), @mangaId)";
+                var test = await _crud.ExecuteAsync(query, new { mangaId = mangaPage.Id });
+            }
+            return SuccessJsonContent(mangaPage);
+        }
+
+
+
+        [HttpPost]
         public async Task<ContentResult> LoadSearchResults(
             IEnumerable<SearchFilter> filterCollection)
         {
