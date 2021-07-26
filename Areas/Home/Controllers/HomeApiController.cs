@@ -50,6 +50,13 @@ namespace Jikandesu.Areas.Home.Controllers
         }
 
         [HttpGet]
+        public void Login()
+        {
+            var url = ConfigurationManager.AppSettings.Get("redirectUri");
+            Response.Redirect(url);
+        }
+
+        [HttpGet]
         public void Logout()
         {
             var url = ConfigurationManager.AppSettings.Get("logoutUri");
