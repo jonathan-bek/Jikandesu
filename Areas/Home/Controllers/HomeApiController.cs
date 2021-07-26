@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -48,7 +49,12 @@ namespace Jikandesu.Areas.Home.Controllers
             return SuccessJsonContent(mangaPage);
         }
 
-
+        [HttpGet]
+        public void Logout()
+        {
+            var url = ConfigurationManager.AppSettings.Get("logoutUri");
+            Response.Redirect(url);
+        }
 
         [HttpPost]
         public async Task<ContentResult> LoadSearchResults(
