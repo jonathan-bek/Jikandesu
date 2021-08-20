@@ -2,21 +2,24 @@
 @{ ViewBag.Title = "Home"; }
 
 <body ng-app="homeApp">
-    <p>Home App Html</p>
     <div ng-controller="animeHomeCtrl as ctrl">
-        <div>
-            <label>Get:</label>
+        <div class="text-center">
             <input type="text" ng-model="ctrl.mangaUrl" placeholder="Enter URL" />
-            <button ng-click="ctrl.getMangaPage()">Get</button>
-            <button ng-click="ctrl.saveMangaPage()" ng-show="ctrl.mangaPage !== undefined">Save</button>
+            <button ng-click="ctrl.getMangaPage()">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
         </div>
-        <div ng-show="ctrl.mangaPage !== undefined">
-            <label>Manga Page</label>
-            <h4>{{ctrl.mangaPage.Title}}</h4>
-            <img ng-src="{{ctrl.mangaPage.ImageUrl}}" />
-            <div ng-repeat="c in ctrl.mangaPage.MangaChapters">
-                <a ng-href="{{c.ChapterUrl}}">{{c.ChapterName}}</a>
+        <div class="col-xs-12" ng-show="ctrl.mangaPage !== undefined">
+            <div class="col-xs-0 col-sm-3"></div>
+            <div class="col-xs-12 col-sm-6 text-center">
+                <img ng-src="{{ctrl.mangaPage.ImageUrl}}" />
+                <h4>{{ctrl.mangaPage.Title}}</h4>
+                <button ng-click="ctrl.saveMangaPage()" ng-show="ctrl.mangaPage !== undefined">Save</button>
+                <div ng-repeat="c in ctrl.mangaPage.MangaChapters">
+                    <a ng-href="{{c.ChapterUrl}}">{{c.ChapterName}}</a>
+                </div>
             </div>
+            <div class="col-xs-0 col-sm-3"></div>
         </div>
 
         <!-- discovery side
