@@ -237,6 +237,7 @@
     <Compile Include="Areas\Authentication\Models\MsGraphHelper.cs" />
     <Compile Include="Areas\Home\Controllers\HomeApiController.cs" />
     <Compile Include="Areas\Home\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Home\Controllers\AuthApiController.cs" />
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
     <Compile Include="Areas\Home\Models\IMangaPageProvider.cs" />
     <Compile Include="Areas\Home\Models\JsonModels\Anime.cs" />

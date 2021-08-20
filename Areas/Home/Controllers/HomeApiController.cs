@@ -36,64 +36,6 @@ namespace Jikandesu.Areas.Home.Controllers
             _pageProvider = pageProvider;
         }
 
-        [HttpPost]
-        public async Task<ContentResult> GetMangaPage(string mangaUrl)
-        {
-            var page = await _pageProvider.GetMangaPage(mangaUrl);
-            return SuccessJsonContent(page);
-        }
-
-        [HttpPost]
-        public async Task<ContentResult> SaveMangaPage(string mangaPageStr)
-        {
-            var mangaPage = JsonConvert.DeserializeObject<MangaPage>(mangaPageStr);
-
-            using (_crud.GetOpenConnection())
-            {
-                var query = @"INSERT INTO linkUserManga (userId, mangaId) VALUES (NEWID(), @mangaId)";
-                var test = await _crud.ExecuteAsync(query, new { mangaId = mangaPage.Id });
-            }
-            return SuccessJsonContent(mangaPage);
-        }
-
-        [HttpGet]
-        public void ManualLogin()
-        {
-            if (ConfigurationManager.AppSettings.Get("EnableLocalLogin") == "true")
-            {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, "LocalDev"),
-                    new Claim(ClaimTypes.NameIdentifier, "LocalDev"),
-                    new Claim(ClaimTypes.Email, "LocalDev@local.com"),
-                    new Claim(ClaimTypes.Surname, "Developer"),
-                    new Claim(ClaimTypes.GivenName, "LocalDev"),
-                    new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity")
-                };
-                var authmgr = HttpContext.GetOwinContext().Authentication;
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationType);
-                authmgr.SignIn(new AuthenticationProperties { IsPersistent = false, AllowRefresh = true }, claimsIdentity);
-            }
-            //var url = ConfigurationManager.AppSettings.Get("RedirectUri");
-            //Response.Redirect(url);
-            Response.Redirect("/");
-        }
-
-        [HttpGet]
-        public void ManualLogout()
-        {
-            var authmgr = HttpContext.GetOwinContext().Authentication;
-            authmgr.SignOut(CookieAuthenticationDefaults.AuthenticationType);
-            Response.Redirect("/");
-        }
-
-        [HttpGet]
-        public void Logout()
-        {
-            var url = ConfigurationManager.AppSettings.Get("LogoutUri");
-            Response.Redirect(url);
-        }
-
         public void TestUser()
         {
             //GetUserDetails(); 
@@ -116,7 +58,25 @@ namespace Jikandesu.Areas.Home.Controllers
             Response.Redirect("/");
         }
 
+        [HttpPost]
+        public async Task<ContentResult> GetMangaPage(string mangaUrl)
+        {
+            var page = await _pageProvider.GetMangaPage(mangaUrl);
+            return SuccessJsonContent(page);
+        }
 
+        [HttpPost]
+        public async Task<ContentResult> SaveMangaPage(string mangaPageStr)
+        {
+            var mangaPage = JsonConvert.DeserializeObject<MangaPage>(mangaPageStr);
+
+            using (_crud.GetOpenConnection())
+            {
+                var query = @"INSERT INTO linkUserManga (userId, mangaId) VALUES (NEWID(), @mangaId)";
+                var test = await _crud.ExecuteAsync(query, new { mangaId = mangaPage.Id });
+            }
+            return SuccessJsonContent(mangaPage);
+        }
 
         [HttpPost]
         public async Task<ContentResult> LoadSearchResults(

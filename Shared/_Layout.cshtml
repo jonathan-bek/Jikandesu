@@ -31,13 +31,13 @@
                         @{ if (HttpContext.Current.IsDebuggingEnabled)
                             {
                                 <li>@Html.ActionLink("Test", "Test", "HomeApi")</li>
-                                <li>@Html.ActionLink("ManualLogin", "ManualLogin", "HomeApi")</li>
-                                <li>@Html.ActionLink("ManualLogout", "ManualLogout", "HomeApi")</li>
+                                <li>@Html.ActionLink("ManualLogin", "ManualLogin", "AuthApi")</li>
+                                <li>@Html.ActionLink("ManualLogout", "ManualLogout", "AuthApi")</li>
                             }
                             else
                             {
                                 <li>@Html.ActionLink("Test", "Test", "HomeApi")</li>
-                                <li>@Html.ActionLink("Logout", "Logout", "HomeApi")</li>
+                                <li>@Html.ActionLink("Logout", "Logout", "AuthApi")</li>
                             }
                         }
                     </ul>
