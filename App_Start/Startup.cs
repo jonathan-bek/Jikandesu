@@ -1,9 +1,14 @@
 ﻿using System.Configuration;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using Jikandesu.Areas.Authentication.Models;
+using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Notifications;
 using Microsoft.Owin.Security.OpenIdConnect;
 using Owin;
 
@@ -24,9 +29,9 @@ namespace Jikandesu.App_Start
                     // Sets the client ID, authority, and redirect URI as obtained from Web.config
                     ClientId = ConfigurationManager.AppSettings.Get("ClientId"),
                     Authority = ConfigurationManager.AppSettings.Get("Authority"),
-                    RedirectUri = ConfigurationManager.AppSettings.Get("redirectUri"),
+                    RedirectUri = ConfigurationManager.AppSettings.Get("RedirectUri"),
                     // PostLogoutRedirectUri is the page that users will be redirected to after sign-out. In this case, it's using the home page
-                    PostLogoutRedirectUri = ConfigurationManager.AppSettings.Get("redirectUri"),
+                    PostLogoutRedirectUri = ConfigurationManager.AppSettings.Get("RedirectUri"),
                     Scope = OpenIdConnectScope.OpenIdProfile,
                     // ResponseType is set to request the code id_token, which contains basic information about the signed-in user
                     ResponseType = OpenIdConnectResponseType.CodeIdToken,
@@ -40,10 +45,44 @@ namespace Jikandesu.App_Start
                     // OpenIdConnectAuthenticationNotifications configures OWIN to send notification of failed authentications to the OnAuthenticationFailed method
                     Notifications = new OpenIdConnectAuthenticationNotifications
                     {
-                        //AuthenticationFailed = OnAuthenticationFailed
-                    }
+                        AuthorizationCodeReceived = async n =>
+                        {
+                            await OnAuthorizationCodeReceivedAsync(n);
+                        }
+                    },
+                    SaveTokens = true
                 }
             );
+        }
+
+        private static async Task OnAuthorizationCodeReceivedAsync(
+            AuthorizationCodeReceivedNotification notification)
+        {
+            Trace.TraceInformation("Code Received");
+            var appId = ConfigurationManager.AppSettings.Get("ClientId");
+            var idClient = ConfidentialClientApplicationBuilder.Create(appId)
+                .WithRedirectUri(ConfigurationManager.AppSettings.Get("RedirectUri"))
+                .WithClientSecret(ConfigurationManager.AppSettings.Get("ClientSecret"))
+                .Build();
+            string msg;
+            string debug;
+            try
+            {
+                var scopes = OpenIdConnectScope.OpenIdProfile.Split(' ');
+                var result = await idClient.AcquireTokenByAuthorizationCode(scopes, notification.Code)
+                    .ExecuteAsync();
+                var userDetails = await MsGraphHelper.GetUserDetails(result.AccessToken);
+                msg = "User retrieved.";
+                debug = userDetails.DisplayName;
+            }
+            catch (MsalException ex)
+            {
+                msg = "Token exception";
+                debug = ex.Message;
+            }
+            Trace.TraceInformation(msg);
+            Trace.TraceInformation(debug);
+            notification.HandleResponse();
         }
     }
 }

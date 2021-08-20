@@ -1,13 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using Jikandesu.Areas.Home.Models;
 using Jikandesu.Areas.Home.Models.JsonModels;
 using Jikandesu.Models;
 using Jikandesu.Services;
+using Microsoft.Graph;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
 using Newtonsoft.Json;
 
 namespace Jikandesu.Areas.Home.Controllers
@@ -50,18 +57,66 @@ namespace Jikandesu.Areas.Home.Controllers
         }
 
         [HttpGet]
-        public void Login()
+        public void ManualLogin()
         {
-            var url = ConfigurationManager.AppSettings.Get("redirectUri");
-            Response.Redirect(url);
+            if (ConfigurationManager.AppSettings.Get("EnableLocalLogin") == "true")
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, "LocalDev"),
+                    new Claim(ClaimTypes.NameIdentifier, "LocalDev"),
+                    new Claim(ClaimTypes.Email, "LocalDev@local.com"),
+                    new Claim(ClaimTypes.Surname, "Developer"),
+                    new Claim(ClaimTypes.GivenName, "LocalDev"),
+                    new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity")
+                };
+                var authmgr = HttpContext.GetOwinContext().Authentication;
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationType);
+                authmgr.SignIn(new AuthenticationProperties { IsPersistent = false, AllowRefresh = true }, claimsIdentity);
+            }
+            //var url = ConfigurationManager.AppSettings.Get("RedirectUri");
+            //Response.Redirect(url);
+            Response.Redirect("/");
+        }
+
+        [HttpGet]
+        public void ManualLogout()
+        {
+            var authmgr = HttpContext.GetOwinContext().Authentication;
+            authmgr.SignOut(CookieAuthenticationDefaults.AuthenticationType);
+            Response.Redirect("/");
         }
 
         [HttpGet]
         public void Logout()
         {
-            var url = ConfigurationManager.AppSettings.Get("logoutUri");
+            var url = ConfigurationManager.AppSettings.Get("LogoutUri");
             Response.Redirect(url);
         }
+
+        public void TestUser()
+        {
+            //GetUserDetails(); 
+            var name = ClaimsPrincipal.Current.Identity.Name;
+            Trace.TraceInformation("User name: " + name);
+            var claimsIdentity = HttpContext.User.Identity as ClaimsIdentity;
+            HttpContext.GetOwinContext().Authentication.Challenge(CookieAuthenticationDefaults.AuthenticationType);
+            var claims = claimsIdentity.Claims;
+            foreach (var c in claims)
+            {
+                Trace.TraceInformation("type: " + c.Type);
+                Trace.TraceInformation("issuer: " + c.Issuer);
+                Trace.TraceInformation("value: " + c.Value);
+                foreach (var p in c.Properties)
+                {
+                    Trace.TraceInformation("propKey: " + p.Key);
+                }
+            }
+            //Response.Redirect("https://localhost:44384");
+            Response.Redirect("/");
+        }
+
+
 
         [HttpPost]
         public async Task<ContentResult> LoadSearchResults(

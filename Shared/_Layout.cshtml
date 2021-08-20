@@ -29,14 +29,16 @@
                 <div class="pull-right">
                     <ul class="nav navbar-nav">
                         @{ if (HttpContext.Current.IsDebuggingEnabled)
-                           {
-                               <li>@Html.ActionLink("ManualLogin", "Login", "HomeApi")</li>
-                               <li>@Html.ActionLink("Logout", "Logout", "HomeApi")</li>
-                           }
-                           else
-                           {
-                               <li>@Html.ActionLink("Logout", "Logout", "HomeApi")</li>
-                           }
+                            {
+                                <li>@Html.ActionLink("Test", "Test", "HomeApi")</li>
+                                <li>@Html.ActionLink("ManualLogin", "ManualLogin", "HomeApi")</li>
+                                <li>@Html.ActionLink("ManualLogout", "ManualLogout", "HomeApi")</li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("Test", "Test", "HomeApi")</li>
+                                <li>@Html.ActionLink("Logout", "Logout", "HomeApi")</li>
+                            }
                         }
                     </ul>
                 </div>
