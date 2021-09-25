@@ -14,7 +14,9 @@
             <div class="col-xs-12 col-sm-6 text-center">
                 <img ng-src="{{ctrl.mangaPage.ImageUrl}}" />
                 <h4>{{ctrl.mangaPage.Title}}</h4>
-                <button ng-click="ctrl.saveMangaPage()" ng-show="ctrl.mangaPage !== undefined">Save</button>
+                <button ng-show="ctrl.mangaPage !== undefined" 
+                        ng-click="ctrl.saveMangaPage()"
+                        class="btn btn-success">Save</button>
                 <div ng-repeat="c in ctrl.mangaPage.MangaChapters">
                     <a ng-href="{{c.ChapterUrl}}">{{c.ChapterName}}</a>
                 </div>

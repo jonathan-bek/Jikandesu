@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
@@ -54,13 +56,20 @@ namespace Jikandesu.Areas.Home.Models
         {
             var result = new List<MangaChapter>();
             var list = html.DocumentNode.SelectNodes("//ul[@class='row-content-chapter']");
-            var chapters = list.Descendants("li").Select(x => x.ChildNodes.First(y => y.Name == "a"));
+            var chapters = list.Descendants("li");
             foreach (var c in chapters)
             {
-                var chapter = new MangaChapter()
+                var nameAndLink = c.Descendants(0).First(x => x.GetAttributeValue("class", "").Contains("chapter-name"));
+                var uploadDate = c.Descendants(0).First(x => x.GetAttributeValue("class", "").Contains("chapter-time"))
+                    .GetAttributeValue("title", "");
+                var views = c.Descendants(0).First(x => x.GetAttributeValue("class", "").Contains("chapter-view"))
+                    .InnerHtml;
+                var chapter = new MangaChapter
                 {
-                    ChapterName = c.InnerHtml,
-                    ChapterUrl = c.Attributes.First(x => x.Name == "href").Value
+                    ChapterName = nameAndLink.InnerHtml,
+                    ChapterUrl = nameAndLink.Attributes.First(x => x.Name == "href").Value,
+                    ChapterUploadDate = DateTime.Parse(uploadDate),
+                    ChapterViews = int.Parse(views, NumberStyles.AllowThousands)
                 };
                 result.Add(chapter);
             }
