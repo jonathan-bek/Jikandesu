@@ -240,17 +240,10 @@
     <Compile Include="Areas\Home\Controllers\AuthApiController.cs" />
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
     <Compile Include="Areas\Home\Models\IMangaPageProvider.cs" />
-    <Compile Include="Areas\Home\Models\JsonModels\Anime.cs" />
-    <Compile Include="Areas\Home\Models\JsonModels\Genre.cs" />
-    <Compile Include="Areas\Home\Models\JsonModels\SearchResults.cs" />
-    <Compile Include="Areas\Home\Models\JsonModels\Manga.cs" />
     <Compile Include="Areas\Home\Models\MangaChapter.cs" />
     <Compile Include="Areas\Home\Models\ManganeloPageParser.cs" />
     <Compile Include="Areas\Home\Models\MangaPage.cs" />
     <Compile Include="Areas\Home\Models\MangaPageProvider.cs" />
-    <Compile Include="Areas\Home\Models\SearchCategoryEnum.cs" />
-    <Compile Include="Areas\Home\Models\SearchFilter.cs" />
-    <Compile Include="Areas\Home\Models\JsonModels\Season.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -261,8 +254,6 @@
     <None Include="Scripts\Directives\JdRow\tsconfig.json" />
     <TypeScriptCompile Include="Scripts\Home\animeDataService.ts" />
     <TypeScriptCompile Include="Scripts\Home\IMangaPage.ts" />
-    <TypeScriptCompile Include="Scripts\Home\ISearchFilter.ts" />
-    <TypeScriptCompile Include="Scripts\Home\ISearchResult.ts" />
     <TypeScriptCompile Include="Scripts\Home\IAnimeHomeCtrl.ts" />
     <Compile Include="Services\IJdCrud.cs" />
     <Compile Include="Services\IJdHttpService.cs" />
@@ -336,11 +327,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Home\homeApp.ts" />
-    <TypeScriptCompile Include="Scripts\Home\IAnime.ts" />
     <TypeScriptCompile Include="Scripts\Home\IAnimeDataService.ts" />
-    <TypeScriptCompile Include="Scripts\Home\IGenre.ts" />
-    <TypeScriptCompile Include="Scripts\Home\ISeason.ts" />
-    <TypeScriptCompile Include="Scripts\Home\SearchCategoryEnum.ts" />
     <TypeScriptCompile Include="Scripts\Home\animeHomeCtrl.ts" />
   </ItemGroup>
   <ItemGroup>
