@@ -20,6 +20,7 @@ namespace Jikandesu.Areas.Home.Models
             var imgUrl = GetManganeloImageUrl(html);
             var id = GetManganeloId(html);
             var chapters = GetChapterList(html);
+            AddChapterDateDisplayInfo(chapters);
             return new MangaPage()
             {
                 Title = title,
@@ -59,22 +60,58 @@ namespace Jikandesu.Areas.Home.Models
             var chapters = list.Descendants("li");
             foreach (var c in chapters)
             {
-                var nameAndLink = c.Descendants(0).First(x => x.GetAttributeValue("class", "").Contains("chapter-name"));
-                var uploadDate = c.Descendants(0).First(x => x.GetAttributeValue("class", "").Contains("chapter-time"))
-                    .GetAttributeValue("title", "");
-                var views = c.Descendants(0).First(x => x.GetAttributeValue("class", "").Contains("chapter-view"))
-                    .InnerHtml;
                 var chapter = new MangaChapter
                 {
-                    ChapterName = nameAndLink.InnerHtml,
-                    ChapterUrl = nameAndLink.Attributes.First(x => x.Name == "href").Value,
-                    ChapterUploadDate = DateTime.Parse(uploadDate),
-                    ChapterViews = int.Parse(views, NumberStyles.AllowThousands)
+                    ChapterName = GetChapterName(c),
+                    ChapterUrl = GetChapterUrl(c),
+                    ChapterUploadDate = GetChapterUploadDate(c),
+                    ChapterViews = GetChapterViews(c)
                 };
                 result.Add(chapter);
             }
 
             return result;
+        }
+
+        private string GetChapterName(HtmlNode chapterNode)
+        {
+            var link = chapterNode.Descendants(0)
+                .First(x => x.GetAttributeValue("class", "").Contains("chapter-name"));
+            return link.InnerHtml;
+        }
+
+        private string GetChapterUrl(HtmlNode chapterNode)
+        {
+            var link = chapterNode.Descendants(0)
+                .First(x => x.GetAttributeValue("class", "").Contains("chapter-name"));
+            return link.GetAttributeValue("href", "");
+        }
+
+        private DateTime GetChapterUploadDate(HtmlNode chapterNode)
+        {
+            var uploadDate = chapterNode.Descendants(0)
+                .First(x => x.GetAttributeValue("class", "").Contains("chapter-time"));
+            return DateTime.Parse(uploadDate.GetAttributeValue("title", ""));
+        }
+
+        private int GetChapterViews(HtmlNode chapterNode)
+        {
+            var views = chapterNode.Descendants(0)
+                .First(x => x.GetAttributeValue("class", "").Contains("chapter-view"));
+            return int.Parse(views.InnerHtml, NumberStyles.AllowThousands);
+        }
+
+        private void AddChapterDateDisplayInfo(List<MangaChapter> chapters)
+        {
+            chapters.ForEach(c =>
+            {
+                c.ChapterUploadedDateDifference = DateTime.Now - c.ChapterUploadDate;
+                c.ChapterUploadDateString = c.ChapterUploadedDateDifference.Days > 30
+                    ? c.ChapterUploadDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)
+                    : c.ChapterUploadedDateDifference.Days > 1
+                        ? $"{c.ChapterUploadedDateDifference.Days} days ago"
+                        : $"{c.ChapterUploadedDateDifference.Hours} hours ago";
+            });
         }
     }
 }

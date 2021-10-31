@@ -8,5 +8,9 @@ namespace Jikandesu.Areas.Home.Models
         public string ChapterUrl { get; set; }
         public DateTime ChapterUploadDate { get; set; }
         public int ChapterViews { get; set; }
+
+        //Display
+        public TimeSpan ChapterUploadedDateDifference { get; set; }
+        public string ChapterUploadDateString { get; set; }
     }
 }
