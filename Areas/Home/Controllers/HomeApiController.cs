@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -31,24 +32,27 @@ namespace Jikandesu.Areas.Home.Controllers
 
         public void TestUser()
         {
-            //GetUserDetails(); 
-            var name = ClaimsPrincipal.Current.Identity.Name;
-            Trace.TraceInformation("User name: " + name);
             var claimsIdentity = HttpContext.User.Identity as ClaimsIdentity;
             HttpContext.GetOwinContext().Authentication.Challenge(CookieAuthenticationDefaults.AuthenticationType);
-            var claims = claimsIdentity.Claims;
-            foreach (var c in claims)
+            var id = claimsIdentity.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
+            var name = claimsIdentity.FindFirst("name").Value;
+            var email = claimsIdentity.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress").Value;
+            var user = new User
             {
-                Trace.TraceInformation("type: " + c.Type);
-                Trace.TraceInformation("issuer: " + c.Issuer);
-                Trace.TraceInformation("value: " + c.Value);
-                foreach (var p in c.Properties)
-                {
-                    Trace.TraceInformation("propKey: " + p.Key);
-                }
-            }
-            //Response.Redirect("https://localhost:44384");
+                UserId = new Guid(id),
+                UserName = name,
+                Email = email
+            };
+            Trace.TraceInformation(user.UserId + "");
+            Trace.TraceInformation(user.UserName);
+            Trace.TraceInformation(user.Email);
             Response.Redirect("/");
+        }
+        public class User
+        {
+            public Guid UserId { get; set; }
+            public string UserName { get; set; }
+            public string Email { get; set; }
         }
 
         [HttpPost]

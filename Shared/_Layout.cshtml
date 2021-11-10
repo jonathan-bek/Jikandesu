@@ -30,13 +30,13 @@
                     <ul class="nav navbar-nav">
                         @{ if (HttpContext.Current.IsDebuggingEnabled)
                             {
-                                <li>@Html.ActionLink("Test", "Test", "HomeApi")</li>
+                                <li>@Html.ActionLink("Test", "TestUser", "HomeApi")</li>
                                 <li>@Html.ActionLink("ManualLogin", "ManualLogin", "AuthApi")</li>
                                 <li>@Html.ActionLink("ManualLogout", "ManualLogout", "AuthApi")</li>
                             }
                             else
                             {
-                                <li>@Html.ActionLink("Test", "Test", "HomeApi")</li>
+                                <li>@Html.ActionLink("Test", "TestUser", "HomeApi")</li>
                                 <li>@Html.ActionLink("Logout", "Logout", "AuthApi")</li>
                             }
                         }
