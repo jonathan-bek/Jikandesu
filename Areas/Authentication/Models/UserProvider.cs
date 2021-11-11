@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Web;
@@ -10,17 +11,25 @@ namespace Jikandesu.Areas.Authentication.Models
     {
         public User GetUser(HttpContextBase context)
         {
-            var claimsIdentity = context.User.Identity as ClaimsIdentity;
-            var id = claimsIdentity.FindFirst(idSchema).Value;
-            var name = claimsIdentity.FindFirst("name").Value;
-            var email = claimsIdentity.FindFirst(emailSchema).Value;
-            var user = new User
+            try
             {
-                UserId = new Guid(id),
-                UserName = name,
-                Email = email
-            };
-            return user;
+                var claimsIdentity = context.User.Identity as ClaimsIdentity;
+                var id = claimsIdentity.FindFirst(idSchema).Value;
+                var name = claimsIdentity.FindFirst("name").Value;
+                var email = claimsIdentity.FindFirst(emailSchema).Value;
+                var user = new User
+                {
+                    UserId = new Guid(id),
+                    UserName = name,
+                    Email = email
+                };
+                return user;
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError("Failed to get user info: " + ex.Message);
+                throw new Exception("Failed to get user info.");
+            }
         }
         private const string idSchema = "http://schemas.microsoft.com/identity/claims/objectidentifier";
         private const string emailSchema = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress";
