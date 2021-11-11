@@ -29,9 +29,13 @@ namespace Jikandesu.App_Start
                     // Sets the client ID, authority, and redirect URI as obtained from Web.config
                     ClientId = ConfigurationManager.AppSettings.Get("ClientId"),
                     Authority = ConfigurationManager.AppSettings.Get("Authority"),
-                    RedirectUri = ConfigurationManager.AppSettings.Get("RedirectUri"),
+                    RedirectUri = Debugger.IsAttached
+                        ? ConfigurationManager.AppSettings.Get("LocalRedirectUri")
+                        : ConfigurationManager.AppSettings.Get("RedirectUri"),
                     // PostLogoutRedirectUri is the page that users will be redirected to after sign-out. In this case, it's using the home page
-                    PostLogoutRedirectUri = ConfigurationManager.AppSettings.Get("RedirectUri"),
+                    PostLogoutRedirectUri = Debugger.IsAttached
+                        ? ConfigurationManager.AppSettings.Get("LocalRedirectUri")
+                        : ConfigurationManager.AppSettings.Get("RedirectUri"),
                     Scope = OpenIdConnectScope.OpenIdProfile + " " + OpenIdConnectScope.Email,
                     // ResponseType is set to request the code id_token, which contains basic information about the signed-in user
                     ResponseType = OpenIdConnectResponseType.CodeIdToken,
@@ -59,29 +63,29 @@ namespace Jikandesu.App_Start
             );
         }
 
-        private static async Task OnAuthorizationCodeReceivedAsync(
-            AuthorizationCodeReceivedNotification notification)
-        {
-            Trace.TraceInformation("Code Received");
-            var appId = ConfigurationManager.AppSettings.Get("ClientId");
-            var idClient = ConfidentialClientApplicationBuilder.Create(appId)
-                .WithRedirectUri(ConfigurationManager.AppSettings.Get("RedirectUri"))
-                .WithClientSecret(ConfigurationManager.AppSettings.Get("ClientSecret"))
-                .Build();
-            string msg;
-            try
-            {
-                var scopes = OpenIdConnectScope.OpenIdProfile.Split(' ');
-                var result = await idClient.AcquireTokenByAuthorizationCode(scopes, notification.Code)
-                    .ExecuteAsync();
-                msg = "User retrieved.";
-            }
-            catch (MsalException ex)
-            {
-                msg = "Token exception" + ex.Message;
-            }
-            Trace.TraceInformation(msg);
-            notification.HandleResponse();
-        }
+        //private static async Task OnAuthorizationCodeReceivedAsync(
+        //    AuthorizationCodeReceivedNotification notification)
+        //{
+        //    Trace.TraceInformation("Code Received");
+        //    var appId = ConfigurationManager.AppSettings.Get("ClientId");
+        //    var idClient = ConfidentialClientApplicationBuilder.Create(appId)
+        //        .WithRedirectUri(ConfigurationManager.AppSettings.Get("RedirectUri"))
+        //        .WithClientSecret(ConfigurationManager.AppSettings.Get("ClientSecret"))
+        //        .Build();
+        //    string msg;
+        //    try
+        //    {
+        //        var scopes = OpenIdConnectScope.OpenIdProfile.Split(' ');
+        //        var result = await idClient.AcquireTokenByAuthorizationCode(scopes, notification.Code)
+        //            .ExecuteAsync();
+        //        msg = "User retrieved.";
+        //    }
+        //    catch (MsalException ex)
+        //    {
+        //        msg = "Token exception" + ex.Message;
+        //    }
+        //    Trace.TraceInformation(msg);
+        //    notification.HandleResponse();
+        //}
     }
 }
