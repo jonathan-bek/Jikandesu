@@ -3,33 +3,28 @@ using System.Configuration;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
+using Jikandesu.Areas.Authentication.Models;
 using Jikandesu.Models;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 
 namespace Jikandesu.Areas.Home.Controllers
 {
-    public class AuthApiController: BaseApiController
-
+    public class AuthApiController : BaseApiController
     {
+        private IUserProvider _userProvider;
+
+        public AuthApiController(IUserProvider userProvider)
+        {
+            _userProvider = userProvider;
+        }
+
         [HttpGet]
+        [Authorize]
         public void ManualLogin()
         {
-            if (ConfigurationManager.AppSettings.Get("EnableLocalLogin") == "true")
-            {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, "LocalDev"),
-                    new Claim(ClaimTypes.NameIdentifier, "LocalDev"),
-                    new Claim(ClaimTypes.Email, "LocalDev@local.com"),
-                    new Claim(ClaimTypes.Surname, "Developer"),
-                    new Claim(ClaimTypes.GivenName, "LocalDev"),
-                    new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity")
-                };
-                var authmgr = HttpContext.GetOwinContext().Authentication;
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationType);
-                authmgr.SignIn(new AuthenticationProperties { IsPersistent = false, AllowRefresh = true }, claimsIdentity);
-            }
+            //HttpContext.GetOwinContext().Authentication.Challenge(CookieAuthenticationDefaults.AuthenticationType);
+            var user = _userProvider.GetUser(HttpContext);
             Response.Redirect("/");
         }
 

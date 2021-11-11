@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Jikandesu.Areas.Authentication.Models;
 using Jikandesu.Areas.Home.Models;
 using Jikandesu.Models;
 using Jikandesu.Services;
@@ -18,41 +19,28 @@ namespace Jikandesu.Areas.Home.Controllers
         private readonly IJdCrud _crud;
         private readonly IJdHttpService _http;
         private readonly IMangaPageProvider _pageProvider;
+        private readonly IUserProvider _userProvider;
 
         private const string baseUrl = "https://api.jikan.moe/v3";
 
         public HomeApiController(IJdCrud crud,
             IJdHttpService http,
-            IMangaPageProvider pageProvider)
+            IMangaPageProvider pageProvider,
+            IUserProvider userProvider)
         {
             _crud = crud;
             _http = http;
             _pageProvider = pageProvider;
+            _userProvider = userProvider;
         }
 
         public void TestUser()
         {
-            var claimsIdentity = HttpContext.User.Identity as ClaimsIdentity;
-            HttpContext.GetOwinContext().Authentication.Challenge(CookieAuthenticationDefaults.AuthenticationType);
-            var id = claimsIdentity.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
-            var name = claimsIdentity.FindFirst("name").Value;
-            var email = claimsIdentity.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress").Value;
-            var user = new User
-            {
-                UserId = new Guid(id),
-                UserName = name,
-                Email = email
-            };
+            var user = _userProvider.GetUser(HttpContext);
             Trace.TraceInformation(user.UserId + "");
             Trace.TraceInformation(user.UserName);
             Trace.TraceInformation(user.Email);
             Response.Redirect("/");
-        }
-        public class User
-        {
-            public Guid UserId { get; set; }
-            public string UserName { get; set; }
-            public string Email { get; set; }
         }
 
         [HttpPost]
@@ -66,7 +54,7 @@ namespace Jikandesu.Areas.Home.Controllers
         public async Task<ContentResult> SaveMangaPage(string mangaPageStr)
         {
             var mangaPage = JsonConvert.DeserializeObject<MangaPage>(mangaPageStr);
-
+            //var user = _userProvider.GetUser(HttpContext);
             using (_crud.GetOpenConnection())
             {
                 var query = @"INSERT INTO linkUserManga (userId, mangaId) VALUES (NEWID(), @mangaId)";

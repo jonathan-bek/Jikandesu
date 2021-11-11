@@ -5,6 +5,7 @@ namespace Jikandesu.Areas.Home
 {
     public class HomeController : BaseController
     {
+        //[AllowAnonymous]
         public ActionResult Index()
         {
             return View("~/Areas/Home/Views/Index.cshtml");

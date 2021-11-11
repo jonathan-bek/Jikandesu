@@ -234,7 +234,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Areas\Authentication\Models\IUserProvider.cs" />
     <Compile Include="Areas\Authentication\Models\MsGraphHelper.cs" />
+    <Compile Include="Areas\Authentication\Models\User.cs" />
+    <Compile Include="Areas\Authentication\Models\UserProvider.cs" />
     <Compile Include="Areas\Home\Controllers\HomeApiController.cs" />
     <Compile Include="Areas\Home\Controllers\HomeController.cs" />
     <Compile Include="Areas\Home\Controllers\AuthApiController.cs" />

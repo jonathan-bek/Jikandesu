@@ -32,7 +32,7 @@ namespace Jikandesu.App_Start
                     RedirectUri = ConfigurationManager.AppSettings.Get("RedirectUri"),
                     // PostLogoutRedirectUri is the page that users will be redirected to after sign-out. In this case, it's using the home page
                     PostLogoutRedirectUri = ConfigurationManager.AppSettings.Get("RedirectUri"),
-                    Scope = OpenIdConnectScope.OpenIdProfile,
+                    Scope = OpenIdConnectScope.OpenIdProfile + " " + OpenIdConnectScope.Email,
                     // ResponseType is set to request the code id_token, which contains basic information about the signed-in user
                     ResponseType = OpenIdConnectResponseType.CodeIdToken,
                     // ValidateIssuer set to false to allow personal and work accounts from any organization to sign in to your application
@@ -47,8 +47,19 @@ namespace Jikandesu.App_Start
                     {
                         AuthorizationCodeReceived = async n =>
                         {
-                            await OnAuthorizationCodeReceivedAsync(n);
+                            Trace.TraceInformation("Code received");
+                            foreach (var x in n.JwtSecurityToken.Claims)
+                            {
+                                Trace.TraceInformation(x.Value);
+                            }
+                            //await OnAuthorizationCodeReceivedAsync(n);
                         }
+                        //AuthenticationFailed = async n =>
+                        //{
+                        //    Trace.TraceInformation("Code Received");
+                        //    Trace.TraceInformation(n.Exception.Message);
+                        //    n.HandleResponse();
+                        //}
                     },
                     SaveTokens = true
                 }
@@ -65,23 +76,18 @@ namespace Jikandesu.App_Start
                 .WithClientSecret(ConfigurationManager.AppSettings.Get("ClientSecret"))
                 .Build();
             string msg;
-            string debug;
             try
             {
                 var scopes = OpenIdConnectScope.OpenIdProfile.Split(' ');
                 var result = await idClient.AcquireTokenByAuthorizationCode(scopes, notification.Code)
                     .ExecuteAsync();
-                var userDetails = await MsGraphHelper.GetUserDetails(result.AccessToken);
                 msg = "User retrieved.";
-                debug = userDetails.DisplayName;
             }
             catch (MsalException ex)
             {
-                msg = "Token exception";
-                debug = ex.Message;
+                msg = "Token exception" + ex.Message;
             }
             Trace.TraceInformation(msg);
-            Trace.TraceInformation(debug);
             notification.HandleResponse();
         }
     }
