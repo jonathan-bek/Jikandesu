@@ -47,18 +47,11 @@ namespace Jikandesu.App_Start
                     {
                         AuthorizationCodeReceived = async n =>
                         {
-                            Trace.TraceInformation("Code received");
-                            foreach (var x in n.JwtSecurityToken.Claims)
-                            {
-                                Trace.TraceInformation(x.Value);
-                            }
+                            Trace.TraceInformation("Login code received");
                             //await OnAuthorizationCodeReceivedAsync(n);
                         }
                         //AuthenticationFailed = async n =>
                         //{
-                        //    Trace.TraceInformation("Code Received");
-                        //    Trace.TraceInformation(n.Exception.Message);
-                        //    n.HandleResponse();
                         //}
                     },
                     SaveTokens = true
