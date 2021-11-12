@@ -1,8 +1,8 @@
 ﻿namespace JdAnime {
     export interface IMangaPage {
+        Url: string;
         Title: string;
         ImageUrl: string;
-        Id: string;
         MangaChapters: IMangaChapter[];
     }
 

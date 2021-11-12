@@ -43,6 +43,13 @@ namespace Jikandesu.Services
             return _con.GetAsync<T>(id);
         }
 
+        public Task<IEnumerable<T>> GetListAsync<T>(
+            string where, object parameters = null,
+            IDbTransaction trn = null, int? timeout = null)
+        {
+            return _con.GetListAsync<T>(where, parameters, trn, timeout);
+        }
+
         public Task<int> ExecuteAsync(string sql)
         {
             return _con.ExecuteAsync(sql);

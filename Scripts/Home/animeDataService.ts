@@ -22,8 +22,8 @@
             var postObj = { mangaPageStr: JSON.stringify(mangaPage) };
             return this.$http.post(url, postObj)
                 .then((data: any) => {
-
-                }, msg => console.log("ERROR:", msg));
+                    alert("Saved!");
+                }, msg => alert("Error: You must be signed in to use this feature."));
         }
 
         testDb(): Promise<any> {

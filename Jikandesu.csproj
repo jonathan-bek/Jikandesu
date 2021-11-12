@@ -244,6 +244,11 @@
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
     <Compile Include="Areas\Home\Models\IMangaPageProvider.cs" />
     <Compile Include="Areas\Home\Models\MangaChapter.cs" />
+    <Compile Include="Areas\Home\Models\MangaData\IUserMangaProvider.cs" />
+    <Compile Include="Areas\Home\Models\MangaData\IUserMangaSaver.cs" />
+    <Compile Include="Areas\Home\Models\MangaData\LinkUserManga.cs" />
+    <Compile Include="Areas\Home\Models\MangaData\UserMangaProvider.cs" />
+    <Compile Include="Areas\Home\Models\MangaData\UserMangaSaver.cs" />
     <Compile Include="Areas\Home\Models\ManganeloPageParser.cs" />
     <Compile Include="Areas\Home\Models\MangaPage.cs" />
     <Compile Include="Areas\Home\Models\MangaPageProvider.cs" />
