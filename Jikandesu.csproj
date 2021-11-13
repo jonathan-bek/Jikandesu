@@ -252,22 +252,32 @@
     <Compile Include="Areas\Home\Models\ManganeloPageParser.cs" />
     <Compile Include="Areas\Home\Models\MangaPage.cs" />
     <Compile Include="Areas\Home\Models\MangaPageProvider.cs" />
+    <Compile Include="Areas\Manga\Controllers\MangaController.cs" />
+    <Compile Include="Areas\Manga\MangaAreaRegistration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseApiController.cs" />
     <Compile Include="Models\BaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Scripts\Manga\tsconfig.json" />
     <TypeScriptCompile Include="Scripts\Directives\JdRow\JdRow.ts" />
+    <Content Include="Areas\Manga\Views\web.config" />
+    <Content Include="Areas\Manga\Views\About.cshtml" />
+    <Content Include="Areas\Manga\Views\Contact.cshtml" />
+    <Content Include="Areas\Manga\Views\Index.cshtml" />
     <None Include="Scripts\Directives\JdRow\tsconfig.json" />
-    <TypeScriptCompile Include="Scripts\Home\animeDataService.ts" />
-    <TypeScriptCompile Include="Scripts\Home\IMangaPage.ts" />
+    <TypeScriptCompile Include="Scripts\Manga\Interfaces\IMangaDataService.ts" />
+    <TypeScriptCompile Include="Scripts\Manga\Interfaces\IMangaPage.ts" />
     <TypeScriptCompile Include="Scripts\Home\IAnimeHomeCtrl.ts" />
     <Compile Include="Services\IJdCrud.cs" />
     <Compile Include="Services\IJdHttpService.cs" />
     <Compile Include="Services\JdCrud.cs" />
     <Compile Include="Services\JdHttpService.cs" />
     <Compile Include="UserInfo.cs" />
+    <TypeScriptCompile Include="Scripts\Manga\Interfaces\IMangaChapter.ts" />
+    <TypeScriptCompile Include="Scripts\Manga\mangaApp.ts" />
+    <TypeScriptCompile Include="Scripts\Manga\mangaDataService.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -301,6 +311,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Manga\.gitignore" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -335,7 +346,6 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Home\homeApp.ts" />
-    <TypeScriptCompile Include="Scripts\Home\IAnimeDataService.ts" />
     <TypeScriptCompile Include="Scripts\Home\animeHomeCtrl.ts" />
   </ItemGroup>
   <ItemGroup>

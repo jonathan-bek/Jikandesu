@@ -1,16 +1,15 @@
-﻿/// <reference path="animeDataService.ts" />
+﻿/// <reference path="../Manga/Interfaces/IMangaPage.ts" />
+/// <reference path="../Manga/Interfaces/IMangaDataService.ts" />
 
 namespace JdAnime {
     "use strict";
+    import IMangaPage = Manga.IMangaPage;
+    import IMangaDataService = Manga.IMangaDataService;
     export class AnimeHomeCtrl implements ng.IController, IAnimeHomeCtrl {
-        static $inject = ["$scope", "$http", "animeDataService"];
-
-        mangaPage: IMangaPage | undefined;
-
+        static $inject = ["$scope", "mangaDataService"];
         constructor(
             private readonly $scope: ng.IScope,
-            private readonly $http: ng.IHttpService,
-            private readonly animeDataService: IAnimeDataService,
+            private readonly mangaDataService: IMangaDataService,
 
             public searchText: string,
             public displayText: string, //for testing
@@ -21,25 +20,18 @@ namespace JdAnime {
             this.mangaUrl = "";
         }
 
+        mangaPage: IMangaPage | undefined;
         private pageSize: number = 5;
 
         getMangaPage(): void {
-            this.animeDataService.getMangaPage(this.mangaUrl)
+            this.mangaDataService.getMangaPage(this.mangaUrl)
                 .then((data: IMangaPage | void) => {
                     this.mangaPage = data as IMangaPage;
                 })
         }
 
         saveMangaPage(): void {
-            this.animeDataService.saveMangaPage(this.mangaPage as IMangaPage);
-        }
-
-        testDb(): void {
-            this.animeDataService.testDb()
-                .then((data: any) => {
-                    this.displayText = data;
-                },
-                    msg => console.log("ERROR:", msg));
+            this.mangaDataService.saveMangaPage(this.mangaPage as IMangaPage);
         }
     }
 }

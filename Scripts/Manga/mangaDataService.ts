@@ -1,9 +1,7 @@
-﻿namespace JdAnime {
+﻿namespace Manga {
     "use strict";
-    //import here
-    export class AnimeDataService implements IAnimeDataService {
+    export class MangaDataService {
         static $inject = ["$http"];
-
         constructor(
             private readonly $http: ng.IHttpService
         ) { }
@@ -24,14 +22,6 @@
                 .then((res: any) => {
                     alert(res.data);
                 }, msg => alert("Error: You must be signed in to use this feature."));
-        }
-
-        testDb(): Promise<any> {
-            var url = `/Home/HomeApi/GetInfoFromDb`;
-            return this.$http.get(url)
-                .then((res) => {
-                    return res.data as Promise<any>;
-                }, msg => console.log("ERROR:", msg));
         }
     }
 }

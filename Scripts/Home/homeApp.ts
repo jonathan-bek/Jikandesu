@@ -1,5 +1,5 @@
 ﻿/// <reference path="animeHomeCtrl.ts" />
-/// <reference path="animeDataService.ts" />
+/// <reference path="../Manga/mangaDataService.ts" />
 /// <reference path="../Directives/JdRow/JdRow.ts" />
 
 module Home {
@@ -11,8 +11,8 @@ module Home {
         $locationProvider.html5Mode({ enabled: true, requireBase: false });
     }]);
 
-    app.controller("animeHomeCtrl", JdAnime.AnimeHomeCtrl)
-        .directive("jdRow", JdRowDirective.JdRowDirective.factory());
+    app.controller("animeHomeCtrl", JdAnime.AnimeHomeCtrl);
+        //.directive("jdRow", JdRowDirective.JdRowDirective.factory());
 
-    app.service("animeDataService", JdAnime.AnimeDataService)
+    app.service("mangaDataService", Manga.MangaDataService);
 }

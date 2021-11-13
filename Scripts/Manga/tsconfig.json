@@ -1,0 +1,10 @@
+﻿{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "removeComments": true,
+    "target": "es5",
+    "outFile": "MangaBundle.js",
+    "sourceMap": true,
+    "strict": true
+  }
+}
