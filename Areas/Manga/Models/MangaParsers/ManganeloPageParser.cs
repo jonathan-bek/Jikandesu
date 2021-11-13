@@ -7,11 +7,6 @@ using HtmlAgilityPack;
 
 namespace Jikandesu.Areas.Home.Models
 {
-    public interface IManganeloPageParser
-    {
-        Task<MangaPage> GetMangaDetails(HtmlDocument html);
-    }
-
     public class ManganeloPageParser : IManganeloPageParser
     {
         public async Task<MangaPage> GetMangaDetails(HtmlDocument html)

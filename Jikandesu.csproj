@@ -242,16 +242,17 @@
     <Compile Include="Areas\Home\Controllers\HomeController.cs" />
     <Compile Include="Areas\Home\Controllers\AuthApiController.cs" />
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
-    <Compile Include="Areas\Home\Models\IMangaPageProvider.cs" />
-    <Compile Include="Areas\Home\Models\MangaChapter.cs" />
-    <Compile Include="Areas\Home\Models\MangaData\IUserMangaProvider.cs" />
-    <Compile Include="Areas\Home\Models\MangaData\IUserMangaSaver.cs" />
-    <Compile Include="Areas\Home\Models\MangaData\LinkUserManga.cs" />
-    <Compile Include="Areas\Home\Models\MangaData\UserMangaProvider.cs" />
-    <Compile Include="Areas\Home\Models\MangaData\UserMangaSaver.cs" />
-    <Compile Include="Areas\Home\Models\ManganeloPageParser.cs" />
-    <Compile Include="Areas\Home\Models\MangaPage.cs" />
-    <Compile Include="Areas\Home\Models\MangaPageProvider.cs" />
+    <Compile Include="Areas\Manga\Models\Interfaces\IMangaPageProvider.cs" />
+    <Compile Include="Areas\Manga\Models\MangaChapter.cs" />
+    <Compile Include="Areas\Manga\Models\MangaDb\IUserMangaProvider.cs" />
+    <Compile Include="Areas\Manga\Models\MangaDb\IUserMangaSaver.cs" />
+    <Compile Include="Areas\Manga\Models\MangaDb\LinkUserManga.cs" />
+    <Compile Include="Areas\Manga\Models\MangaDb\UserMangaProvider.cs" />
+    <Compile Include="Areas\Manga\Models\MangaDb\UserMangaSaver.cs" />
+    <Compile Include="Areas\Manga\Models\MangaParsers\IManganeloPageParser.cs" />
+    <Compile Include="Areas\Manga\Models\MangaParsers\ManganeloPageParser.cs" />
+    <Compile Include="Areas\Manga\Models\MangaPage.cs" />
+    <Compile Include="Areas\Manga\Models\MangaPageProvider.cs" />
     <Compile Include="Areas\Manga\Controllers\MangaController.cs" />
     <Compile Include="Areas\Manga\MangaAreaRegistration.cs" />
     <Compile Include="Global.asax.cs">
@@ -330,6 +331,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Home\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

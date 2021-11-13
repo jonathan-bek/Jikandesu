@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Configuration;
-using System.Security.Claims;
+﻿using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
 using Jikandesu.Areas.Authentication.Models;
 using Jikandesu.Models;
-using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 
 namespace Jikandesu.Areas.Home.Controllers

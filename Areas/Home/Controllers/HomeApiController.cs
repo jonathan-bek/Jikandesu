@@ -1,41 +1,28 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using Jikandesu.Areas.Authentication.Models;
 using Jikandesu.Areas.Home.Models;
 using Jikandesu.Areas.Home.Models.MangaData;
 using Jikandesu.Models;
-using Jikandesu.Services;
-using Microsoft.Owin.Security.Cookies;
 using Newtonsoft.Json;
 
 namespace Jikandesu.Areas.Home.Controllers
 {
     public class HomeApiController : BaseApiController
     {
-        private readonly IJdCrud _crud;
-        private readonly IJdHttpService _http;
         private readonly IMangaPageProvider _pageProvider;
         private readonly IUserProvider _userProvider;
         private readonly IUserMangaProvider _userMangaProvider;
         private readonly IUserMangaSaver _userMangaSaver;
 
-        private const string baseUrl = "https://api.jikan.moe/v3";
-
-        public HomeApiController(IJdCrud crud,
-            IJdHttpService http,
+        public HomeApiController(
             IMangaPageProvider pageProvider,
             IUserProvider userProvider,
             IUserMangaProvider userMangaProvider,
             IUserMangaSaver userMangaSaver)
         {
-            _crud = crud;
-            _http = http;
             _pageProvider = pageProvider;
             _userProvider = userProvider;
             _userMangaProvider = userMangaProvider;
