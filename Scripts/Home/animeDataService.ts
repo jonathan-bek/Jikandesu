@@ -12,8 +12,8 @@
             var url = "/Home/HomeApi/GetMangaPage";
             var postObj = { mangaUrl: mangaUrl };
             return this.$http.post(url, postObj)
-                .then((data: any) => {
-                    return data.data as Promise<IMangaPage>;
+                .then((res: any) => {
+                    return res.data as Promise<IMangaPage>;
                 }, msg => console.log("ERROR:", msg));
         }
 
@@ -21,16 +21,16 @@
             var url = "/Home/HomeApi/SaveMangaPage";
             var postObj = { mangaPageStr: JSON.stringify(mangaPage) };
             return this.$http.post(url, postObj)
-                .then((data: any) => {
-                    alert("Saved!");
+                .then((res: any) => {
+                    alert(res.data);
                 }, msg => alert("Error: You must be signed in to use this feature."));
         }
 
         testDb(): Promise<any> {
             var url = `/Home/HomeApi/GetInfoFromDb`;
             return this.$http.get(url)
-                .then((data) => {
-                    return data.data as Promise<any>;
+                .then((res) => {
+                    return res.data as Promise<any>;
                 }, msg => console.log("ERROR:", msg));
         }
     }

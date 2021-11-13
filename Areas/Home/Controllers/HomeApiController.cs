@@ -66,11 +66,15 @@ namespace Jikandesu.Areas.Home.Controllers
             var user = _userProvider.GetUser(HttpContext);
             var userManga = await _userMangaProvider.GetUserManga(user, mangaPage.Url);
             var exists = userManga.Any();
-            if (!exists)
+            if (exists)
+            {
+                return SuccessJsonContent("Manga has already been saved.");
+            }
+            else
             {
                 await _userMangaSaver.SaveUserManga(user, mangaPage.Url);
+                return SuccessJsonContent("Manga successfully saved.");
             }
-            return SuccessJsonContent(mangaPage);
         }
     }
 }
