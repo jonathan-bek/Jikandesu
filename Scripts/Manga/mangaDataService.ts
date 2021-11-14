@@ -10,8 +10,8 @@
             var url = "/Manga/MangaApi/GetUserManga";
             return this.$http.get(url)
                 .then((res: any) => {
-
-                }, msg => alert("error"));
+                    return res.data as Promise<IMangaPage[]>;
+                }, msg => alert("Error: You must be signed in to use this feature."));
         }
 
         getMangaPage(mangaUrl: string): Promise<IMangaPage | void> {

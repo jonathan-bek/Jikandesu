@@ -1,5 +1,5 @@
 ﻿@{ Layout = "~/Shared/_Layout.cshtml"; }
-@{ ViewBag.Title = "Home"; }
+@{ ViewBag.Title = "Manga"; }
 
 <body ng-app="mangaApp">
     <div ng-controller="mangaCtrl as ctrl">
@@ -9,9 +9,10 @@
                 <i class="glyphicon glyphicon-search"></i>
             </button>
         </div>
-        <div class="col-xs-12" ng-show="ctrl.mangaPage !== undefined">
+        <div class="col-xs-12">
             <div class="col-xs-0 col-sm-3"></div>
             <div class="col-xs-12 col-sm-6 text-center">
+                <h2>Manga Page</h2>
                 <div ng-repeat="p in ctrl.mangaPages">
                     <p>{{p.Title}}</p>
                     <p>{{p.Url}}</p>
@@ -48,4 +49,4 @@
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/angular.min.js"></script>
-<script src="~/Scripts/Home/MangaBundle.js"></script>
+<script src="~/Scripts/Manga/MangaBundle.js"></script>

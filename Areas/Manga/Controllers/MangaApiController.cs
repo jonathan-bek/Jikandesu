@@ -25,6 +25,7 @@ namespace Jikandesu.Areas.Manga.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ContentResult> GetUserManga()
         {
             var user = _userProvider.GetUser(HttpContext);
