@@ -10,18 +10,12 @@ namespace JdAnime {
         constructor(
             private readonly $scope: ng.IScope,
             private readonly mangaDataService: IMangaDataService,
-
-            public searchText: string,
-            public displayText: string, //for testing
-            public mangaUrl: string
         ) {
-            this.searchText = "";
-            this.displayText = "Display Text";
             this.mangaUrl = "";
         }
 
+        mangaUrl: string
         mangaPage: IMangaPage | undefined;
-        private pageSize: number = 5;
 
         getMangaPage(): void {
             this.mangaDataService.getMangaPage(this.mangaUrl)

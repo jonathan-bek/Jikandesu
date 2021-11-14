@@ -32,26 +32,29 @@ namespace Jikandesu.Areas.Home.Models
             var html = ParseHtmlString(htmlString);
             var provider = GetMangaProvider(html);
 
-            var page = await ParseMangaPageByProvider(html, provider);
-            var id = await _mangaProvider.GetMangaPageId(url);
-            if (id == 0)
+            var page = await ParseMangaPageByProvider(html, provider, url);
+            page.Id = await _mangaProvider.GetMangaPageId(url);
+            if (page.Id == 0)
             {
-                id = await _mangaSaver.SaveMangaPage(page);
-                page.Id = id;
+                page.Id = await _mangaSaver.SaveMangaPage(page);
             }
             return page;
         }
 
         private async Task<MangaPage> ParseMangaPageByProvider(
-            HtmlDocument html, MangaProviderEnum provider)
+            HtmlDocument html, MangaProviderEnum provider, string url)
         {
+            MangaPage page;
             switch (provider)
             {
                 case MangaProviderEnum.Manganelo:
-                    return await _manganeloPageParser.GetMangaDetails(html);
+                    page = await _manganeloPageParser.GetMangaDetails(html);
+                    break;
                 default:
                     throw new ArgumentException("Invalid url for manga page");
             }
+            page.Url = url;
+            return page;
         }
 
         private HtmlDocument ParseHtmlString(string htmlString)

@@ -12,14 +12,12 @@ namespace Jikandesu.Areas.Home.Models
     {
         public async Task<MangaPage> GetMangaDetails(HtmlDocument html)
         {
-            var url = GetManganeloUrl(html);
             var title = GetManganeloTitle(html);
             var imgUrl = GetManganeloImageUrl(html);
             var chapters = GetChapterList(html);
             AddChapterDateDisplayInfo(chapters);
             return new MangaPage()
             {
-                Url = url,
                 Title = title,
                 ImageUrl = imgUrl,
                 MangaProviderId = MangaProviderEnum.Manganelo,
@@ -39,15 +37,6 @@ namespace Jikandesu.Areas.Home.Models
             var imgDiv = html.DocumentNode.SelectNodes("//img[@class='img-loading']").Single();
             var imgSrc = imgDiv.Attributes.First(x => x.Name == "src").Value;
             return imgSrc;
-        }
-
-        private string GetManganeloUrl(HtmlDocument html)
-        {
-            var urlTag = html.DocumentNode.SelectNodes("//meta")
-                .Where(x => x.GetAttributeValue("property", "").Contains("og:url")).First();
-            var content = urlTag.GetAttributeValue("content", "");
-            var url = content.Split('/').Last();
-            return url;
         }
 
         private List<MangaChapter> GetChapterList(HtmlDocument html)

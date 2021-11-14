@@ -15,7 +15,7 @@
         }
 
         getMangaPage(mangaUrl: string): Promise<IMangaPage | void> {
-            var url = "/Home/HomeApi/GetMangaPage";
+            var url = "/Manga/MangaApi/GetMangaPage";
             var postObj = { mangaUrl: mangaUrl };
             return this.$http.post(url, postObj)
                 .then((res: any) => {
@@ -24,7 +24,7 @@
         }
 
         saveMangaPage(mangaPage: IMangaPage): Promise<void> {
-            var url = "/Home/HomeApi/SaveMangaPage";
+            var url = "Manga/MangaApi/SaveMangaPage";
             var postObj = { mangaPageStr: JSON.stringify(mangaPage) };
             return this.$http.post(url, postObj)
                 .then((res: any) => {

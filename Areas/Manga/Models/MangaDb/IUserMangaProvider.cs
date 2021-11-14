@@ -8,6 +8,6 @@ namespace Jikandesu.Areas.Home.Models.MangaData
     {
         Task<List<MangaPage>> GetUserManga(User user);
         Task<List<LinkUserManga>> GetUserMangaLinks(User user);
-        Task<List<LinkUserManga>> GetUserMangaLinks(User user, string mangaUrl);
+        Task<LinkUserManga> GetUserMangaLink(User user, string mangaUrl);
     }
 }

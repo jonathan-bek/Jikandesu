@@ -61,7 +61,7 @@ namespace Jikandesu.Services
             return _con.ExecuteAsync(sql, param);
         }
 
-        public Task<int?> InsertAsync<T>(object obj,
+        public Task<int?> InsertAsync<T>(T obj,
             IDbTransaction trn = null, int? timeout = null)
         {
             return _con.InsertAsync(obj, trn, timeout);

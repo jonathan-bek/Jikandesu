@@ -40,14 +40,14 @@ namespace Jikandesu.Areas.Home.Models.MangaData
             }
         }
 
-        public async Task<List<LinkUserManga>> GetUserMangaLinks(User user, string mangaUrl)
+        public async Task<LinkUserManga> GetUserMangaLink(User user, string mangaUrl)
         {
             using (_crud.GetOpenConnection())
             {
                 var where = @"WHERE userId = @userId AND mangaUrl = @mangaUrl";
                 var result = await _crud.GetListAsync<LinkUserManga>(
                     where, new { user.UserId, mangaUrl });
-                return result.ToList();
+                return result.FirstOrDefault();
             }
         }
     }

@@ -270,8 +270,6 @@
     <Content Include="Scripts\Manga\tsconfig.json" />
     <TypeScriptCompile Include="Scripts\Directives\JdRow\JdRow.ts" />
     <Content Include="Areas\Manga\Views\web.config" />
-    <Content Include="Areas\Manga\Views\About.cshtml" />
-    <Content Include="Areas\Manga\Views\Contact.cshtml" />
     <Content Include="Areas\Manga\Views\Index.cshtml" />
     <None Include="Scripts\Directives\JdRow\tsconfig.json" />
     <TypeScriptCompile Include="Scripts\Manga\Interfaces\IMangaDataService.ts" />

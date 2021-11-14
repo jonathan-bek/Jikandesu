@@ -15,7 +15,7 @@ namespace Jikandesu.Services
             IDbTransaction trn = null, int? timeout = null);
         Task<T> ExecuteScalarAsync<T>(string sql, object param = null);
         Task<int> ExecuteAsync(string sql, object param);
-        Task<int?> InsertAsync<T>(object obj,
+        Task<int?> InsertAsync<T>(T obj,
             IDbTransaction trn = null, int? timeout = null);
     }
 }
