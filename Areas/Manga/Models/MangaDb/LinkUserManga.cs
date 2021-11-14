@@ -8,6 +8,9 @@ namespace Jikandesu.Areas.Home.Models.MangaData
     {
         [Column("userId")]
         public Guid UserId { get; set; }
+        [Column("mangaPageId")]
+        public int MangaId { get; set; }
+
         [Column("mangaUrl")]
         public string MangaUrl { get; set; }
     }

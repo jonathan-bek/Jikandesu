@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using Jikandesu.Areas.Manga.Models.MangaParsers;
 
 namespace Jikandesu.Areas.Home.Models
 {
@@ -21,6 +22,7 @@ namespace Jikandesu.Areas.Home.Models
                 Url = url,
                 Title = title,
                 ImageUrl = imgUrl,
+                MangaProviderId = MangaProviderEnum.Manganelo,
                 MangaChapters = chapters
             };
         }

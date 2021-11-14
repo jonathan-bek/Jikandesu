@@ -242,11 +242,16 @@
     <Compile Include="Areas\Home\Controllers\HomeController.cs" />
     <Compile Include="Areas\Home\Controllers\AuthApiController.cs" />
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
+    <Compile Include="Areas\Manga\Controllers\MangaApiController.cs" />
     <Compile Include="Areas\Manga\Models\Interfaces\IMangaPageProvider.cs" />
     <Compile Include="Areas\Manga\Models\MangaChapter.cs" />
+    <Compile Include="Areas\Manga\Models\MangaDb\IMangaProvider.cs" />
+    <Compile Include="Areas\Manga\Models\MangaDb\IMangaSaver.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\IUserMangaProvider.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\IUserMangaSaver.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\LinkUserManga.cs" />
+    <Compile Include="Areas\Manga\Models\MangaDb\MangaProvider.cs" />
+    <Compile Include="Areas\Manga\Models\MangaDb\MangaSaver.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\UserMangaProvider.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\UserMangaSaver.cs" />
     <Compile Include="Areas\Manga\Models\MangaParsers\IManganeloPageParser.cs" />
@@ -255,6 +260,7 @@
     <Compile Include="Areas\Manga\Models\MangaPageProvider.cs" />
     <Compile Include="Areas\Manga\Controllers\MangaController.cs" />
     <Compile Include="Areas\Manga\MangaAreaRegistration.cs" />
+    <Compile Include="Areas\Manga\Models\MangaParsers\MangaProviderEnum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -314,6 +320,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Manga\.gitignore" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Tables\linkUserManga.txt" />
+    <Content Include="Tables\tblMangaPage.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

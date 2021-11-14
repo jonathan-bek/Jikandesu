@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using Jikandesu.Areas.Manga.Models.MangaDb;
+using Jikandesu.Areas.Manga.Models.MangaParsers;
 using Jikandesu.Services;
 
 namespace Jikandesu.Areas.Home.Models
@@ -10,12 +12,18 @@ namespace Jikandesu.Areas.Home.Models
     {
         private readonly IJdHttpService _http;
         private readonly IManganeloPageParser _manganeloPageParser;
+        private readonly IMangaProvider _mangaProvider;
+        private readonly IMangaSaver _mangaSaver;
 
         public MangaPageProvider(IJdHttpService http,
-            IManganeloPageParser manganeloPageParser)
+            IManganeloPageParser manganeloPageParser,
+            IMangaProvider mangaProvider,
+            IMangaSaver mangaSaver)
         {
             _http = http;
             _manganeloPageParser = manganeloPageParser;
+            _mangaProvider = mangaProvider;
+            _mangaSaver = mangaSaver;
         }
 
         public async Task<MangaPage> GetMangaPage(string url)
@@ -23,12 +31,27 @@ namespace Jikandesu.Areas.Home.Models
             var htmlString = await _http.AsyncGet(url);
             var html = ParseHtmlString(htmlString);
             var provider = GetMangaProvider(html);
-            if (provider == MangaProviderEnum.Manganelo)
-            {
-                return await _manganeloPageParser.GetMangaDetails(html);
-            }
 
-            throw new ArgumentException("Invalid url for manga page", nameof(url));
+            var page = await ParseMangaPageByProvider(html, provider);
+            var id = await _mangaProvider.GetMangaPageId(url);
+            if (id == 0)
+            {
+                id = await _mangaSaver.SaveMangaPage(page);
+                page.Id = id;
+            }
+            return page;
+        }
+
+        private async Task<MangaPage> ParseMangaPageByProvider(
+            HtmlDocument html, MangaProviderEnum provider)
+        {
+            switch (provider)
+            {
+                case MangaProviderEnum.Manganelo:
+                    return await _manganeloPageParser.GetMangaDetails(html);
+                default:
+                    throw new ArgumentException("Invalid url for manga page");
+            }
         }
 
         private HtmlDocument ParseHtmlString(string htmlString)
@@ -47,12 +70,6 @@ namespace Jikandesu.Areas.Home.Models
             return manganeloSiteTag == null
                 ? MangaProviderEnum.Invalid
                 : MangaProviderEnum.Manganelo;
-        }
-
-        private enum MangaProviderEnum
-        {
-            Invalid,
-            Manganelo
         }
     }
 }

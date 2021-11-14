@@ -33,9 +33,10 @@ namespace Jikandesu.Services
             _con = new SqlConnection(builder.ConnectionString);
         }
 
-        public Task<IEnumerable<T>> QueryAsync<T>(string sql)
+        public Task<IEnumerable<T>> QueryAsync<T>(
+            string sql, object param = null)
         {
-            return _con.QueryAsync<T>(sql);
+            return _con.QueryAsync<T>(sql, param);
         }
 
         public Task<T> GetAsync<T>(int id)
@@ -44,18 +45,18 @@ namespace Jikandesu.Services
         }
 
         public Task<IEnumerable<T>> GetListAsync<T>(
-            string where, object parameters = null,
+            string where, object param = null,
             IDbTransaction trn = null, int? timeout = null)
         {
-            return _con.GetListAsync<T>(where, parameters, trn, timeout);
+            return _con.GetListAsync<T>(where, param, trn, timeout);
         }
 
-        public Task<int> ExecuteAsync(string sql)
+        public Task<T> ExecuteScalarAsync<T>(string sql, object param = null)
         {
-            return _con.ExecuteAsync(sql);
+            return _con.ExecuteScalarAsync<T>(sql, param);
         }
 
-        public Task<int> ExecuteAsync(string sql, object param)
+        public Task<int> ExecuteAsync(string sql, object param = null)
         {
             return _con.ExecuteAsync(sql, param);
         }

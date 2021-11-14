@@ -4,6 +4,7 @@ namespace Manga {
         Url: string;
         Title: string;
         ImageUrl: string;
+        MangaProviderId: number;
         MangaChapters: IMangaChapter[];
     }
 }

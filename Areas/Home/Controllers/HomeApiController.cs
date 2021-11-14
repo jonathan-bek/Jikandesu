@@ -51,7 +51,7 @@ namespace Jikandesu.Areas.Home.Controllers
         {
             var mangaPage = JsonConvert.DeserializeObject<MangaPage>(mangaPageStr);
             var user = _userProvider.GetUser(HttpContext);
-            var userManga = await _userMangaProvider.GetUserManga(user, mangaPage.Url);
+            var userManga = await _userMangaProvider.GetUserMangaLinks(user, mangaPage.Url);
             var exists = userManga.Any();
             if (exists)
             {
@@ -59,7 +59,7 @@ namespace Jikandesu.Areas.Home.Controllers
             }
             else
             {
-                await _userMangaSaver.SaveUserManga(user, mangaPage.Url);
+                await _userMangaSaver.SaveUserMangaLink(user, mangaPage);
                 return SuccessJsonContent("Manga successfully saved.");
             }
         }

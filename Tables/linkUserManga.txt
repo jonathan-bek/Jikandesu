@@ -1,0 +1,5 @@
+﻿CREATE TABLE linkUserManga(
+	userId UNIQUEIDENTIFIER NOT NULL,
+	mangaPageId INT NOT NULL,
+	mangaUrl VARCHAR(200) NOT NULL
+)

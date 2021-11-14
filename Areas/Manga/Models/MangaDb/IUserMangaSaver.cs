@@ -5,6 +5,6 @@ namespace Jikandesu.Areas.Home.Models.MangaData
 {
     public interface IUserMangaSaver
     {
-        Task<int> SaveUserManga(User user, string mangaUrl);
+        Task<int> SaveUserMangaLink(User user, MangaPage mangaPage);
     }
 }

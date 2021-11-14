@@ -1,0 +1,7 @@
+﻿CREATE TABLE tblMangaPage(
+	Id INT PRIMARY KEY,
+	pageUrl VARCHAR(200) NOT NULL,
+	pageTitle VARCHAR(200) NOT NULL,
+	imageUrl VARCHAR(200) NOT NULL,
+	mangaProviderId TINYINT NOT NULL
+)

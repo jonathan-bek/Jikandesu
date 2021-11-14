@@ -25,10 +25,9 @@ namespace Jikandesu.Areas.Authentication.Models
                 };
                 return user;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Trace.TraceError("Failed to get user info: " + ex.Message);
-                throw new Exception("Failed to get user info.");
+                return null;
             }
         }
         private const string idSchema = "http://schemas.microsoft.com/identity/claims/objectidentifier";

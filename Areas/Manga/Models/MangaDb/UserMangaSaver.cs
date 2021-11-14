@@ -17,14 +17,15 @@ namespace Jikandesu.Areas.Home.Models.MangaData
             _crud = crud;
         }
 
-        public async Task<int> SaveUserManga(User user, string mangaUrl)
+        public async Task<int> SaveUserMangaLink(User user, MangaPage mangaPage)
         {
             using (_crud.GetOpenConnection())
             {
                 var toInsert = new LinkUserManga
                 {
                     UserId = user.UserId,
-                    MangaUrl = mangaUrl
+                    MangaId = mangaPage.Id,
+                    MangaUrl = mangaPage.Url
                 };
                 var result = await _crud.InsertAsync<LinkUserManga>(toInsert);
                 return result ?? throw new Exception("Failed to insert.");
