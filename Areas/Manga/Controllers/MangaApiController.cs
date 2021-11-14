@@ -34,7 +34,7 @@ namespace Jikandesu.Areas.Manga.Controllers
             }
             else
             {
-                var mangaPages = _userMangaProvider.GetUserManga(user);
+                var mangaPages = await _userMangaProvider.GetUserManga(user);
                 return SuccessJsonContent(mangaPages);
             }
         }

@@ -1,10 +1,18 @@
 ﻿namespace Manga {
     "use strict";
-    export class MangaDataService {
+    export class MangaDataService implements IMangaDataService {
         static $inject = ["$http"];
         constructor(
             private readonly $http: ng.IHttpService
         ) { }
+
+        getUserManga(): Promise<IMangaPage[] | void> {
+            var url = "/Manga/MangaApi/GetUserManga";
+            return this.$http.get(url)
+                .then((res: any) => {
+
+                }, msg => alert("error"));
+        }
 
         getMangaPage(mangaUrl: string): Promise<IMangaPage | void> {
             var url = "/Home/HomeApi/GetMangaPage";
@@ -15,7 +23,7 @@
                 }, msg => console.log("ERROR:", msg));
         }
 
-        saveMangaPage(mangaPage: IMangaPage): any {
+        saveMangaPage(mangaPage: IMangaPage): Promise<void> {
             var url = "/Home/HomeApi/SaveMangaPage";
             var postObj = { mangaPageStr: JSON.stringify(mangaPage) };
             return this.$http.post(url, postObj)

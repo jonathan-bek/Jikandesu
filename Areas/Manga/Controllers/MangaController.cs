@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Jikandesu.Areas.Authentication.Models;
-using Jikandesu.Areas.Home.Models.MangaData;
+﻿using System.Web.Mvc;
 using Jikandesu.Models;
 
 namespace Jikandesu.Areas.Manga

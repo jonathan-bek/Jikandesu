@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Jikandesu.Areas.Home
+namespace Jikandesu.Areas.Manga
 {
     public class MangaAreaRegistration : AreaRegistration
     {
@@ -16,8 +16,8 @@ namespace Jikandesu.Areas.Home
         {
             context.MapRoute(
                 "Manga_default",
-                "Manga/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                "Manga/{controller}/{action}",
+                new { action = "Index" }
             );
         }
     }

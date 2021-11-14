@@ -27,7 +27,7 @@ namespace JdAnime {
             this.mangaDataService.getMangaPage(this.mangaUrl)
                 .then((data: IMangaPage | void) => {
                     this.mangaPage = data as IMangaPage;
-                })
+                });
         }
 
         saveMangaPage(): void {

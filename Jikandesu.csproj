@@ -284,6 +284,7 @@
     <Compile Include="UserInfo.cs" />
     <TypeScriptCompile Include="Scripts\Manga\Interfaces\IMangaChapter.ts" />
     <TypeScriptCompile Include="Scripts\Manga\mangaApp.ts" />
+    <TypeScriptCompile Include="Scripts\Manga\mangaCtrl.ts" />
     <TypeScriptCompile Include="Scripts\Manga\mangaDataService.ts" />
   </ItemGroup>
   <ItemGroup>
