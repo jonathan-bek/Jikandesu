@@ -68,6 +68,11 @@ namespace Jikandesu.Areas.Manga.Controllers
             else
             {
                 var mangaPages = await _userMangaProvider.GetUserManga(user);
+                foreach (var p in mangaPages)
+                {
+                    var page = await _pageProvider.GetMangaPage(p.Url);
+                    p.MangaChapters = page.MangaChapters;
+                }
                 return SuccessJsonContent(mangaPages);
             }
         }
