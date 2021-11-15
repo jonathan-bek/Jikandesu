@@ -12,7 +12,7 @@ module Home {
     }]);
 
     app.controller("animeHomeCtrl", JdAnime.AnimeHomeCtrl);
-        //.directive("jdRow", JdRowDirective.JdRowDirective.factory());
+    //.directive("jdRow", JdRowDirective.JdRowDirective.factory());
 
     app.service("mangaDataService", Manga.MangaDataService);
 }
