@@ -3,8 +3,9 @@ var JdAnime;
 (function (JdAnime) {
     "use strict";
     var AnimeHomeCtrl = (function () {
-        function AnimeHomeCtrl($scope, mangaDataService) {
+        function AnimeHomeCtrl($scope, $window, mangaDataService) {
             this.$scope = $scope;
+            this.$window = $window;
             this.mangaDataService = mangaDataService;
             this.mangaUrl = "";
         }
@@ -18,7 +19,7 @@ var JdAnime;
         AnimeHomeCtrl.prototype.saveMangaPage = function () {
             this.mangaDataService.saveMangaPage(this.mangaPage);
         };
-        AnimeHomeCtrl.$inject = ["$scope", "mangaDataService"];
+        AnimeHomeCtrl.$inject = ["$scope", "$window", "mangaDataService"];
         return AnimeHomeCtrl;
     }());
     JdAnime.AnimeHomeCtrl = AnimeHomeCtrl;
