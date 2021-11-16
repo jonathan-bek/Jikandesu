@@ -9,5 +9,10 @@ namespace Jikandesu.Areas.Manga
         {
             return View("~/Areas/Manga/Views/Index.cshtml");
         }
+
+        public ActionResult Page(string searchUrl)
+        {
+            return View("~/Areas/Manga/Views/Page.cshtml");
+        }
     }
 }

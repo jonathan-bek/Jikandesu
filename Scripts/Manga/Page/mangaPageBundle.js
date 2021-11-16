@@ -1,35 +1,45 @@
 "use strict";
-var JdAnime;
-(function (JdAnime) {
+var Manga;
+(function (Manga) {
     "use strict";
-    var AnimeHomeCtrl = (function () {
-        function AnimeHomeCtrl($scope, $window, mangaDataService) {
+    var MangaPageCtrl = (function () {
+        function MangaPageCtrl($scope, $window, mangaDataService) {
             this.$scope = $scope;
             this.$window = $window;
             this.mangaDataService = mangaDataService;
-            this.mangaUrl = "";
         }
-        AnimeHomeCtrl.prototype.getMangaPage = function () {
+        MangaPageCtrl.prototype.$onInit = function () {
+            this.getMangaPage(this.getMangaUrl());
+        };
+        MangaPageCtrl.prototype.getMangaPage = function (url) {
             var _this = this;
-            this.mangaDataService.getMangaPage(this.mangaUrl)
+            this.mangaDataService.getMangaPage(url)
                 .then(function (data) {
                 _this.mangaPage = data;
             });
         };
-        AnimeHomeCtrl.prototype.saveMangaPage = function () {
+        MangaPageCtrl.prototype.saveMangaPage = function () {
             this.mangaDataService.saveMangaPage(this.mangaPage);
         };
-        AnimeHomeCtrl.$inject = ["$scope", "$window", "mangaDataService"];
-        return AnimeHomeCtrl;
+        MangaPageCtrl.prototype.getMangaUrl = function () {
+            var mangaUrl = this.$window.location.search.replace("?searchUrl=", "");
+            if (mangaUrl.indexOf("http") < 0) {
+                mangaUrl = "https://" + mangaUrl;
+            }
+            return mangaUrl;
+        };
+        MangaPageCtrl.$inject = ["$scope", "$window", "mangaDataService"];
+        return MangaPageCtrl;
     }());
-    JdAnime.AnimeHomeCtrl = AnimeHomeCtrl;
-})(JdAnime || (JdAnime = {}));
+    Manga.MangaPageCtrl = MangaPageCtrl;
+})(Manga || (Manga = {}));
 var Manga;
 (function (Manga) {
     "use strict";
     var MangaDataService = (function () {
-        function MangaDataService($http) {
+        function MangaDataService($http, $window) {
             this.$http = $http;
+            this.$window = $window;
         }
         MangaDataService.prototype.getUserManga = function () {
             var url = "/Manga/MangaApi/GetUserManga";
@@ -47,48 +57,26 @@ var Manga;
             }, function (msg) { return console.log("ERROR:", msg); });
         };
         MangaDataService.prototype.saveMangaPage = function (mangaPage) {
-            var url = "Manga/MangaApi/SaveMangaPage";
+            var url = this.$window.location.origin + "/Manga/MangaApi/SaveMangaPage";
             var postObj = { mangaPageStr: JSON.stringify(mangaPage) };
             return this.$http.post(url, postObj)
                 .then(function (res) {
                 alert(res.data);
             }, function (msg) { return alert("Error: You must be signed in to use this feature."); });
         };
-        MangaDataService.$inject = ["$http"];
+        MangaDataService.$inject = ["$http", "$window"];
         return MangaDataService;
     }());
     Manga.MangaDataService = MangaDataService;
 })(Manga || (Manga = {}));
-var JdRowDirective;
-(function (JdRowDirective_1) {
-    var JdRowDirective = (function () {
-        function JdRowDirective() {
-            this.restrict = "AE";
-            this.template = "\n            <div ng-repeat=\"item in value\">\n                <img ng-src=\"{{item.image_url}}\" />\n                <p>{{item.title}}</p>\n                <p>{{item.score}}</p>\n            </div>";
-            this.scope = {
-                value: "=value"
-            };
-            this.replace = true;
-            this.link = function (scope, element, attrs, ctrl) {
-            };
-        }
-        JdRowDirective.factory = function () {
-            var directive = function () { return new JdRowDirective(); };
-            directive.$inject = [];
-            return directive;
-        };
-        return JdRowDirective;
-    }());
-    JdRowDirective_1.JdRowDirective = JdRowDirective;
-})(JdRowDirective || (JdRowDirective = {}));
-var Home;
-(function (Home) {
+var Manga;
+(function (Manga) {
     "use strict";
-    var app = angular.module("homeApp", []);
+    var app = angular.module("mangaPageApp", []);
     app.config(["$locationProvider", function ($locationProvider) {
             $locationProvider.html5Mode({ enabled: true, requireBase: false });
         }]);
-    app.controller("animeHomeCtrl", JdAnime.AnimeHomeCtrl);
+    app.controller("mangaPageCtrl", Manga.MangaPageCtrl);
     app.service("mangaDataService", Manga.MangaDataService);
-})(Home || (Home = {}));
-//# sourceMappingURL=HomeBundle.js.map
+})(Manga || (Manga = {}));
+//# sourceMappingURL=mangaPageBundle.js.map

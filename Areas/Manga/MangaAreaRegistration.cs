@@ -16,8 +16,8 @@ namespace Jikandesu.Areas.Manga
         {
             context.MapRoute(
                 "Manga_default",
-                "Manga/{controller}/{action}",
-                new { action = "Index" }
+                "Manga/{controller}/{action}/{mangaUrl}",
+                new { action = "Index", mangaUrl = UrlParameter.Optional }
             );
         }
     }

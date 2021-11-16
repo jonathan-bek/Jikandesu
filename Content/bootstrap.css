@@ -4439,6 +4439,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     padding-top: 15px;
     padding-bottom: 15px;
   }
+    .navbar-nav > li > input {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
 }
 .navbar-form {
   padding: 10px 15px;

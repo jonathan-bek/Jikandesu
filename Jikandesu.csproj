@@ -234,6 +234,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Areas\Authentication\Controllers\AuthApiController.cs" />
+    <Compile Include="Areas\Authentication\AuthenticationAreaRegistration.cs" />
     <Compile Include="Areas\Authentication\Models\IUserProvider.cs" />
     <Compile Include="Areas\Authentication\Models\MsGraphHelper.cs" />
     <Compile Include="Areas\Authentication\Models\User.cs" />
@@ -267,22 +269,27 @@
     <Compile Include="Models\BaseApiController.cs" />
     <Compile Include="Models\BaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Scripts\Manga\tsconfig.json" />
+    <Content Include="Scripts\Manga\.gitignore" />
+    <Content Include="Scripts\Manga\Interfaces\.gitignore" />
+    <Content Include="Scripts\Manga\Page\Interfaces\.gitignore" />
+    <Content Include="Scripts\Manga\UserManga\.gitignore" />
+    <Content Include="Scripts\Manga\UserManga\tsconfig.json" />
     <TypeScriptCompile Include="Scripts\Directives\JdRow\JdRow.ts" />
     <Content Include="Areas\Manga\Views\web.config" />
     <Content Include="Areas\Manga\Views\Index.cshtml" />
+    <Content Include="Areas\Home\Views\Index.cshtml" />
     <None Include="Scripts\Directives\JdRow\tsconfig.json" />
     <TypeScriptCompile Include="Scripts\Manga\Interfaces\IMangaDataService.ts" />
     <TypeScriptCompile Include="Scripts\Manga\Interfaces\IMangaPage.ts" />
-    <TypeScriptCompile Include="Scripts\Home\IAnimeHomeCtrl.ts" />
+    <TypeScriptCompile Include="Scripts\Manga\Page\Interfaces\IMangaPageCtrl.ts" />
     <Compile Include="Services\IJdCrud.cs" />
     <Compile Include="Services\IJdHttpService.cs" />
     <Compile Include="Services\JdCrud.cs" />
     <Compile Include="Services\JdHttpService.cs" />
     <Compile Include="UserInfo.cs" />
     <TypeScriptCompile Include="Scripts\Manga\Interfaces\IMangaChapter.ts" />
-    <TypeScriptCompile Include="Scripts\Manga\mangaApp.ts" />
-    <TypeScriptCompile Include="Scripts\Manga\mangaCtrl.ts" />
+    <TypeScriptCompile Include="Scripts\Manga\UserManga\userMangaApp.ts" />
+    <TypeScriptCompile Include="Scripts\Manga\UserManga\userMangaCtrl.ts" />
     <TypeScriptCompile Include="Scripts\Manga\mangaDataService.ts" />
   </ItemGroup>
   <ItemGroup>
@@ -302,8 +309,8 @@
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="package-lock.json" />
     <Content Include="Scripts\Directives\JdRow\.gitignore" />
-    <Content Include="Scripts\Home\.gitignore" />
-    <Content Include="Scripts\Home\tsconfig.json" />
+    <Content Include="Scripts\Manga\Page\.gitignore" />
+    <Content Include="Scripts\Manga\Page\tsconfig.json" />
     <Content Include="Areas\Home\Views\web.config" />
     <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\Jikandesu - Web Deploy.pubxml" />
@@ -317,7 +324,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\Manga\.gitignore" />
+    <Content Include="Scripts\Menu\layoutMenu.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Tables\linkUserManga.txt" />
     <Content Include="Tables\tblMangaPage.txt" />
@@ -332,13 +339,14 @@
     <Content Include="Shared\_Layout.cshtml" />
     <Content Include="Areas\Home\Views\About.cshtml" />
     <Content Include="Areas\Home\Views\Contact.cshtml" />
-    <Content Include="Areas\Home\Views\Index.cshtml" />
+    <Content Include="Areas\Manga\Views\Page.cshtml" />
     <Content Include="tsconfig.json" />
     <Content Include="Shared\web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Home\Models\" />
+    <Folder Include="Scripts\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -354,8 +362,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\Home\homeApp.ts" />
-    <TypeScriptCompile Include="Scripts\Home\animeHomeCtrl.ts" />
+    <TypeScriptCompile Include="Scripts\Manga\Page\mangaPageApp.ts" />
+    <TypeScriptCompile Include="Scripts\Manga\Page\mangaPageCtrl.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

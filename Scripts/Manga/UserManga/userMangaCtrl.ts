@@ -1,7 +1,9 @@
-﻿namespace Manga {
+﻿/// <reference path="../mangaDataService.ts" />
+
+namespace Manga {
     "use strict";
-    export class MangaCtrl implements ng.IController {
-        static inject = [];
+    export class UserMangaCtrl implements ng.IController {
+        static inject = ["mangaDataService"];
 
         constructor(
             private readonly $scope: ng.IScope,

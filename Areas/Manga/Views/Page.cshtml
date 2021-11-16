@@ -1,0 +1,42 @@
+﻿@{ Layout = "~/Shared/_Layout.cshtml"; }
+@{ ViewBag.Title = "Manga"; }
+
+<body ng-app="mangaPageApp">
+    <div ng-controller="mangaPageCtrl as ctrl">
+        <div class="col-xs-12" ng-show="ctrl.mangaPage !== undefined">
+            <div class="col-xs-0 col-sm-3"></div>
+            <div class="col-xs-12 col-sm-6 text-center">
+                <img ng-src="{{ctrl.mangaPage.ImageUrl}}" />
+                <h4>{{ctrl.mangaPage.Title}}</h4>
+                <button ng-show="ctrl.mangaPage !== undefined"
+                        ng-click="ctrl.saveMangaPage()"
+                        class="btn btn-success">
+                    Save
+                </button>
+                <table class="text-left">
+                    <tr>
+                        <th>Chapters</th>
+                        <th>Views</th>
+                        <th>Uploaded</th>
+                    </tr>
+                    <tr ng-repeat="c in ctrl.mangaPage.MangaChapters">
+                        <td>
+                            <a ng-href="{{c.ChapterUrl}}">{{c.ChapterName}}</a>
+                        </td>
+                        <td class="text-right">
+                            {{c.ChapterViews}}
+                        </td>
+                        <td>
+                            {{c.ChapterUploadDateString}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/Manga/Page/mangaPageBundle.js"></script>
+@*<script src="~/Scripts/Directives/JdRow/jdRowBundle.js"></script>*@

@@ -22,13 +22,19 @@
                 <div>
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Manga", "Index", "Manga", new { area = "Manga" }, null)</li>
+                        <li>
+                            <input id="searchBox" type="text" placeholder="Enter URL" />
+                            <button id="searchBoxBtn" onclick="onClickSearch()">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </li>
                     </ul>
                 </div>
                 <div class="pull-right">
                     <ul class="nav navbar-nav">
                         <li ng-show="@Request.IsAuthenticated">@Html.ActionLink("Test", "TestUser", "HomeApi")</li>
-                        <li ng-hide="@Request.IsAuthenticated">@Html.ActionLink("Login", @HttpContext.Current.IsDebuggingEnabled ? "ManualLogin" : "Login", "AuthApi")</li>
-                        <li ng-show="@Request.IsAuthenticated">@Html.ActionLink("Logout", @HttpContext.Current.IsDebuggingEnabled ? "ManualLogout" : "Logout", "AuthApi")</li>
+                        <li ng-hide="@Request.IsAuthenticated">@Html.RouteLink("Login", new { area = "Authentication", controller = "AuthApi", action = @HttpContext.Current.IsDebuggingEnabled ? "ManualLogin" : "Login" })</li>
+                        <li ng-hide="@Request.IsAuthenticated">@Html.RouteLink("Logout", new { area = "Authentication", controller = "AuthApi", action = @HttpContext.Current.IsDebuggingEnabled ? "ManualLogout" : "Logout" })</li>
                     </ul>
                 </div>
             </div>
@@ -42,6 +48,7 @@
         </footer>
     </div>
 
+    <script src="~/Scripts/Menu/layoutMenu.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

@@ -3,7 +3,7 @@
   "compilerOptions": {
     "removeComments": true,
     "target": "es5",
-    "outFile": "MangaBundle.js",
+    "outFile": "mangaPageBundle.js",
     "sourceMap": true,
     "strict": true
   }
