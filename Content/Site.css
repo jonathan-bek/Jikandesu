@@ -33,3 +33,7 @@ th {
 td {
     padding: 0 15px;
 }
+
+[ng-click] {
+    cursor: pointer;
+}

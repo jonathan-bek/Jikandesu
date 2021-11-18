@@ -19,5 +19,7 @@ namespace Jikandesu.Areas.Home.Models
         public MangaProviderEnum MangaProviderId { get; set; }
         [NotMapped]
         public List<MangaChapter> MangaChapters { get; set; }
+        [NotMapped]
+        public bool IsLinkedToUser { get; set; }
     }
 }

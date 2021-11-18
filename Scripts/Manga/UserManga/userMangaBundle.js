@@ -12,7 +12,7 @@ var Manga;
             return this.$http.get(url)
                 .then(function (res) {
                 return res.data;
-            }, function (msg) { return alert("Error: You must be signed in to use this feature."); });
+            }, function (msg) { return alert("Network error: You must be signed in to use this feature."); });
         };
         MangaDataService.prototype.getMangaPage = function (mangaUrl) {
             var url = "/Manga/MangaApi/GetMangaPage";
@@ -20,15 +20,15 @@ var Manga;
             return this.$http.post(url, postObj)
                 .then(function (res) {
                 return res.data;
-            }, function (msg) { return console.log("ERROR:", msg); });
+            }, function (msg) { return alert("Network error"); });
         };
         MangaDataService.prototype.saveMangaPage = function (mangaPage) {
-            var url = this.$window.location.origin + "/Manga/MangaApi/SaveMangaPage";
+            var url = "/Manga/MangaApi/SaveMangaPage";
             var postObj = { mangaPageStr: JSON.stringify(mangaPage) };
             return this.$http.post(url, postObj)
                 .then(function (res) {
                 alert(res.data);
-            }, function (msg) { return alert("Error: You must be signed in to use this feature."); });
+            }, function (msg) { return alert("Network error: You must be signed in to use this feature."); });
         };
         MangaDataService.$inject = ["$http", "$window"];
         return MangaDataService;
@@ -39,13 +39,21 @@ var Manga;
 (function (Manga) {
     "use strict";
     var UserMangaCtrl = (function () {
-        function UserMangaCtrl($scope, mangaDataService) {
+        function UserMangaCtrl($scope, $window, mangaDataService) {
             this.$scope = $scope;
+            this.$window = $window;
             this.mangaDataService = mangaDataService;
             this.mangaPages = [];
         }
         UserMangaCtrl.prototype.$onInit = function () {
             this.getUserManga();
+        };
+        UserMangaCtrl.prototype.redirectToManga = function (page) {
+            var mangaUrl = page.Url;
+            mangaUrl = mangaUrl.replace("https://", "");
+            mangaUrl = mangaUrl.replace("http://", "");
+            var redirect = this.$window.location.origin + "/Manga/Manga/Page?searchUrl=" + mangaUrl;
+            window.location.href = redirect;
         };
         UserMangaCtrl.prototype.getUserManga = function () {
             var _this = this;
@@ -54,7 +62,7 @@ var Manga;
                 _this.mangaPages = data;
             });
         };
-        UserMangaCtrl.inject = ["mangaDataService"];
+        UserMangaCtrl.inject = ["$scope", "$window", "mangaDataService"];
         return UserMangaCtrl;
     }());
     Manga.UserMangaCtrl = UserMangaCtrl;

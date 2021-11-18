@@ -8,7 +8,7 @@
             <div class="col-xs-12 col-sm-10">
                 <div ng-repeat="p in ctrl.mangaPages" class="col-xs-2 text-center">
                     <p>{{p.Title}}</p>
-                    <img ng-src="{{p.ImageUrl}}" style="max-width: 100%" />
+                    <img ng-src="{{p.ImageUrl}}" ng-click="ctrl.redirectToManga(p)" style="max-width: 100%" />
                     <div ng-repeat="c in p.MangaChapters | limitTo: 1">
                         <p>Last updated:</p>
                         <p>{{c.ChapterUploadDateString}}</p>

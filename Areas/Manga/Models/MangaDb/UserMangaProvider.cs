@@ -40,6 +40,19 @@ namespace Jikandesu.Areas.Home.Models.MangaData
             }
         }
 
+        public async Task<bool> UserMangaIsLinked(User user, string mangaUrl)
+        {
+            if (user == null)
+            {
+                return false;
+            }
+            else
+            {
+                var link = await GetUserMangaLink(user, mangaUrl);
+                return link != null;
+            }
+        }
+
         public async Task<LinkUserManga> GetUserMangaLink(User user, string mangaUrl)
         {
             using (_crud.GetOpenConnection())
@@ -47,6 +60,17 @@ namespace Jikandesu.Areas.Home.Models.MangaData
                 var where = @"WHERE userId = @userId AND mangaUrl = @mangaUrl";
                 var result = await _crud.GetListAsync<LinkUserManga>(
                     where, new { user.UserId, mangaUrl });
+                return result.FirstOrDefault();
+            }
+        }
+
+        public async Task<LinkUserManga> GetUserMangaLink(User user, int mangaId)
+        {
+            using (_crud.GetOpenConnection())
+            {
+                var where = @"WHERE userId = @userId AND mangaId = @mangaId";
+                var result = await _crud.GetListAsync<LinkUserManga>(
+                    where, new { user.UserId, mangaId });
                 return result.FirstOrDefault();
             }
         }

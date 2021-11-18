@@ -8,14 +8,14 @@ using Jikandesu.Services;
 
 namespace Jikandesu.Areas.Home.Models
 {
-    public class MangaPageProvider : IMangaPageProvider
+    public class MangaPageParser : IMangaPageParser
     {
         private readonly IJdHttpService _http;
         private readonly IManganeloPageParser _manganeloPageParser;
         private readonly IMangaProvider _mangaProvider;
         private readonly IMangaSaver _mangaSaver;
 
-        public MangaPageProvider(IJdHttpService http,
+        public MangaPageParser(IJdHttpService http,
             IManganeloPageParser manganeloPageParser,
             IMangaProvider mangaProvider,
             IMangaSaver mangaSaver)
@@ -26,7 +26,7 @@ namespace Jikandesu.Areas.Home.Models
             _mangaSaver = mangaSaver;
         }
 
-        public async Task<MangaPage> GetMangaPage(string url)
+        public async Task<MangaPage> ParseMangaPageHtml(string url)
         {
             var htmlString = await _http.AsyncGet(url);
             var html = ParseHtmlString(htmlString);

@@ -46,7 +46,7 @@ var Manga;
             return this.$http.get(url)
                 .then(function (res) {
                 return res.data;
-            }, function (msg) { return alert("Error: You must be signed in to use this feature."); });
+            }, function (msg) { return alert("Network error: You must be signed in to use this feature."); });
         };
         MangaDataService.prototype.getMangaPage = function (mangaUrl) {
             var url = "/Manga/MangaApi/GetMangaPage";
@@ -54,15 +54,15 @@ var Manga;
             return this.$http.post(url, postObj)
                 .then(function (res) {
                 return res.data;
-            }, function (msg) { return console.log("ERROR:", msg); });
+            }, function (msg) { return alert("Network error"); });
         };
         MangaDataService.prototype.saveMangaPage = function (mangaPage) {
-            var url = this.$window.location.origin + "/Manga/MangaApi/SaveMangaPage";
+            var url = "/Manga/MangaApi/SaveMangaPage";
             var postObj = { mangaPageStr: JSON.stringify(mangaPage) };
             return this.$http.post(url, postObj)
                 .then(function (res) {
                 alert(res.data);
-            }, function (msg) { return alert("Error: You must be signed in to use this feature."); });
+            }, function (msg) { return alert("Network error: You must be signed in to use this feature."); });
         };
         MangaDataService.$inject = ["$http", "$window"];
         return MangaDataService;

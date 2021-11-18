@@ -15,13 +15,13 @@ namespace Jikandesu.Areas.Manga.Controllers
     public class MangaApiController : BaseApiController
     {
         private readonly IUserProvider _userProvider;
-        private readonly IMangaPageProvider _pageProvider;
+        private readonly IMangaPageParser _pageProvider;
         private readonly IUserMangaProvider _userMangaProvider;
         private readonly IUserMangaSaver _userMangaSaver;
 
         public MangaApiController(
             IUserProvider userProvider,
-            IMangaPageProvider pageProvider,
+            IMangaPageParser pageProvider,
             IUserMangaProvider userMangaProvider,
             IUserMangaSaver userMangaSaver)
         {
@@ -34,7 +34,10 @@ namespace Jikandesu.Areas.Manga.Controllers
         [HttpPost]
         public async Task<ContentResult> GetMangaPage(string mangaUrl)
         {
-            var page = await _pageProvider.GetMangaPage(mangaUrl);
+            throw new Exception("Test Msg");
+            var page = await _pageProvider.ParseMangaPageHtml(mangaUrl);
+            var user = _userProvider.GetUser(HttpContext);
+            page.IsLinkedToUser = await _userMangaProvider.UserMangaIsLinked(user, page.Url);
             return SuccessJsonContent(page);
         }
 
@@ -44,15 +47,15 @@ namespace Jikandesu.Areas.Manga.Controllers
         {
             var mangaPage = JsonConvert.DeserializeObject<MangaPage>(mangaPageStr);
             var user = _userProvider.GetUser(HttpContext);
-            var userManga = await _userMangaProvider.GetUserMangaLink(user, mangaPage.Url);
-            if (userManga == null)
+            var isLinked = await _userMangaProvider.UserMangaIsLinked(user, mangaPage.Url);
+            if (isLinked)
             {
-                await _userMangaSaver.SaveUserMangaLink(user, mangaPage);
-                return SuccessJsonContent("Manga successfully saved.");
+                return SuccessJsonContent("Manga has already been saved.");
             }
             else
             {
-                return SuccessJsonContent("Manga has already been saved.");
+                await _userMangaSaver.SaveUserMangaLink(user, mangaPage);
+                return SuccessJsonContent("Manga successfully saved.");
             }
         }
 
@@ -70,7 +73,7 @@ namespace Jikandesu.Areas.Manga.Controllers
                 var mangaPages = await _userMangaProvider.GetUserManga(user);
                 foreach (var p in mangaPages)
                 {
-                    var page = await _pageProvider.GetMangaPage(p.Url);
+                    var page = await _pageProvider.ParseMangaPageHtml(p.Url);
                     p.MangaChapters = page.MangaChapters;
                 }
                 return SuccessJsonContent(mangaPages);
