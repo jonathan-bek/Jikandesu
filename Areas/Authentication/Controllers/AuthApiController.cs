@@ -18,10 +18,17 @@ namespace Jikandesu.Areas.Authentication.Controllers
 
         [HttpGet]
         [Authorize]
+        public void Login()
+        {
+            Response.Redirect("/");
+        }
+
+        [HttpGet]
+        [Authorize]
         public void ManualLogin()
         {
             //HttpContext.GetOwinContext().Authentication.Challenge(CookieAuthenticationDefaults.AuthenticationType);
-            var user = _userProvider.GetUser(HttpContext);
+            //var user = _userProvider.GetUser(HttpContext);
             Response.Redirect("/");
         }
 
