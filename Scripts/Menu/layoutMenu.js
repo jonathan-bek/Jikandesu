@@ -1,5 +1,14 @@
-﻿var searchBox = document.getElementById("searchBox");
-//var searchBoxBtn = document.getElementById("searchBoxBtn");
+﻿window.onload = function () {
+    //Make "Enter" submit search box
+    var searchBox = document.getElementById("searchBox");
+    searchBox.addEventListener("keyup", function (event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            onClickSearch();
+        }
+    });
+}
 
 function onClickSearch() {
     var searchValue = document.getElementById("searchBox").value;

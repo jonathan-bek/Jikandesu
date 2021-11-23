@@ -34,7 +34,6 @@ namespace Jikandesu.Areas.Manga.Controllers
         [HttpPost]
         public async Task<ContentResult> GetMangaPage(string mangaUrl)
         {
-            throw new Exception("Test Msg");
             var page = await _pageProvider.ParseMangaPageHtml(mangaUrl);
             var user = _userProvider.GetUser(HttpContext);
             page.IsLinkedToUser = await _userMangaProvider.UserMangaIsLinked(user, page.Url);
