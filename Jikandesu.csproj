@@ -341,7 +341,7 @@
     <Content Include="Shared\_Layout.cshtml" />
     <Content Include="Areas\Home\Views\About.cshtml" />
     <Content Include="Areas\Home\Views\Contact.cshtml" />
-    <Content Include="Areas\Manga\Views\Page.cshtml" />
+    <Content Include="Areas\Manga\Views\MangaPage.cshtml" />
     <Content Include="tsconfig.json" />
     <Content Include="Shared\web.config" />
   </ItemGroup>
