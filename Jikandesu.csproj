@@ -272,6 +272,7 @@
     <Content Include="Scripts\Manga\.gitignore" />
     <Content Include="Scripts\Manga\Interfaces\.gitignore" />
     <Content Include="Scripts\Manga\Page\Interfaces\.gitignore" />
+    <Content Include="Scripts\Manga\Page\mangaPageBundle.js" />
     <Content Include="Scripts\Manga\UserManga\.gitignore" />
     <Content Include="Scripts\Manga\UserManga\tsconfig.json" />
     <TypeScriptCompile Include="Scripts\Directives\JdRow\JdRow.ts" />
@@ -324,6 +325,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Manga\UserManga\userMangaBundle.js" />
     <Content Include="Scripts\Menu\layoutMenu.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Tables\linkUserManga.txt" />
