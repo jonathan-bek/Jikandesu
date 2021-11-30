@@ -42,27 +42,47 @@ var Manga;
             this.$window = $window;
         }
         MangaDataService.prototype.getUserManga = function () {
+            var _this = this;
             var url = "/Manga/MangaApi/GetUserManga";
             return this.$http.get(url)
                 .then(function (res) {
                 return res.data;
-            }, function (msg) { return alert("Network error: You must be signed in to use this feature."); });
+            }, function (msg) {
+                _this.handleError(msg);
+            });
         };
         MangaDataService.prototype.getMangaPage = function (mangaUrl) {
+            var _this = this;
             var url = "/Manga/MangaApi/GetMangaPage";
             var postObj = { mangaUrl: mangaUrl };
             return this.$http.post(url, postObj)
                 .then(function (res) {
                 return res.data;
-            }, function (msg) { return alert("Network error"); });
+            }, function (msg) {
+                _this.handleError(msg);
+            });
         };
         MangaDataService.prototype.saveMangaPage = function (mangaPage) {
+            var _this = this;
             var url = "/Manga/MangaApi/SaveMangaPage";
             var postObj = { mangaPageStr: JSON.stringify(mangaPage) };
             return this.$http.post(url, postObj)
                 .then(function (res) {
                 alert(res.data);
-            }, function (msg) { return alert("Network error: You must be signed in to use this feature."); });
+            }, function (msg) {
+                _this.handleError(msg);
+            });
+        };
+        MangaDataService.prototype.handleError = function (res) {
+            var msg = "";
+            if (res.status == -1) {
+                msg = "Network error: You must be signed in to use this feature.";
+            }
+            else {
+                var errorMsgs = res.data;
+                msg = errorMsgs.join();
+            }
+            alert(msg);
         };
         MangaDataService.$inject = ["$http", "$window"];
         return MangaDataService;

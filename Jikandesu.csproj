@@ -246,6 +246,7 @@
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
     <Compile Include="Areas\Manga\Controllers\MangaApiController.cs" />
     <Compile Include="Areas\Manga\Models\Interfaces\IMangaPageParser.cs" />
+    <Compile Include="Areas\Manga\Models\MangaCache\MangaCache.cs" />
     <Compile Include="Areas\Manga\Models\MangaChapter.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\IMangaProvider.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\IMangaSaver.cs" />

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using Jikandesu.Areas.Authentication.Models;
 using Jikandesu.Areas.Home.Models;
 using Jikandesu.Areas.Home.Models.MangaData;
+using Jikandesu.Areas.Manga.Models.MangaCache;
 using Jikandesu.Models;
 using Newtonsoft.Json;
 
@@ -34,7 +33,12 @@ namespace Jikandesu.Areas.Manga.Controllers
         [HttpPost]
         public async Task<ContentResult> GetMangaPage(string mangaUrl)
         {
-            var page = await _pageProvider.ParseMangaPageHtml(mangaUrl);
+            var page = MangaCache.Get(mangaUrl);
+            if (page == null)
+            {
+                page = await _pageProvider.ParseMangaPageHtml(mangaUrl);
+                MangaCache.Insert(page);
+            }
             var user = _userProvider.GetUser(HttpContext);
             page.IsLinkedToUser = await _userMangaProvider.UserMangaIsLinked(user, page.Url);
             return SuccessJsonContent(page);

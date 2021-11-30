@@ -12,7 +12,9 @@
             return this.$http.get(url)
                 .then((res: any) => {
                     return res.data as Promise<IMangaPage[]>;
-                }, msg => alert("Network error: You must be signed in to use this feature."));
+                }, msg => {
+                    this.handleError(msg)
+                });
         }
 
         getMangaPage(mangaUrl: string): Promise<IMangaPage | void> {
@@ -21,7 +23,9 @@
             return this.$http.post(url, postObj)
                 .then((res: any) => {
                     return res.data as Promise<IMangaPage>;
-                }, msg => alert("Network error"));
+                }, msg => {
+                    this.handleError(msg)
+                });
         }
 
         saveMangaPage(mangaPage: IMangaPage): Promise<void> {
@@ -30,7 +34,20 @@
             return this.$http.post(url, postObj)
                 .then((res: any) => {
                     alert(res.data);
-                }, msg => alert("Network error: You must be signed in to use this feature."));
+                }, msg => {
+                    this.handleError(msg)
+                });
+        }
+
+        private handleError(res: any): void {
+            var msg = "";
+            if (res.status == -1) {
+                msg = "Network error: You must be signed in to use this feature.";
+            } else {
+                var errorMsgs = res.data as string[];
+                msg = errorMsgs.join();
+            }
+            alert(msg);
         }
     }
 }

@@ -11,12 +11,16 @@ namespace Jikandesu.Areas.Authentication.Models
     {
         public User GetUser(HttpContextBase context)
         {
-            try
+            var claimsIdentity = context.User.Identity as ClaimsIdentity;
+            var id = claimsIdentity.FindFirst(idSchema)?.Value;
+            var name = claimsIdentity.FindFirst("name")?.Value;
+            var email = claimsIdentity.FindFirst(emailSchema)?.Value;
+            if ((id ?? name ?? email) == null)
             {
-                var claimsIdentity = context.User.Identity as ClaimsIdentity;
-                var id = claimsIdentity.FindFirst(idSchema).Value;
-                var name = claimsIdentity.FindFirst("name").Value;
-                var email = claimsIdentity.FindFirst(emailSchema).Value;
+                return null;
+            }
+            else
+            {
                 var user = new User
                 {
                     UserId = new Guid(id),
@@ -24,10 +28,6 @@ namespace Jikandesu.Areas.Authentication.Models
                     Email = email
                 };
                 return user;
-            }
-            catch (Exception)
-            {
-                return null;
             }
         }
         private const string idSchema = "http://schemas.microsoft.com/identity/claims/objectidentifier";
