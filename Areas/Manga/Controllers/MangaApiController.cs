@@ -14,33 +14,27 @@ namespace Jikandesu.Areas.Manga.Controllers
     public class MangaApiController : BaseApiController
     {
         private readonly IUserProvider _userProvider;
-        private readonly IMangaPageParser _pageProvider;
         private readonly IUserMangaProvider _userMangaProvider;
         private readonly IUserMangaSaver _userMangaSaver;
+        private readonly IMangaPageProvider _mangaPageProvider;
 
         public MangaApiController(
             IUserProvider userProvider,
-            IMangaPageParser pageProvider,
             IUserMangaProvider userMangaProvider,
-            IUserMangaSaver userMangaSaver)
+            IUserMangaSaver userMangaSaver,
+            IMangaPageProvider mangaPageProvider)
         {
             _userProvider = userProvider;
-            _pageProvider = pageProvider;
             _userMangaProvider = userMangaProvider;
             _userMangaSaver = userMangaSaver;
+            _mangaPageProvider = mangaPageProvider;
         }
 
         [HttpPost]
         public async Task<ContentResult> GetMangaPage(string mangaUrl)
         {
-            var page = MangaCache.Get(mangaUrl);
-            if (page == null)
-            {
-                page = await _pageProvider.ParseMangaPageHtml(mangaUrl);
-                MangaCache.Insert(page);
-            }
             var user = _userProvider.GetUser(HttpContext);
-            page.IsLinkedToUser = await _userMangaProvider.UserMangaIsLinked(user, page.Url);
+            var page = await _mangaPageProvider.Get(mangaUrl, user);
             return SuccessJsonContent(page);
         }
 
@@ -73,12 +67,7 @@ namespace Jikandesu.Areas.Manga.Controllers
             }
             else
             {
-                var mangaPages = await _userMangaProvider.GetUserManga(user);
-                foreach (var p in mangaPages)
-                {
-                    var page = await _pageProvider.ParseMangaPageHtml(p.Url);
-                    p.MangaChapters = page.MangaChapters;
-                }
+                var mangaPages = await _mangaPageProvider.GetAll(user);
                 return SuccessJsonContent(mangaPages);
             }
         }

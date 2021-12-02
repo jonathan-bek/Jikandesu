@@ -3,11 +3,11 @@ using Jikandesu.Services;
 
 namespace Jikandesu.Areas.Manga.Models.MangaDb
 {
-    public class MangaProvider : IMangaProvider
+    public class MangaPageDataProvider : IMangaPageDataProvider
     {
         private readonly IJdCrud _crud;
 
-        public MangaProvider(IJdCrud crud)
+        public MangaPageDataProvider(IJdCrud crud)
         {
             _crud = crud;
         }

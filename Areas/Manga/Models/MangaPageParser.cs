@@ -12,12 +12,12 @@ namespace Jikandesu.Areas.Manga.Models
     {
         private readonly IJdHttpService _http;
         private readonly IManganeloPageParser _manganeloPageParser;
-        private readonly IMangaProvider _mangaProvider;
+        private readonly IMangaPageDataProvider _mangaProvider;
         private readonly IMangaSaver _mangaSaver;
 
         public MangaPageParser(IJdHttpService http,
             IManganeloPageParser manganeloPageParser,
-            IMangaProvider mangaProvider,
+            IMangaPageDataProvider mangaProvider,
             IMangaSaver mangaSaver)
         {
             _http = http;
