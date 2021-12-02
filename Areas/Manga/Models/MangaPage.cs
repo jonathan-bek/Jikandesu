@@ -2,7 +2,7 @@
 using Dapper;
 using Jikandesu.Areas.Manga.Models.MangaParsers;
 
-namespace Jikandesu.Areas.Home.Models
+namespace Jikandesu.Areas.Manga.Models
 {
     [Table("tblMangaPage")]
     public class MangaPage

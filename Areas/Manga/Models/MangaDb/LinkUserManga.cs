@@ -1,7 +1,7 @@
 ﻿using System;
 using Dapper;
 
-namespace Jikandesu.Areas.Home.Models.MangaData
+namespace Jikandesu.Areas.Home.Models.MangaDb
 {
     [Table("linkUserManga")]
     public class LinkUserManga

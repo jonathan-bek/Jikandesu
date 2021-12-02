@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Caching;
-using Jikandesu.Areas.Home.Models;
 
 namespace Jikandesu.Areas.Manga.Models.MangaCache
 {

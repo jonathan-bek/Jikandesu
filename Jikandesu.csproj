@@ -257,7 +257,7 @@
     <Compile Include="Areas\Manga\Models\MangaDb\MangaSaver.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\UserMangaProvider.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\UserMangaSaver.cs" />
-    <Compile Include="Areas\Manga\Models\MangaParsers\IManganeloPageParser.cs" />
+    <Compile Include="Areas\Manga\Models\MangaParsers\Interfaces\IManganeloPageParser.cs" />
     <Compile Include="Areas\Manga\Models\MangaParsers\ManganeloPageParser.cs" />
     <Compile Include="Areas\Manga\Models\MangaPage.cs" />
     <Compile Include="Areas\Manga\Models\MangaPageParser.cs" />

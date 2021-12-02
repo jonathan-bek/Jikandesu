@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Jikandesu.Areas.Home.Models
+namespace Jikandesu.Areas.Manga.Models
 {
     public interface IMangaPageParser
     {

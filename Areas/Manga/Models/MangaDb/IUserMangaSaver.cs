@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Jikandesu.Areas.Authentication.Models;
+using Jikandesu.Areas.Manga.Models;
 
-namespace Jikandesu.Areas.Home.Models.MangaData
+namespace Jikandesu.Areas.Home.Models.MangaDb
 {
     public interface IUserMangaSaver
     {

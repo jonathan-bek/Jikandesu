@@ -6,7 +6,7 @@ using Jikandesu.Areas.Manga.Models.MangaDb;
 using Jikandesu.Areas.Manga.Models.MangaParsers;
 using Jikandesu.Services;
 
-namespace Jikandesu.Areas.Home.Models
+namespace Jikandesu.Areas.Manga.Models
 {
     public class MangaPageParser : IMangaPageParser
     {

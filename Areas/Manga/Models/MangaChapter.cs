@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jikandesu.Areas.Home.Models
+namespace Jikandesu.Areas.Manga.Models
 {
     public class MangaChapter
     {

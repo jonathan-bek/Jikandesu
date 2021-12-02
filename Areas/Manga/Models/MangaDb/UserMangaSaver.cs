@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using Jikandesu.Areas.Authentication.Models;
+using Jikandesu.Areas.Manga.Models;
 using Jikandesu.Services;
 
-namespace Jikandesu.Areas.Home.Models.MangaData
+namespace Jikandesu.Areas.Home.Models.MangaDb
 {
     public class UserMangaSaver : IUserMangaSaver
     {
