@@ -5,7 +5,6 @@ using System.Web.Mvc;
 using Jikandesu.Areas.Authentication.Models;
 using Jikandesu.Areas.Home.Models.MangaDb;
 using Jikandesu.Areas.Manga.Models;
-using Jikandesu.Areas.Manga.Models.MangaCache;
 using Jikandesu.Models;
 using Newtonsoft.Json;
 

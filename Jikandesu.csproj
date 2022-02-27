@@ -250,6 +250,9 @@
     <Compile Include="Areas\Manga\Models\Interfaces\IMangaPageParser.cs" />
     <Compile Include="Areas\Manga\Models\MangaCache\MangaCache.cs" />
     <Compile Include="Areas\Manga\Models\MangaChapter.cs" />
+    <Compile Include="Areas\Manga\Models\MangaDb\DataObjects\LinkUserPageGroup.cs" />
+    <Compile Include="Areas\Manga\Models\MangaDb\DataObjects\PageGroup.cs" />
+    <Compile Include="Areas\Manga\Models\MangaDb\DataObjects\PageGroupMember.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\IMangaPageDataProvider.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\IMangaSaver.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\IUserMangaProvider.cs" />
@@ -257,6 +260,7 @@
     <Compile Include="Areas\Manga\Models\MangaDb\LinkUserManga.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\MangaPageDataProvider.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\MangaSaver.cs" />
+    <Compile Include="Areas\Manga\Models\MangaDb\UserMangaGroupSaver.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\UserMangaProvider.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\UserMangaSaver.cs" />
     <Compile Include="Areas\Manga\Models\MangaParsers\Interfaces\IManganeloPageParser.cs" />

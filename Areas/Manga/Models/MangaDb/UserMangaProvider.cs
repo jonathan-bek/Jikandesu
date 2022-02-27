@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Jikandesu.Areas.Authentication.Models;
-using Jikandesu.Areas.Manga.Models;
 using Jikandesu.Services;
 
 namespace Jikandesu.Areas.Home.Models.MangaDb
