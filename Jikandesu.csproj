@@ -260,7 +260,7 @@
     <Compile Include="Areas\Manga\Models\MangaDb\LinkUserManga.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\MangaPageDataProvider.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\MangaSaver.cs" />
-    <Compile Include="Areas\Manga\Models\MangaDb\UserMangaGroupSaver.cs" />
+    <Compile Include="Areas\Manga\Models\MangaDb\PageGroupCreator.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\UserMangaProvider.cs" />
     <Compile Include="Areas\Manga\Models\MangaDb\UserMangaSaver.cs" />
     <Compile Include="Areas\Manga\Models\MangaParsers\Interfaces\IManganeloPageParser.cs" />

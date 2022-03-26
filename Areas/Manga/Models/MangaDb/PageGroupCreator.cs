@@ -7,11 +7,11 @@ using Jikandesu.Services;
 
 namespace Jikandesu.Areas.Manga.Models.MangaDb
 {
-    public class UserMangaGroupSaver
+    public class PageGroupCreator
     {
         private readonly IJdCrud _crud;
 
-        public UserMangaGroupSaver(IJdCrud crud)
+        public PageGroupCreator(IJdCrud crud)
         {
             _crud = crud;
         }
@@ -19,8 +19,8 @@ namespace Jikandesu.Areas.Manga.Models.MangaDb
         public async Task CreateDefaultGroup(MangaPage page, User user)
         {
             var newGroup = new PageGroup { PageGroupId = Guid.NewGuid() };
+            SetGroupDefaultInfo(page, newGroup);
             var userGroupLink = CreateLinkFromUserToGroup(user, newGroup);
-            SetPageAsDefaultForGroup(page, newGroup);
             var groupPageLink = CreateLinkFromGroupToPage(page, newGroup);
             await InsertAll(newGroup, userGroupLink, groupPageLink);
         }
@@ -37,6 +37,7 @@ namespace Jikandesu.Areas.Manga.Models.MangaDb
                     await _crud.InsertAsync(group, trn);
                     await _crud.InsertAsync(groupPageLink, trn);
                     await _crud.InsertAsync(userGroupLink, trn);
+                    trn.Commit();
                 }
                 catch
                 {
@@ -48,7 +49,7 @@ namespace Jikandesu.Areas.Manga.Models.MangaDb
             }
         }
 
-        private void SetPageAsDefaultForGroup(MangaPage page, PageGroup group)
+        private void SetGroupDefaultInfo(MangaPage page, PageGroup group)
         {
             group.Name = page.Title;
             group.ThumbnailImageUrl = page.ImageUrl;
