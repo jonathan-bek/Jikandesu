@@ -7,9 +7,9 @@ namespace Jikandesu.Areas.Home.Models.MangaDb
 {
     public interface IUserMangaProvider
     {
-        Task<List<LinkUserManga>> GetUserMangaLinks(User user);
+        Task<List<LinkUserPage>> GetUserMangaLinks(User user);
         Task<bool> UserMangaIsLinked(User user, string mangaUrl);
-        Task<LinkUserManga> GetUserMangaLink(User user, string mangaUrl);
-        Task<LinkUserManga> GetUserMangaLink(User user, int mangaId);
+        Task<LinkUserPage> GetUserMangaLink(User user, string mangaUrl);
+        Task<LinkUserPage> GetUserMangaLink(User user, int mangaId);
     }
 }

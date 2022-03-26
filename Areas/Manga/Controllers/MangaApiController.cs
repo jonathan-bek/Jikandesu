@@ -50,7 +50,7 @@ namespace Jikandesu.Areas.Manga.Controllers
             }
             else
             {
-                await _userMangaSaver.SaveUserMangaLink(user, mangaPage);
+                await _userMangaSaver.SaveUserPageLink(user, mangaPage);
                 return SuccessJsonContent("Manga successfully saved.");
             }
         }

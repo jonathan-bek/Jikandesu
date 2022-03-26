@@ -37,7 +37,7 @@ namespace Jikandesu.Areas.Manga
         {
             var result = new List<MangaPage>();
             var links = await _userMangaProvider.GetUserMangaLinks(user);
-            foreach (var url in links.Select(x => x.MangaUrl))
+            foreach (var url in links.Select(x => x.Url))
             {
                 var page = await Get(url, user, true);
                 result.Add(page);

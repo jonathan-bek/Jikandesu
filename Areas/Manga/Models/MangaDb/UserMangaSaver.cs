@@ -15,16 +15,16 @@ namespace Jikandesu.Areas.Home.Models.MangaDb
             _crud = crud;
         }
 
-        public async Task SaveUserMangaLink(User user, MangaPage mangaPage)
+        public async Task SaveUserPageLink(User user, MangaPage page)
         {
             const string query = @"
-                INSERT INTO linkUserManga 
-                (userId, mangaPageId, mangaUrl) 
-                VALUES (@userId, @id, @url)";
+                INSERT INTO linkUserPage 
+                (userId, pageId, url, isManga) 
+                VALUES (@userId, @id, @url, 1)";
             using (_crud.GetOpenConnection())
             {
                 var result = await _crud.ExecuteAsync(query,
-                    new { user.UserId, mangaPage.Id, mangaPage.Url });
+                    new { user.UserId, page.Id, page.Url });
                 if (result != 1)
                 {
                     throw new Exception("Failed to insert.");

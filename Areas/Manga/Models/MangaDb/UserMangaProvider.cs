@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Jikandesu.Areas.Authentication.Models;
@@ -15,18 +16,18 @@ namespace Jikandesu.Areas.Home.Models.MangaDb
             _crud = crud;
         }
 
-        public async Task<List<LinkUserManga>> GetUserMangaLinks(User user)
+        public async Task<List<LinkUserPage>> GetUserMangaLinks(User user)
         {
             using (_crud.GetOpenConnection())
             {
-                var where = @"WHERE userId = @userId";
-                var result = await _crud.GetListAsync<LinkUserManga>(
+                var where = @"WHERE userId = @userId AND isManga = 1";
+                var result = await _crud.GetListAsync<LinkUserPage>(
                     where, new { user.UserId });
                 return result.ToList();
             }
         }
 
-        public async Task<bool> UserMangaIsLinked(User user, string mangaUrl)
+        public async Task<bool> UserMangaIsLinked(User user, string url)
         {
             if (user == null)
             {
@@ -34,29 +35,29 @@ namespace Jikandesu.Areas.Home.Models.MangaDb
             }
             else
             {
-                var link = await GetUserMangaLink(user, mangaUrl);
+                var link = await GetUserMangaLink(user, url);
                 return link != null;
             }
         }
 
-        public async Task<LinkUserManga> GetUserMangaLink(User user, string mangaUrl)
+        public async Task<LinkUserPage> GetUserMangaLink(User user, string url)
         {
             using (_crud.GetOpenConnection())
             {
-                var where = @"WHERE userId = @userId AND mangaUrl = @mangaUrl";
-                var result = await _crud.GetListAsync<LinkUserManga>(
-                    where, new { user.UserId, mangaUrl });
+                var where = @"WHERE userId = @userId AND isManga = 1 AND url = @url";
+                var result = await _crud.GetListAsync<LinkUserPage>(
+                    where, new { user.UserId, url });
                 return result.FirstOrDefault();
             }
         }
 
-        public async Task<LinkUserManga> GetUserMangaLink(User user, int mangaId)
+        public async Task<LinkUserPage> GetUserMangaLink(User user, int pageId)
         {
             using (_crud.GetOpenConnection())
             {
-                var where = @"WHERE userId = @userId AND mangaId = @mangaId";
-                var result = await _crud.GetListAsync<LinkUserManga>(
-                    where, new { user.UserId, mangaId });
+                var where = @"WHERE userId = @userId AND isManga = 1 AND pageId = @pageId";
+                var result = await _crud.GetListAsync<LinkUserPage>(
+                    where, new { user.UserId, pageId });
                 return result.FirstOrDefault();
             }
         }

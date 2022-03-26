@@ -12,13 +12,13 @@ namespace Jikandesu.Areas.Manga.Models.MangaDb
             _crud = crud;
         }
 
-        public async Task<int> GetMangaPageId(string mangaUrl)
+        public async Task<int> GetMangaPageId(string url)
         {
             using (_crud.GetOpenConnection())
             {
                 const string query = @"SELECT TOP 1 Id FROM tblMangaPage 
-                                       WHERE pageUrl = @mangaUrl";
-                var id = await _crud.ExecuteScalarAsync<int>(query, new { mangaUrl });
+                                       WHERE pageUrl = @url";
+                var id = await _crud.ExecuteScalarAsync<int>(query, new { url });
                 return id;
             }
         }
