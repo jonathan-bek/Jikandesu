@@ -29,7 +29,11 @@ namespace Jikandesu.Areas.Manga
                 page = await _pageParser.ParseMangaPageHtml(mangaUrl);
                 MangaCache.Insert(page);
             }
-            page.IsLinkedToUser = fromUser || await _userMangaProvider.UserMangaIsLinked(user, page.Url);
+            var isLinkedToUser = fromUser || await _userMangaProvider.UserMangaIsLinked(user, page.Url);
+            if (isLinkedToUser)
+            {
+                page.LinkedUserId = user.UserId;
+            }
             return page;
         }
 

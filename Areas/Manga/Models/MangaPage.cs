@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Dapper;
 using Jikandesu.Areas.Manga.Models.MangaParsers;
 
@@ -20,6 +21,6 @@ namespace Jikandesu.Areas.Manga.Models
         [NotMapped]
         public List<MangaChapter> MangaChapters { get; set; }
         [NotMapped]
-        public bool IsLinkedToUser { get; set; }
+        public Guid? LinkedUserId { get; set; }
     }
 }

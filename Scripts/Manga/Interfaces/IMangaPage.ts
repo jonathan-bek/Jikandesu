@@ -6,6 +6,6 @@ namespace Manga {
         ImageUrl: string;
         MangaProviderId: number;
         MangaChapters: IMangaChapter[];
-        IsLinkedToUser: boolean;
+        LinkedUserId: string | null;
     }
 }

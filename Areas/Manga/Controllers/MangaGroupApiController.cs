@@ -29,5 +29,10 @@ namespace Jikandesu.Areas.Manga.Controllers
             var pageGroups = await _pageGroupProvider.GetPageGroups(user);
             return SuccessJsonContent(pageGroups);
         }
+
+        //Now create a save/create manga groups controller.
+        //this should tie into a modal in the ui.
+        //Either save to existing,
+        //or create new (open modal) and save to it.
     }
 }
