@@ -22,19 +22,25 @@ namespace Manga {
         openModal(): void {
             var modalInstance = this.$uibModal.open({
                 template:
-                    '<div class="modal-header">' +
-                    ' <h3 class="modal-title" id="modal-title">Modal Title</h3>' +
-                    '</div>' +
-                    '<div class="modal-body" id="modal-body">' +
-                    'Modal Content here..!' +
-                    '</div>' +
-                    '<div class="modal-footer">' +
-                    ' <button class="btn btn-primary" type="button" ng-click="ctrl.test()">OK</button>' +
-                    '<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>' +
-                    '</div>',
-                //templateUrl: '../../Scripts/Manga/Page/testhtml'
-                controller: 'mangaPageCtrl',
-                controllerAs: 'ctrl',
+                    `<div class="modal-header"> 
+                     <h3 class="modal-title" id="modal-title">Modal Title</h3> 
+                    </div> 
+                    <div class="modal-body" id="modal-body"> 
+                    Modal Content here..! 
+                    </div> 
+                    <div class="modal-footer"> 
+                     <button class="btn btn-primary" type="button" ng-click="test()">OK</button> 
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button> 
+                    </div>`,
+                controller: function ($scope: any) {
+                    $scope.test = function () {
+                        console.log("lol")
+                    },
+                    $scope.cancel = function () {
+                        modalInstance.dismiss();
+                    }
+                },
+                scope: this.$scope,
                 resolve: {
                     //tbd
                 }
@@ -42,10 +48,6 @@ namespace Manga {
             modalInstance.result.then(function (result: any) {
             }, function () {
             });
-        }
-
-        test(): void {
-            console.log('lol')
         }
 
         getMangaPage(url: string): void {

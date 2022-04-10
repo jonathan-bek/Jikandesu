@@ -14,26 +14,21 @@ var Manga;
         };
         MangaPageCtrl.prototype.openModal = function () {
             var modalInstance = this.$uibModal.open({
-                template: '<div class="modal-header">' +
-                    ' <h3 class="modal-title" id="modal-title">Modal Title</h3>' +
-                    '</div>' +
-                    '<div class="modal-body" id="modal-body">' +
-                    'Modal Content here..!' +
-                    '</div>' +
-                    '<div class="modal-footer">' +
-                    ' <button class="btn btn-primary" type="button" ng-click="ctrl.test()">OK</button>' +
-                    '<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>' +
-                    '</div>',
-                controller: 'mangaPageCtrl',
-                controllerAs: 'ctrl',
+                template: "<div class=\"modal-header\"> \n                     <h3 class=\"modal-title\" id=\"modal-title\">Modal Title</h3> \n                    </div> \n                    <div class=\"modal-body\" id=\"modal-body\"> \n                    Modal Content here..! \n                    </div> \n                    <div class=\"modal-footer\"> \n                     <button class=\"btn btn-primary\" type=\"button\" ng-click=\"test()\">OK</button> \n                    <button class=\"btn btn-warning\" type=\"button\" ng-click=\"cancel()\">Cancel</button> \n                    </div>",
+                controller: function ($scope) {
+                    $scope.test = function () {
+                        console.log("lol");
+                    },
+                        $scope.cancel = function () {
+                            modalInstance.dismiss();
+                        };
+                },
+                scope: this.$scope,
                 resolve: {}
             });
             modalInstance.result.then(function (result) {
             }, function () {
             });
-        };
-        MangaPageCtrl.prototype.test = function () {
-            console.log('lol');
         };
         MangaPageCtrl.prototype.getMangaPage = function (url) {
             var _this = this;
