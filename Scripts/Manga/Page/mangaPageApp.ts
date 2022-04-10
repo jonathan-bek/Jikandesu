@@ -4,7 +4,7 @@
 module Manga {
     "use strict";
 
-    const app = angular.module("mangaPageApp", []);
+    const app = angular.module("mangaPageApp", ['ui.bootstrap']);
     //Allow $location to work
     app.config(["$locationProvider", ($locationProvider: ng.ILocationProvider) => {
         $locationProvider.html5Mode({ enabled: true, requireBase: false });

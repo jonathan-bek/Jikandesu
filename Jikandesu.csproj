@@ -299,6 +299,7 @@
     <Compile Include="Services\JdHttpService.cs" />
     <Compile Include="UserInfo.cs" />
     <TypeScriptCompile Include="Scripts\Manga\Interfaces\IMangaChapter.ts" />
+    <TypeScriptCompile Include="Scripts\Manga\Page\testModal.ts" />
     <TypeScriptCompile Include="Scripts\Manga\UserManga\userMangaApp.ts" />
     <TypeScriptCompile Include="Scripts\Manga\UserManga\userMangaCtrl.ts" />
     <TypeScriptCompile Include="Scripts\Manga\mangaDataService.ts" />
@@ -338,6 +339,7 @@
     <Content Include="Scripts\Manga\UserManga\userMangaBundle.js" />
     <Content Include="Scripts\Menu\layoutMenu.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls-2.5.0.min.js" />
     <Content Include="Tables\linkUserManga.txt" />
     <Content Include="Tables\tblMangaPage.txt" />
     <Content Include="Web.config" />

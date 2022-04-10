@@ -13,6 +13,9 @@
                         class="btn btn-success">
                     {{ctrl.mangaPage.LinkedUserId !== null ? 'Saved' : 'Save'}}
                 </button>
+                <button ng-click="ctrl.openModal()">
+                    Test
+                </button>
                 <table class="text-left" style="width:100%">
                     <tr>
                         <th>Chapters</th>
@@ -38,5 +41,6 @@
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-2.5.0.min.js"></script>
 <script src="~/Scripts/Manga/Page/mangaPageBundle.js"></script>
 @*<script src="~/Scripts/Directives/JdRow/jdRowBundle.js"></script>*@

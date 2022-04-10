@@ -3,13 +3,37 @@ var Manga;
 (function (Manga) {
     "use strict";
     var MangaPageCtrl = (function () {
-        function MangaPageCtrl($scope, $window, mangaDataService) {
+        function MangaPageCtrl($scope, $window, mangaDataService, $uibModal) {
             this.$scope = $scope;
             this.$window = $window;
             this.mangaDataService = mangaDataService;
+            this.$uibModal = $uibModal;
         }
         MangaPageCtrl.prototype.$onInit = function () {
             this.getMangaPage(this.getMangaUrl());
+        };
+        MangaPageCtrl.prototype.openModal = function () {
+            var modalInstance = this.$uibModal.open({
+                template: '<div class="modal-header">' +
+                    ' <h3 class="modal-title" id="modal-title">Modal Title</h3>' +
+                    '</div>' +
+                    '<div class="modal-body" id="modal-body">' +
+                    'Modal Content here..!' +
+                    '</div>' +
+                    '<div class="modal-footer">' +
+                    ' <button class="btn btn-primary" type="button" ng-click="ctrl.test()">OK</button>' +
+                    '<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>' +
+                    '</div>',
+                controller: 'mangaPageCtrl',
+                controllerAs: 'ctrl',
+                resolve: {}
+            });
+            modalInstance.result.then(function (result) {
+            }, function () {
+            });
+        };
+        MangaPageCtrl.prototype.test = function () {
+            console.log('lol');
         };
         MangaPageCtrl.prototype.getMangaPage = function (url) {
             var _this = this;
@@ -28,7 +52,7 @@ var Manga;
             }
             return mangaUrl;
         };
-        MangaPageCtrl.$inject = ["$scope", "$window", "mangaDataService"];
+        MangaPageCtrl.$inject = ["$scope", "$window", "mangaDataService", "$uibModal"];
         return MangaPageCtrl;
     }());
     Manga.MangaPageCtrl = MangaPageCtrl;
@@ -92,7 +116,7 @@ var Manga;
 var Manga;
 (function (Manga) {
     "use strict";
-    var app = angular.module("mangaPageApp", []);
+    var app = angular.module("mangaPageApp", ['ui.bootstrap']);
     app.config(["$locationProvider", function ($locationProvider) {
             $locationProvider.html5Mode({ enabled: true, requireBase: false });
         }]);
